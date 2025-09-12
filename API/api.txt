@@ -1,0 +1,91 @@
+BASE\_URL = [http://13.60.157.181:5001](http://13.60.157.181:5001)
+
+---
+
+**Health:**
+
+* GET [http://13.60.157.181:5001/api/health](http://13.60.157.181:5001/api/health) → ok, env, time
+
+**Auth:**
+
+* POST [http://13.60.157.181:5001/api/register](http://13.60.157.181:5001/api/register) → creates user; returns token and user
+* POST [http://13.60.157.181:5001/api/login](http://13.60.157.181:5001/api/login) → returns token and user
+
+**Profile (requires Authorization: Bearer <token>):**
+
+* GET [http://13.60.157.181:5001/api/profile](http://13.60.157.181:5001/api/profile) → current user
+* PUT [http://13.60.157.181:5001/api/profile](http://13.60.157.181:5001/api/profile) → update current user
+
+**Users (requires token):**
+
+* GET [http://13.60.157.181:5001/api/users](http://13.60.157.181:5001/api/users) → list users
+* GET [http://13.60.157.181:5001/api/users/\:id](http://13.60.157.181:5001/api/users/:id) → single user by id
+
+**Public dashboards (no auth):**
+
+* GET [http://13.60.157.181:5001/api/public/stats](http://13.60.157.181:5001/api/public/stats) → { totalUsers, avgFarmSize, avgMonthlyExpenditure }
+* GET [http://13.60.157.181:5001/api/public/recent-users?limit=10](http://13.60.157.181:5001/api/public/recent-users?limit=10) → latest users (limited fields)
+* GET [http://13.60.157.181:5001/api/summary](http://13.60.157.181:5001/api/summary) → { totalUsers, newThisWeek, avgFarmSize }
+* GET [http://13.60.157.181:5001/api/app-data](http://13.60.157.181:5001/api/app-data) → full analytics + users
+* GET [http://13.60.157.181:5001/api/public/config](http://13.60.157.181:5001/api/public/config) → { environment, version, time }
+
+**Devices:**
+
+* POST [http://13.60.157.181:5001/api/devices](http://13.60.157.181:5001/api/devices)
+* GET [http://13.60.157.181:5001/api/devices](http://13.60.157.181:5001/api/devices)
+* GET [http://13.60.157.181:5001/api/devices/\:id](http://13.60.157.181:5001/api/devices/:id)
+* PUT [http://13.60.157.181:5001/api/devices/\:id](http://13.60.157.181:5001/api/devices/:id)
+* DELETE [http://13.60.157.181:5001/api/devices/\:id](http://13.60.157.181:5001/api/devices/:id)
+
+**Fields:**
+
+* POST [http://13.60.157.181:5001/api/fields](http://13.60.157.181:5001/api/fields)
+* GET [http://13.60.157.181:5001/api/fields](http://13.60.157.181:5001/api/fields)
+* PUT [http://13.60.157.181:5001/api/fields/\:id](http://13.60.157.181:5001/api/fields/:id)
+* DELETE [http://13.60.157.181:5001/api/fields/\:id](http://13.60.157.181:5001/api/fields/:id)
+
+**Crops:**
+
+* POST [http://13.60.157.181:5001/api/crops](http://13.60.157.181:5001/api/crops)
+* GET [http://13.60.157.181:5001/api/crops](http://13.60.157.181:5001/api/crops)
+* PUT [http://13.60.157.181:5001/api/crops/\:id](http://13.60.157.181:5001/api/crops/:id)
+* DELETE [http://13.60.157.181:5001/api/crops/\:id](http://13.60.157.181:5001/api/crops/:id)
+
+**Jobs:**
+
+* POST [http://13.60.157.181:5001/api/jobs](http://13.60.157.181:5001/api/jobs)
+* GET [http://13.60.157.181:5001/api/jobs](http://13.60.157.181:5001/api/jobs)
+* PUT [http://13.60.157.181:5001/api/jobs/\:id](http://13.60.157.181:5001/api/jobs/:id)
+* DELETE [http://13.60.157.181:5001/api/jobs/\:id](http://13.60.157.181:5001/api/jobs/:id)
+
+**Finance:**
+
+* POST [http://13.60.157.181:5001/api/finance](http://13.60.157.181:5001/api/finance)
+* GET [http://13.60.157.181:5001/api/finance](http://13.60.157.181:5001/api/finance)
+* GET [http://13.60.157.181:5001/api/finance/summary](http://13.60.157.181:5001/api/finance/summary)
+
+**Health Reports:**
+
+* POST [http://13.60.157.181:5001/api/health-reports](http://13.60.157.181:5001/api/health-reports)
+* GET [http://13.60.157.181:5001/api/health-reports](http://13.60.157.181:5001/api/health-reports)
+
+**Weather Cache:**
+
+* GET [http://13.60.157.181:5001/api/weather?location=City](http://13.60.157.181:5001/api/weather?location=City)
+* POST [http://13.60.157.181:5001/api/weather](http://13.60.157.181:5001/api/weather) body: { location, data, ttlMinutes? }
+
+**Notifications:**
+
+* POST [http://13.60.157.181:5001/api/notifications](http://13.60.157.181:5001/api/notifications)
+* GET [http://13.60.157.181:5001/api/notifications](http://13.60.157.181:5001/api/notifications)
+* PUT [http://13.60.157.181:5001/api/notifications/\:id/read](http://13.60.157.181:5001/api/notifications/:id/read)
+
+**Activities:**
+
+* POST [http://13.60.157.181:5001/api/activities](http://13.60.157.181:5001/api/activities)
+* GET [http://13.60.157.181:5001/api/activities/recent](http://13.60.157.181:5001/api/activities/recent)
+
+**App Logs:**
+
+* POST [http://13.60.157.181:5001/api/logs](http://13.60.157.181:5001/api/logs) (no auth; for client error reporting)
+* GET [http://13.60.157.181:5001/api/logs/recent](http://13.60.157.181:5001/api/logs/recent) (auth)
