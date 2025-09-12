@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface User {
@@ -136,10 +136,18 @@ export class ApiService {
 
   // Authentication methods
   login(credentials: LoginRequest): Observable<AuthResponse> {
-    console.log('🔐 Attempting login with API URL:', `${this.apiUrl}/login`);
-    console.log('📧 Login credentials:', credentials);
+    console.log('🔐 API Service: Attempting login with API URL:', `${this.apiUrl}/login`);
+    console.log('📧 API Service: Login credentials:', credentials);
+    
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        tap(response => {
+          console.log('📨 API Service: Raw response received:', response);
+          console.log('📊 API Service: Response type:', typeof response);
+          console.log('📊 API Service: Response keys:', Object.keys(response || {}));
+        }),
+        catchError(this.handleError)
+      );
   }
 
   register(userData: RegisterRequest): Observable<AuthResponse> {

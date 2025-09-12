@@ -37,18 +37,27 @@ export class AuthService {
 
   login(credentials: LoginRequest): Observable<AuthResponse> {
     return new Observable(observer => {
+      console.log('🔐 AuthService: Starting login process');
       this.apiService.login(credentials).subscribe({
         next: (response: AuthResponse) => {
+          console.log('📨 AuthService: Received response:', response);
+          console.log('✅ Response success:', response.success);
+          console.log('🔑 Response token:', response.token ? 'Present' : 'Missing');
+          console.log('👤 Response user:', response.user ? 'Present' : 'Missing');
+          
           if (response.success && response.token && response.user) {
+            console.log('✅ Login successful, setting token and user');
             this.apiService.setToken(response.token);
             this.currentUserSubject.next(response.user);
             observer.next(response);
             observer.complete();
           } else {
-            observer.error(new Error(response.message || 'Login failed'));
+            console.log('❌ Login failed - missing required fields');
+            observer.error(new Error(response.message || 'Login failed - invalid response'));
           }
         },
         error: (error) => {
+          console.log('❌ AuthService: Login error:', error);
           observer.error(error);
         }
       });

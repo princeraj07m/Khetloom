@@ -42,7 +42,8 @@ export class Login implements OnInit {
         next: (response) => {
           this.isLoading = false;
           console.log('✅ Login successful:', response);
-          alert('Login Successful!');
+          console.log('🎉 Full response object:', JSON.stringify(response, null, 2));
+          alert('Login Successful! Redirecting to dashboard...');
           this.authService.navigateToDashboard();
         },
         error: (error) => {
@@ -50,13 +51,27 @@ export class Login implements OnInit {
           this.errorMessage = error.message || 'Login failed. Please try again.';
           console.error('❌ Login error:', error);
           console.error('❌ Error message:', error.message);
+          console.error('❌ Full error object:', JSON.stringify(error, null, 2));
+          alert(`Login failed: ${this.errorMessage}`);
         }
       });
     } else {
       this.markFormGroupTouched();
       console.log('❌ Form is invalid');
+      console.log('❌ Form errors:', this.getFormErrors());
       alert('Please enter valid credentials.');
     }
+  }
+
+  private getFormErrors(): any {
+    const errors: any = {};
+    Object.keys(this.loginForm.controls).forEach(key => {
+      const control = this.loginForm.get(key);
+      if (control?.errors) {
+        errors[key] = control.errors;
+      }
+    });
+    return errors;
   }
 
   private markFormGroupTouched() {
