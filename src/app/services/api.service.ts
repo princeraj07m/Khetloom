@@ -79,8 +79,7 @@ export interface UsersResponse {
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly apiUrl = (window as any).__API_BASE_URL__ ?? 
-    (environment.production ? 'http://13.60.157.181:5001/api' : environment.apiUrl);
+  private readonly apiUrl = 'http://13.60.157.181:5001/api';
 
   constructor(private readonly http: HttpClient) { }
 
@@ -95,14 +94,19 @@ export class ApiService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
 
+    console.error('🚨 API Error Details:', {
+      status: error.status,
+      statusText: error.statusText,
+      url: error.url,
+      error: error.error,
+      message: error.message
+    });
+
     if (error.error instanceof ErrorEvent) {
       // Client-side error
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `Client Error: ${error.error.message}`;
     } else {
       // Server-side error
-      console.error('Full backend error response:', error.error);
-      console.error('Error status:', error.status);
-
       if (error.error?.message) {
         errorMessage = error.error.message;
         // Add detailed validation errors if available
@@ -110,14 +114,18 @@ export class ApiService {
           errorMessage += ': ' + error.error.errors.join(', ');
         }
       } else if (error.status === 0) {
-        errorMessage = 'Unable to connect to server. Please check your internet connection.';
+        errorMessage = 'Unable to connect to server. Please check your internet connection and try again.';
       } else if (error.status === 400) {
         errorMessage = 'Bad Request: Please check your input data.';
         if (error.error?.errors) {
           errorMessage += ' Errors: ' + JSON.stringify(error.error.errors);
         }
+      } else if (error.status === 401) {
+        errorMessage = 'Invalid email or password. Please try again.';
+      } else if (error.status === 500) {
+        errorMessage = 'Server error. Please try again later.';
       } else {
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        errorMessage = `Error Code: ${error.status} - ${error.statusText}`;
       }
     }
 
@@ -126,6 +134,8 @@ export class ApiService {
 
   // Authentication methods
   login(credentials: LoginRequest): Observable<AuthResponse> {
+    console.log('🔐 Attempting login with API URL:', `${this.apiUrl}/login`);
+    console.log('📧 Login credentials:', credentials);
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
       .pipe(catchError(this.handleError));
   }
