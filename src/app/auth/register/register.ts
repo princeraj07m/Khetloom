@@ -172,19 +172,19 @@ export class Register{
         monthlyExpenditure: formData.monthlyExpenditure ? Number(formData.monthlyExpenditure) : 0
       };
       
-      console.log('Sending user data to backend:', userData);
+      // console.log('Sending user data to backend:', userData);
       
       this.authService.register(userData).subscribe({
         next: (response) => {
           this.isLoading = false;
-          console.log('Registration successful:', response);
+          // console.log('Registration successful:', response);
           alert('Registration Successful! Welcome to the platform.');
           this.authService.navigateToDashboard();
         },
         error: (error) => {
           this.isLoading = false;
           this.errorMessage = error.message || 'Registration failed. Please try again.';
-          console.error('Registration error:', error);
+          // console.error('Registration error:', error);
         }
       });
     } else {

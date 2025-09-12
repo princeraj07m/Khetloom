@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md bg-white shadow-sm px-3 px-md-5 sticky-top" style="height: 75px;">
-  <div class="d-flex align-items-center " routerLink="/pages/">
+  <div class="d-flex align-items-center " routerLink="/">
     <div class="logo-circle mx-auto me-2">
       <i class="fa-solid fa-leaf text-success"></i>
     </div>
@@ -18,11 +18,11 @@
     <ul class="navbar-nav align-items-center">
 
       <ng-container *ngIf="!isLoggedIn">
-        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/pages/">Home</a></li>
-        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/pages/about">About</a></li>
-        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/pages/features">Features</a>
+        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/">Home</a></li>
+        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/about">About</a></li>
+        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/features">Features</a>
         </li>
-        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/pages/contact">Contact</a>
+        <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/contact">Contact</a>
         </li>
 
         <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/auth/login">Login</a></li>
@@ -39,16 +39,16 @@
       </ng-container>
       <ng-container class="loggedin-dash" *ngIf="isLoggedIn">
         <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
-            routerLink="/pages/dashboard">📊
+            routerLink="/dashboard">📊
             Dashboard</a></li>
         <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
             routerLink="/main/control-panel">⚙️
             Control Panel</a></li>
         <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
-            routerLink="/pages/field-demo">🌱
+            routerLink="/field-demo">🌱
             Field Layout</a></li>
         <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
-            routerLink="/pages/financial-overview">💰 Financials</a></li>
+            routerLink="/financial-overview">💰 Financials</a></li>
         <li class="nav-item dropdown px-2">
           <a class="nav-link dropdown-toggle text-success fw-semibold" href="#" id="menuDropdown" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,13 +56,13 @@
           </a>
           <ul class="dropdown-menu custom-dropdown shadow-lg rounded-3 border-0 p-2" aria-labelledby="menuDropdown">
 
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/crop-cycles">🌾
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/crop-cycles">🌾
                 Crop Cycles</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/weather">☀️
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/weather">☀️
                 Weather</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/history-logs">📜
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/history-logs">📜
                 History & Logs</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/notifications">🔔
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/notifications">🔔
                 Notifications</a></li>
             <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" (click)="navigateToProfile()">👤
                 Edit Profile</a></li>
@@ -72,7 +72,7 @@
 
 
         <li class="nav-item px-2">
-          <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/pages/user-profile">
+          <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/user-profile">
             Profile
           </button>
         </li>
@@ -91,7 +91,7 @@
 <div class="offcanvas offcanvas-start rounded-end shadow-lg" tabindex="-1" id="mobileMenu"
   aria-labelledby="mobileMenuLabel">
   <div class="offcanvas-header border-bottom">
-    <h5 class="offcanvas-title fw-bold text-success d-flex align-items-center" id="mobileMenuLabel">
+    <h5 class="offcanvas-title fw-bold text-success d-flex align-items-center" id="mobileMenuLabel"  routerLink="/">
       <i class="fa-solid fa-leaf me-2"></i> FertiFarm
     </h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -99,26 +99,26 @@
 
   <div class="offcanvas-body d-flex flex-column gap-3">
     <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-      routerLink="/pages/about">
+      routerLink="/about">
       <i class="fa-solid fa-circle-info me-2 text-success"></i> About
     </a>
 
     <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-      routerLink="/pages/features">
+      routerLink="/features">
       <i class="fa-solid fa-star me-2 text-success"></i> Features
     </a>
 
     <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-      routerLink="/pages/contact">
+      routerLink="/contact">
       <i class="fa-solid fa-envelope me-2 text-success"></i> Contact
     </a>
 
     <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-      routerLink="/pages/weather">
+      routerLink="/weather">
       <i class="fa-solid fa-cloud-sun me-2 text-success"></i> Weather
     </a>
     <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-      routerLink="/pages/dashboard">
+      routerLink="/dashboard">
       <i class="fa-solid fa-cloud-sun me-2 text-success"></i> Dashboard
     </a>
     <ng-container *ngIf="!isLoggedIn">
@@ -140,23 +140,23 @@
 
     <ng-container *ngIf="isLoggedIn">
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-        routerLink="/pages/field-demo">
+        routerLink="/field-demo">
         <i class="fa-solid fa-table-columns me-2 text-success"></i> Field Layout
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-        routerLink="/pages/crop-cycles">
+        routerLink="/crop-cycles">
         <i class="fa-solid fa-seedling me-2 text-success"></i> Crop Cycles
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-        routerLink="/pages/weather">
+        routerLink="/weather">
         <i class="fa-solid fa-cloud-sun me-2 text-success"></i> Weather
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-        routerLink="/pages/history-logs">
+        routerLink="/history-logs">
         <i class="fa-solid fa-history me-2 text-success"></i> History & Logs
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-        routerLink="/pages/financial-overview">
+        routerLink="/financial-overview">
         <i class="fa-solid fa-chart-line me-2 text-success"></i> Financials
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
@@ -164,7 +164,7 @@
         <i class="fa-solid fa-table-columns me-2 text-success"></i> Control Panel
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-        routerLink="/pages/notifications">
+        routerLink="/notifications">
         <i class="fa-solid fa-table-columns me-2 text-success"></i> Notifications
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
@@ -172,7 +172,7 @@
         <i class="fa-solid fa-user-edit me-2 text-success"></i> Edit Profile
       </a>
       <button class="btn btn-success text-white mt-3 w-100 rounded-pill shadow-sm py-2"
-        routerLink="/pages/user-profile">
+        routerLink="/user-profile">
         <i class="fa-solid fa-circle-user"></i> Profile
       </button>
 

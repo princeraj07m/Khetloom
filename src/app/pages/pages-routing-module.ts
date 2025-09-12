@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AuthGuard } from '../auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { Home } from './home/home';
 import { Dashboard } from './dashboard/dashboard';
@@ -29,24 +30,37 @@ const routes: Routes = [
     component: Features
   },
   {
+    path: 'contact',
+    component: Contact
+  },
+  {
+    path: 'about',
+    component: About
+  },
+  {
     path: 'fieldlayout',
-    component: FieldLayoutComponent
+    component: FieldLayoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'field-demo',
-    component: FieldLayoutDemoComponent
+    component: FieldLayoutDemoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'user-profile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'notifications',
-    component: NotificationsComponent
+    component: NotificationsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crop-cycles',
-    component: CropCycleComponent
+    component: CropCycleComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'contact',
@@ -58,27 +72,33 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: Profile
+    component: Profile,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+    canActivate: [AuthGuard]
   },
   {
     path: 'health',
-    component: Health
+    component: Health,
+    canActivate: [AuthGuard]
   },
   {
     path: 'sprayer',
-    component: Sprayer
+    component: Sprayer,
+    canActivate: [AuthGuard]
   },
   {
     path: 'analytics',
-    component: Analytics
+    component: Analytics,
+    canActivate: [AuthGuard]
   },
   {
     path: 'setting',
-    component: Setting
+    component: Setting,
+    canActivate: [AuthGuard]
   },
   {
     path: 'users',
@@ -90,11 +110,13 @@ const routes: Routes = [
   },
   {
     path: 'history-logs',
-    component: HistoryLogsComponent
+    component: HistoryLogsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'financial-overview',
-    component: FinancialOverviewComponent
+    component: FinancialOverviewComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

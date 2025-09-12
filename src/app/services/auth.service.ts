@@ -112,11 +112,11 @@ export class AuthService {
   }
 
   navigateToDashboard(): void {
-    this.router.navigate(['/pages/dashboard']);
+    this.router.navigate(['/dashboard']);
   }
 
   navigateToHome(): void {
-    this.router.navigate(['/pages/home']);
+    this.router.navigate(['/home']);
   }
 
   updateProfile(userData: User): Observable<AuthResponse> {
