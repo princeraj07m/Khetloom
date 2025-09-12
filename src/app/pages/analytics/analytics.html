@@ -1,0 +1,253 @@
+<div class="container-fluid mt-4">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-0">📊 App Analytics Dashboard</h2>
+        <button class="btn btn-primary" (click)="refreshData()" [disabled]="isLoading">
+          <i class="fas fa-sync-alt" [class.fa-spin]="isLoading"></i>
+          Refresh Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Loading app data...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading && !errorMessage && appData">
+    
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+      <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h4 class="card-title">{{ appData.statistics.totalUsers }}</h4>
+                <p class="card-text">Total Users</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fas fa-users fa-2x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 mb-3">
+        <div class="card bg-success text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h4 class="card-title">{{ appData.statistics.recentUsers }}</h4>
+                <p class="card-text">Recent Users (7 days)</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fas fa-user-plus fa-2x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 mb-3">
+        <div class="card bg-info text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h4 class="card-title">{{ appData.statistics.averageFarmSize }} acres</h4>
+                <p class="card-text">Avg Farm Size</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fas fa-seedling fa-2x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3 mb-3">
+        <div class="card bg-warning text-white">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h4 class="card-title">${{ appData.statistics.averageMonthlyExpenditure }}</h4>
+                <p class="card-text">Avg Monthly Expenditure</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fas fa-dollar-sign fa-2x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Charts -->
+    <div class="row mb-4">
+      <!-- Crop Distribution -->
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">🌾 Crop Distribution</h5>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let crop of getObjectKeys(appData.analytics.cropDistribution)" class="mb-2">
+              <div class="d-flex justify-content-between">
+                <span>{{ crop }}</span>
+                <span class="badge bg-primary">{{ appData.analytics.cropDistribution[crop] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sprayer Type Distribution -->
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">🚜 Sprayer Type Distribution</h5>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let sprayer of getObjectKeys(appData.analytics.sprayerTypeDistribution)" class="mb-2">
+              <div class="d-flex justify-content-between">
+                <span>{{ sprayer }}</span>
+                <span class="badge bg-success">{{ appData.analytics.sprayerTypeDistribution[sprayer] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Language and Communication -->
+    <div class="row mb-4">
+      <!-- Language Distribution -->
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">🌍 Language Distribution</h5>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let language of getObjectKeys(appData.analytics.languageDistribution)" class="mb-2">
+              <div class="d-flex justify-content-between">
+                <span>{{ language }}</span>
+                <span class="badge bg-info">{{ appData.analytics.languageDistribution[language] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Communication Preferences -->
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">📱 Communication Preferences</h5>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let comm of getObjectKeys(appData.analytics.communicationPreferenceDistribution)" class="mb-2">
+              <div class="d-flex justify-content-between">
+                <span>{{ comm }}</span>
+                <span class="badge bg-warning">{{ appData.analytics.communicationPreferenceDistribution[comm] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">📈 Key Insights</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <p><strong>Most Popular Crop:</strong> {{ appData.summary.mostPopularCrop || 'N/A' }}</p>
+              </div>
+              <div class="col-md-4">
+                <p><strong>Most Used Sprayer:</strong> {{ appData.summary.mostUsedSprayerType || 'N/A' }}</p>
+              </div>
+              <div class="col-md-4">
+                <p><strong>Most Common Language:</strong> {{ appData.summary.mostCommonLanguage || 'N/A' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Users Data -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">👥 All Users Data ({{ appData.users.length }} users)</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Farm Name</th>
+                    <th>Farm Size</th>
+                    <th>Primary Crops</th>
+                    <th>Sprayer Type</th>
+                    <th>Language</th>
+                    <th>Registered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of appData.users">
+                    <td>{{ user.fullName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.farmName || 'N/A' }}</td>
+                    <td>{{ user.farmSize || 'N/A' }} acres</td>
+                    <td>{{ user.primaryCrops?.join(', ') || 'N/A' }}</td>
+                    <td>{{ user.sprayerType || 'N/A' }}</td>
+                    <td>{{ user.language || 'N/A' }}</td>
+                    <td>{{ user.createdAt | date:'short' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Raw Data JSON -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">🔍 Raw API Data</h5>
+          </div>
+          <div class="card-body">
+            <pre class="bg-light p-3" style="max-height: 400px; overflow-y: auto;">{{ appData | json }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,215 @@
+<app-header></app-header>
+<div class="financial-overview-container container">
+  <!-- Header Section -->
+  <div class="header-section mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h1 class="page-title mb-1">Financial Overview</h1>
+        <p class="page-subtitle text-muted">Track expenses, revenue, and profitability.</p>
+      </div>
+      <div class="header-actions">
+        <div class="d-flex align-items-center gap-3">
+          <div class="period-selector">
+            <select
+              class="form-select"
+              [(ngModel)]="selectedPeriod"
+              (change)="onPeriodChange()">
+              <option *ngFor="let period of periodOptions" [value]="period">
+                {{ period }}
+              </option>
+            </select>
+          </div>
+          <button
+            class="btn btn-outline-primary"
+            (click)="openExportModal()">
+            <i class="bi bi-download me-2"></i>
+            Export
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Metrics Cards -->
+  <div class="metrics-section mb-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="metric-card revenue-card">
+          <div class="card-icon">
+            <i class="bi bi-currency-dollar"></i>
+          </div>
+          <div class="card-content">
+            <h3 class="metric-value">{{ formatCurrency(financialData?.metrics?.totalRevenue || 0) }}</h3>
+            <p class="metric-label">Total Revenue</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="metric-card expense-card">
+          <div class="card-icon">
+            <i class="bi bi-clipboard-data"></i>
+          </div>
+          <div class="card-content">
+            <h3 class="metric-value">{{ formatCurrency(financialData?.metrics?.totalExpenses || 0) }}</h3>
+            <p class="metric-label">Total Expenses</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="metric-card profit-card">
+          <div class="card-icon">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <div class="card-content">
+            <h3 class="metric-value">{{ formatCurrency(financialData?.metrics?.netProfit || 0) }}</h3>
+            <p class="metric-label">Net Profit</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue and Expenses Trend Chart -->
+  <div class="chart-section mb-5">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title mb-0">Revenue and Expenses Trend</h5>
+      <p class="card-subtitle mb-0">Track monthly performance and profit margins</p>
+    </div>
+    <div class="card-body">
+      <div class="chart-container">
+        <canvas #trendChart></canvas>
+      </div>
+
+      <!-- Chart Details -->
+      <div class="chart-details">
+        <div class="detail-item">
+          <span class="label">Total Revenue</span>
+          <span class="value">$125,670</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Total Expenses</span>
+          <span class="value">$72,430</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Profit</span>
+          <span class="value">$53,240</span>
+        </div>
+      </div>
+
+      <!-- Chart Legend -->
+      <div class="chart-legend mt-3">
+        <div class="legend-item">
+          <span class="legend-color" style="background-color:#4caf50;"></span>
+          <span class="legend-text">Revenue</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background-color:#e74c3c;"></span>
+          <span class="legend-text">Expenses</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Bottom Section -->
+  <div class="row g-4">
+    <!-- Expense Breakdown -->
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Expense Breakdown</h5>
+        </div>
+        <div class="card-body">
+          <div class="expense-list">
+            <div
+              *ngFor="let expense of financialData?.expenseBreakdown"
+              class="expense-item">
+              <div class="expense-info">
+                <div class="expense-name">{{ expense.name }}</div>
+                <div class="expense-amount">{{ formatCurrency(expense.amount) }}</div>
+              </div>
+              <div class="expense-bar">
+                <div
+                  class="expense-progress"
+                  [style.width]="getExpenseBarWidth(expense.amount)"
+                  [style.background-color]="expense.color">
+                </div>
+              </div>
+              <div class="expense-percentage">{{ getExpensePercentage(expense.amount) }}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profitability by Crop -->
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Profitability by Crop</h5>
+        </div>
+        <div class="card-body">
+          <div class="profitability-chart">
+            <div class="chart-container">
+              <canvas #donutChart></canvas>
+            </div>
+            <div class="profitability-legend">
+              <div
+                *ngFor="let crop of financialData?.cropProfitability"
+                class="legend-item">
+                <div
+                  class="legend-color"
+                  [style.background-color]="crop.color">
+                </div>
+                <div class="legend-text">
+                  <span class="crop-name">{{ crop.crop }}</span>
+                  <span class="crop-profit">{{ formatCurrency(crop.profit) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Export Modal -->
+<div *ngIf="showExportModal" class="modal fade show d-block" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Export Financial Data</h5>
+        <button type="button" class="btn-close" (click)="closeExportModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Export Format</label>
+          <select class="form-select" [(ngModel)]="exportFormat">
+            <option value="csv">CSV</option>
+            <option value="json">JSON</option>
+            <option value="pdf">PDF</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Time Period</label>
+          <select class="form-select" [(ngModel)]="selectedPeriod">
+            <option *ngFor="let period of periodOptions" [value]="period">
+              {{ period }}
+            </option>
+          </select>
+        </div>
+        <p class="text-muted">This will export financial data for {{ selectedPeriod }}.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeExportModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="exportData()">Export</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showExportModal" class="modal-backdrop fade show"></div>
+
+<app-footer></app-footer>

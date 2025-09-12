@@ -1,0 +1,117 @@
+
+<div class="container">
+  <h3 class="mb-4 text-center">Field Layout</h3>
+
+  <!-- Map -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            Field Map
+          </h5>
+        </div>
+        <div class="card-body p-0">
+         <app-google-map></app-google-map>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Field Grid -->
+  <div class="field-grid">
+    <div class="row" *ngFor="let row of gridRows; let rowIndex = index">
+      <div
+        class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
+        *ngFor="let cell of row; let colIndex = index"
+      >
+        <div class="plant-cell">
+          <div
+            *ngIf="cell; else emptyCell"
+            class="card plant-card"
+            [ngClass]="{
+              'plant-healthy': cell.status === 'healthy',
+              'plant-defected': cell.status === 'defected'
+            }"
+          >
+            <div class="card-body text-center p-2">
+              <div class="plant-id">{{ cell.plantId }}</div>
+              <small class="d-block mt-1">
+                ({{ cell.x }}, {{ cell.y }})
+              </small>
+            </div>
+          </div>
+          <ng-template #emptyCell>
+            <div class="card plant-card empty-cell">
+              <div class="card-body text-center p-2">
+                <small>Empty</small>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <h5>Legend:</h5>
+      <div class="d-flex flex-wrap gap-3">
+        <div class="d-flex align-items-center">
+          <div class="card plant-card plant-healthy me-2" style="width: 30px; height: 20px;"></div>
+          <small>Healthy Plants</small>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="card plant-card plant-defected me-2" style="width: 30px; height: 20px;"></div>
+          <small>Defected Plants</small>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="card plant-card empty-cell me-2" style="width: 30px; height: 20px;"></div>
+          <small>Empty Cells</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics and Sample Data -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Field Statistics</h5>
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-4">
+              <div class="h3 text-success">{{ healthyCount }}</div>
+              <small>Healthy</small>
+            </div>
+            <div class="col-4">
+              <div class="h3 text-danger">{{ defectedCount }}</div>
+              <small>Defected</small>
+            </div>
+            <div class="col-4">
+              <div class="h3 text-secondary">{{ totalPlants }}</div>
+              <small>Total</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Sample JSON Input</h5>
+        </div>
+        <div class="card-body">
+          <pre class="small bg-light p-3 rounded">{{ jsonExample }}</pre>
+          <button class="btn btn-primary btn-sm mt-2" (click)="loadSampleData()">
+            Load Sample Data
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

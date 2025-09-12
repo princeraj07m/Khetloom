@@ -1,0 +1,185 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md bg-white shadow-sm px-3 px-md-5 sticky-top" style="height: 75px;">
+    <div class="d-flex align-items-center " routerLink="/pages/">
+        <div class="logo-circle mx-auto me-2">
+            <i class="fa-solid fa-leaf text-success"></i>
+        </div>
+        <span class="fw-bold text-success fs-4">FertiFarm</span>
+    </div>
+
+    <!-- Toggler Button for Offcanvas -->
+    <button class="navbar-toggler ms-auto d-md-none" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Desktop Menu -->
+    <div class="collapse navbar-collapse justify-content-end d-none d-md-flex">
+        <ul class="navbar-nav align-items-center">
+            <li class="nav-item px-2"><a class="nav-link text-success fw-semibold"  routerLink="/pages/">Home</a></li>
+            <li class="nav-item px-2"><a class="nav-link text-success fw-semibold"  routerLink="/pages/about">About</a></li>
+            <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/pages/features">Features</a></li>
+            <li class="nav-item px-2"><a class="nav-link text-success fw-semibold"  routerLink="/pages/contact">Contact</a></li>
+
+            <ng-container *ngIf="!isLoggedIn">
+                <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/auth/login">Login</a></li>
+                <li class="nav-item px-2">
+                    <a class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/auth/register">
+                        Register
+                    </a>
+                </li>
+                <li class="nav-item px-2">
+                    <button class="btn btn-warning px-3 ms-2 rounded-pill shadow-sm" (click)="demoLogin()">
+                        <i class="fa-solid fa-play me-1"></i>Demo
+                    </button>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="isLoggedIn">
+        <li class="nav-item dropdown px-2">
+  <a class="nav-link dropdown-toggle text-success fw-semibold" href="#" id="menuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Menu
+  </a>
+  <ul class="dropdown-menu custom-dropdown shadow-lg rounded-3 border-0 p-2" aria-labelledby="menuDropdown">
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/field-demo">🌱 Field Layout</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/crop-cycles">🌾 Crop Cycles</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/weather">☀️ Weather</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/dashboard">📊 Dashboard</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/history-logs">📜 History & Logs</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/financial-overview">💰 Financials</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/main/control-panel">⚙️ Control Panel</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/pages/notifications">🔔 Notifications</a></li>
+    <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" (click)="navigateToProfile()">👤 Edit Profile</a></li>
+  </ul>
+</li>
+
+
+
+                <li class="nav-item px-2">
+                    <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/pages/user-profile">
+                        Profile
+                    </button>
+                </li>
+                <li class="nav-item px-2">
+                    <button class="btn btn-outline-danger px-3 ms-2 rounded-pill shadow-sm" (click)="logout()">
+                        Logout
+                    </button>
+                </li>
+            </ng-container>
+
+        </ul>
+    </div>
+</nav>
+
+<!-- Offcanvas Left Sidebar -->
+<div class="offcanvas offcanvas-start rounded-end shadow-lg" tabindex="-1" id="mobileMenu"
+    aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold text-success d-flex align-items-center" id="mobileMenuLabel">
+            <i class="fa-solid fa-leaf me-2"></i> FertiFarm
+        </h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body d-flex flex-column gap-3">
+  <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+     data-bs-dismiss="offcanvas"
+     routerLink="/pages/about">
+    <i class="fa-solid fa-circle-info me-2 text-success"></i> About
+  </a>
+
+  <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+     data-bs-dismiss="offcanvas"
+     routerLink="/pages/features">
+    <i class="fa-solid fa-star me-2 text-success"></i> Features
+  </a>
+
+  <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+     data-bs-dismiss="offcanvas"
+     routerLink="/pages/contact">
+    <i class="fa-solid fa-envelope me-2 text-success"></i> Contact
+  </a>
+
+  <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+     data-bs-dismiss="offcanvas"
+     routerLink="/pages/weather">
+    <i class="fa-solid fa-cloud-sun me-2 text-success"></i> Weather
+  </a>
+  <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+     data-bs-dismiss="offcanvas"
+     routerLink="/pages/dashboard">
+    <i class="fa-solid fa-cloud-sun me-2 text-success"></i> Dashboard
+  </a>
+  <ng-container *ngIf="!isLoggedIn">
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/auth/login">
+      <i class="fa-solid fa-right-to-bracket me-2 text-success"></i> Login
+    </a>
+
+    <a class="btn btn-success text-white mt-3 w-100 rounded-pill shadow-sm py-2"
+       data-bs-dismiss="offcanvas"
+       routerLink="/auth/register">
+      <i class="fa-solid fa-user-plus me-2"></i> Register
+    </a>
+
+    <button class="btn btn-warning text-white mt-2 w-100 rounded-pill shadow-sm py-2"
+            data-bs-dismiss="offcanvas"
+            (click)="demoLogin()">
+      <i class="fa-solid fa-play me-2"></i> Demo Mode
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="isLoggedIn">
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/pages/field-demo">
+      <i class="fa-solid fa-table-columns me-2 text-success"></i> Field Layout
+    </a>
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/pages/crop-cycles">
+      <i class="fa-solid fa-seedling me-2 text-success"></i> Crop Cycles
+    </a>
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/pages/weather">
+      <i class="fa-solid fa-cloud-sun me-2 text-success"></i> Weather
+    </a>
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/pages/history-logs">
+      <i class="fa-solid fa-history me-2 text-success"></i> History & Logs
+    </a>
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/pages/financial-overview">
+      <i class="fa-solid fa-chart-line me-2 text-success"></i> Financials
+    </a>
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/main/control-panel">
+      <i class="fa-solid fa-table-columns me-2 text-success"></i> Control Panel
+    </a>
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       routerLink="/pages/notifications">
+      <i class="fa-solid fa-table-columns me-2 text-success"></i> Notifications
+    </a>
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg"
+       data-bs-dismiss="offcanvas"
+       (click)="navigateToProfile()">
+      <i class="fa-solid fa-user-edit me-2 text-success"></i> Edit Profile
+    </a>
+    <button class="btn btn-success text-white mt-3 w-100 rounded-pill shadow-sm py-2"
+            routerLink="/pages/user-profile">
+            <i class="fa-solid fa-circle-user"></i> Profile
+    </button>
+
+    <button class="btn btn-danger text-white mt-2 w-100 rounded-pill shadow-sm py-2"
+            (click)="logout()">
+      <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+    </button>
+  </ng-container>
+</div>
+
+</div>

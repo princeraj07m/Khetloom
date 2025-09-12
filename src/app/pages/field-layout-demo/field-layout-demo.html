@@ -1,0 +1,80 @@
+<app-header></app-header>
+<div class="container">
+  <h1 class="text-center mb-4">Field Layout Component Demo</h1>
+
+  <!-- Control Panel -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Control Panel</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="btn-group" role="group">
+                <button class="btn btn-primary" (click)="loadSampleData()">
+                  Load Sample Data
+                </button>
+                <button class="btn btn-success" (click)="loadLargeField()">
+                  Load Large Field
+                </button>
+                <button class="btn btn-warning" (click)="clearField()">
+                  Clear Field
+                </button>
+              </div>
+            </div>
+            <div class="col-md-4 text-end">
+              <small class="text-muted">
+                Total Plants: {{ plants.length }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Field Layout Component -->
+  <div class="row">
+    <div class="col-12">
+      <app-field-layout [plants]="plants"></app-field-layout>
+    </div>
+  </div>
+
+  <!-- Usage Instructions -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Usage Instructions</h5>
+        </div>
+        <div class="card-body">
+          <h6>How to use the FieldLayoutComponent:</h6>
+          <ol>
+            <li>Import the component in your module</li>
+            <li>Use the component in your template: <code>&lt;app-field-layout [plants]="yourPlantArray"&gt;&lt;/app-field-layout&gt;</code></li>
+            <li>Pass a Plant array with the required structure</li>
+          </ol>
+
+          <h6>Plant Interface:</h6>
+          <pre class="bg-light p-3 rounded"><code>interface Plant {{ '{' }}
+  plantId: string;
+  x: number;
+  y: number;
+  status?: 'healthy' | 'defected';
+{{ '}' }}</code></pre>
+
+          <h6>Example JSON Input:</h6>
+          <pre class="bg-light p-3 rounded"><code>[
+  {{ '{' }} "plantId": "P-1-1", "x": 1, "y": 1, "status": "healthy" {{ '}' }},
+  {{ '{' }} "plantId": "P-1-2", "x": 2, "y": 1, "status": "defected" {{ '}' }},
+  {{ '{' }} "plantId": "P-2-1", "x": 1, "y": 2, "status": "healthy" {{ '}' }}
+]</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

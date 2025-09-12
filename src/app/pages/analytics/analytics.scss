@@ -1,0 +1,83 @@
+.analytics-container {
+  padding: 30px; /* ⬆️ Thoda zyada spacing for desktop */
+  background: #fff;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+.analytics-title {
+  font-size: 24px; /* ⬆️ Title bigger */
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.analytics-card {
+  background: #f9fdf8;
+  border-radius: 20px; /* ⬆️ Softer corners */
+  padding: 28px; /* ⬆️ More breathing space */
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.08); /* ⬆️ Deeper shadow */
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analytics-card:hover {
+  transform: translateY(-5px); /* ⬆️ Hover lift effect */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.analytics-card h6 {
+  font-size: 20px; /* ⬆️ Bigger heading */
+  margin-bottom: 8px;
+}
+
+.analytics-card p {
+  font-size: 16px; /* ⬆️ Normal text slightly bigger */
+}
+
+.analytics-percentage {
+  font-size: 36px; /* ⬆️ Main number more prominent */
+  font-weight: 700;
+  color: #1aab55;
+  display: block;
+  margin: 5px 0;
+}
+
+.analytics-subtext {
+  color: #888;
+  font-size: 15px; /* ⬆️ Slightly bigger */
+}
+
+.analytics-graph {
+  height: 150px; /* ⬆️ Taller graph */
+  background: linear-gradient(
+    180deg,
+    rgba(51, 214, 132, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 14px;
+  margin-top: 15px;
+}
+
+.analytics-change-up {
+  color: #1aab55;
+  font-size: 16px; /* ⬆️ More readable */
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.analytics-change-down {
+  color: #e63946;
+  font-size: 16px; /* ⬆️ More readable */
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+@media (min-width: 992px) {
+  .analytics-row {
+    display: flex;
+    gap: 24px; /* ⬆️ Wider spacing between cards */
+  }
+  .analytics-card {
+    flex: 1;
+  }
+}

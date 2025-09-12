@@ -1,0 +1,88 @@
+.app{
+    background: linear-gradient(98deg, #e8ffe8 0%, #f5fdfa 85%, #e1eaea 100%);
+}
+.hero-bg {
+  min-height: 85vh;
+}
+.stylish-heading {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  letter-spacing: -2px;
+  color: #2e5832;
+  text-shadow: 0 3px 14px #b2f7b444;
+}
+.stylish-sub {
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+.glass-card {
+  background: rgba(245, 255, 240, 0.9);
+  border-radius: 1.2rem;
+  box-shadow: 0 9px 32px #98e59866;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px #7cbf7d55;
+}
+.step-badge {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #8ee68a 40%, #4CAF50 100%);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px #4CAF5033;
+}
+.feature-card {
+  background: #f9fff9;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 6px 22px #a5e7aa44;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.feature-card i {
+  font-size: 2rem;
+  color: #4CAF50;
+  margin-bottom: 0.8rem;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px #86d09866;
+}
+
+.hero-img-wrapper {
+  max-width: 800px;
+  min-width: 560px;
+  background: linear-gradient(135deg, #e8ffe8 48%, #c6f3d6 100%);
+  border-radius: 2rem;
+  box-shadow: 0 12px 48px #86d09844;
+  padding: 2rem;
+  margin: 2rem 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.hero-img {
+  width: 100%;
+  border-radius: 1.6rem;
+  filter: drop-shadow(0 6px 28px #caf4c0cc);
+}
+.app-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #a0e89a 60%, #4CAF50 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px #4CAF5033;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='34' height='34' xmlns='http://www.w3.org/2000/svg'%3E%3Crect y='8' width='32' height='3' rx='1.5' fill='%234CAF50'/%3E%3Crect y='16' width='32' height='3' rx='1.5' fill='%234CAF50'/%3E%3Crect y='24' width='32' height='3' rx='1.5' fill='%234CAF50'/%3E%3C/svg%3E");
+}
+
+.get-s-btn:hover{
+  background-color: #4CAF50;
+  color:white !important;
+}

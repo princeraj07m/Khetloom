@@ -1,0 +1,91 @@
+<app-header></app-header>
+<section class="container mt-3 sprayer-screen p-3">
+  <h5 class="fw-bold">← Sprayer Control</h5>
+
+  <!-- Sprayer 1 -->
+  <div class="sprayer-card">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <div class="sprayer-icon" [ngClass]="{'bg-success': sprayer1Level > 70, 'bg-warning': sprayer1Level > 30 && sprayer1Level <= 70, 'bg-danger': sprayer1Level <= 30}">
+          <i class="fa-solid fa-spray-can"></i>
+        </div>
+        <div>
+          <h6>Sprayer 1</h6>
+          <small>Field A</small>
+          <p>Tank: {{sprayer1Level}}%</p>
+        </div>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" checked>
+      </div>
+    </div>
+    <div class="progress mb-2 mt-2">
+      <div class="progress-bar"
+           [ngClass]="{'green': sprayer1Level > 70, 'yellow': sprayer1Level > 30 && sprayer1Level <= 70, 'red': sprayer1Level <= 30}"
+           [style.width.%]="sprayer1Level">
+      </div>
+    </div>
+    <small class="text-muted">Last Maint: 2024-05-15</small>
+  </div>
+
+  <!-- Sprayer 2 -->
+  <div class="sprayer-card">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <div class="sprayer-icon" [ngClass]="{'bg-success': sprayer2Level > 70, 'bg-warning': sprayer2Level > 30 && sprayer2Level <= 70, 'bg-danger': sprayer2Level <= 30}">
+          <i class="fa-solid fa-spray-can"></i>
+        </div>
+        <div>
+          <h6>Sprayer 2</h6>
+          <small>Field B</small>
+          <p>Tank: {{sprayer2Level}}%</p>
+        </div>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox">
+      </div>
+    </div>
+    <div class="progress mb-2 mt-2">
+      <div class="progress-bar"
+           [ngClass]="{'green': sprayer2Level > 70, 'yellow': sprayer2Level > 30 && sprayer2Level <= 70, 'red': sprayer2Level <= 30}"
+           [style.width.%]="sprayer2Level">
+      </div>
+    </div>
+    <small class="text-muted">Last Maint: 2024-05-12</small>
+  </div>
+
+  <!-- Sprayer 3 -->
+  <div class="sprayer-card">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <div class="sprayer-icon" [ngClass]="{'bg-success': sprayer3Level > 70, 'bg-warning': sprayer3Level > 30 && sprayer3Level <= 70, 'bg-danger': sprayer3Level <= 30}">
+          <i class="fa-solid fa-spray-can"></i>
+        </div>
+        <div>
+          <h6>Sprayer 3</h6>
+          <small>Field C</small>
+          <p>Tank: {{sprayer3Level}}%</p>
+        </div>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" checked>
+      </div>
+    </div>
+    <div class="progress mb-2 mt-2">
+      <div class="progress-bar"
+           [ngClass]="{'green': sprayer3Level > 70, 'yellow': sprayer3Level > 30 && sprayer3Level <= 70, 'red': sprayer3Level <= 30}"
+           [style.width.%]="sprayer3Level">
+      </div>
+    </div>
+    <small class="text-muted">Last Maint: 2024-05-20</small>
+  </div>
+
+  <!-- Button -->
+  <button class="btn btn-success w-100 mt-3">SPRAY All Infected</button>
+
+  <!-- Alerts -->
+  <div class="alert alert-warning mt-3">
+    ⚠️ Low Tank Level – Sprayer 2 tank is at {{sprayer2Level}}%
+  </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,22 @@
+<app-header></app-header>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+      <div class="card p-4 shadow-sm">
+        <h2 class="text-center mb-4">{{ pageTitle }}</h2>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4" *ngFor="let feature of featuresList">
+            <div class="feature-card">
+              <i [class]="feature.icon + ' feature-icon'"></i>
+              <h3>{{ feature.title }}</h3>
+              <p>{{ feature.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

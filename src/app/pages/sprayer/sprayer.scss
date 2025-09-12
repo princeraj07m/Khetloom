@@ -1,0 +1,138 @@
+/* Main Container */
+.sprayer-screen {
+  background: #f5f8f7;
+  border-radius: 16px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+
+/* Icon Circle */
+.sprayer-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+.sprayer-screen h5 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px !important;
+}
+
+/* Sprayer Cards */
+.sprayer-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.sprayer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Sprayer Title */
+.sprayer-card h6 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: #222;
+}
+
+/* Tank Info */
+.sprayer-card p {
+  margin: 5px 0;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Switch */
+.form-check-input {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Progress Bar */
+.progress {
+  height: 12px;
+  border-radius: 8px;
+  background: #e9ecef;
+  overflow: hidden;
+}
+
+.progress-bar {
+  border-radius: 8px;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+/* Dynamic Colors */
+.progress-bar.red {
+  background: linear-gradient(90deg, #e53935, #ef5350);
+}
+.progress-bar.yellow {
+  background: linear-gradient(90deg, #fdd835, #fbc02d);
+}
+.progress-bar.green {
+  background: linear-gradient(90deg, #43a047, #66bb6a);
+}
+
+/* Maintenance Text */
+.sprayer-card small {
+  font-size: 13px;
+  color: #888;
+}
+
+/* Button */
+.sprayer-screen .btn-success {
+  background: linear-gradient(135deg, #28a745, #34d058);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0px 4px 12px rgba(40, 167, 69, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sprayer-screen .btn-success:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 18px rgba(40, 167, 69, 0.6);
+}
+
+/* Alerts */
+.alert {
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 0px 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.alert-warning {
+  background: #fff8e1;
+  color: #d9822b;
+  border: 1px solid #ffd45c;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
