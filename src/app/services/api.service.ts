@@ -80,8 +80,10 @@ export interface UsersResponse {
 })
 export class ApiService {
   private readonly apiUrl = 'http://13.60.157.181:5001/api';
-
-  constructor(private readonly http: HttpClient) { }
+  
+  constructor(private readonly http: HttpClient) {
+    console.log('🔧 API Service initialized with URL:', this.apiUrl);
+  }
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
