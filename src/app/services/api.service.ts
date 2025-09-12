@@ -79,7 +79,8 @@ export interface UsersResponse {
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly apiUrl = (window as any).__API_BASE_URL__ ?? environment.apiUrl;
+  private readonly apiUrl = (window as any).__API_BASE_URL__ ?? 
+    (environment.production ? 'http://13.60.157.181:5001/api' : environment.apiUrl);
 
   constructor(private readonly http: HttpClient) { }
 
