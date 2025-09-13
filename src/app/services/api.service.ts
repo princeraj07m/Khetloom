@@ -82,7 +82,7 @@ export class ApiService {
   private readonly apiUrl = 'http://13.60.157.181:5001/api';
   
   constructor(private readonly http: HttpClient) {
-    console.log('🔧 API Service initialized with URL:', this.apiUrl);
+    // console.log('🔧 API Service initialized with URL:', this.apiUrl);
   }
 
   private getHeaders(): HttpHeaders {
@@ -96,13 +96,13 @@ export class ApiService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
 
-    console.error('🚨 API Error Details:', {
-      status: error.status,
-      statusText: error.statusText,
-      url: error.url,
-      error: error.error,
-      message: error.message
-    });
+    // console.error('🚨 API Error Details:', {
+    //   status: error.status,
+    //   statusText: error.statusText,
+    //   url: error.url,
+    //   error: error.error,
+    //   message: error.message
+    // });
 
     if (error.error instanceof ErrorEvent) {
       // Client-side error
@@ -136,15 +136,15 @@ export class ApiService {
 
   // Authentication methods
   login(credentials: LoginRequest): Observable<AuthResponse> {
-    console.log('🔐 API Service: Attempting login with API URL:', `${this.apiUrl}/login`);
-    console.log('📧 API Service: Login credentials:', credentials);
+    // console.log('🔐 API Service: Attempting login with API URL:', `${this.apiUrl}/login`);
+    // console.log('📧 API Service: Login credentials:', credentials);
     
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap(response => {
-          console.log('📨 API Service: Raw response received:', response);
-          console.log('📊 API Service: Response type:', typeof response);
-          console.log('📊 API Service: Response keys:', Object.keys(response || {}));
+          // console.log('📨 API Service: Raw response received:', response);
+          // console.log('📊 API Service: Response type:', typeof response);
+          // console.log('📊 API Service: Response keys:', Object.keys(response || {}));
         }),
         catchError(this.handleError)
       );

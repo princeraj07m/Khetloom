@@ -29,11 +29,13 @@
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
     "@fortawesome/fontawesome-free": "^7.0.1",
+    "@omnedia/ngx-swapy": "^3.0.1",
     "@types/leaflet": "^1.9.20",
     "bootstrap": "^5.3.8",
     "force": "^0.0.3",
     "leaflet": "^1.9.4",
     "rxjs": "~7.8.0",
+    "swapy": "^1.0.5",
     "tslib": "^2.3.0",
     "zone.js": "^0.15.1"
   },
