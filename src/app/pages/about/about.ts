@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSwapyComponent } from '@omnedia/ngx-swapy';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-about',
@@ -49,54 +50,22 @@ export class About implements OnInit {
   ourVisionTitle: string = 'Our Vision';
   ourVisionText: string = 'To be the leading provider of agricultural technology solutions, fostering a global community of empowered and successful farmers.';
 
-  teamMembers = [
-    {
-      name: 'Prince Kumar',
-      role: 'Lead Developer',
-      image: 'https://coin-images.coingecko.com/coins/images/67527/large/IMG_1097.png?1753083744',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      github: 'https://github.com/johndoe'
-    },
-    {
-      name: 'Rohit Raj',
-      role: 'UI/UX Designer',
-      image: 'https://preview.redd.it/capy-v0-yedxay3k9zqc1.jpeg?auto=webp&s=f0334d04ffef478e77142ed3a5e2c10ee956a0e6',
-      linkedin: 'https://linkedin.com/in/janesmith',
-      github: 'https://github.com/janesmith'
-    },
-    {
-      name: 'Shashank',
-      role: 'Data Scientist',
-      image: 'https://coin-images.coingecko.com/coins/images/50408/large/y1UFAUxp_400x400.jpg?1727664151',
-      linkedin: 'https://linkedin.com/in/peterjones',
-      github: 'https://github.com/peterjones'
-    },
-    {
-      name: 'Manish Kumar',
-      role: 'Marketing Specialist',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJH89Q0SylyDX1hPGuyWsomHwTGIZGG0h_i3s0EXH4omUYNK1kqu3r0PWEOJSz0xGyqFE&usqp=CAU',
-      linkedin: 'https://linkedin.com/in/emilywhite',
-      github: 'https://github.com/emilywhite'
-    },
-    {
-      name: 'Raunak Kumar',
-      role: 'Product Manager',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtzfDy-FIb49W1dR_2D1HgGyIEMiCEt-1sOQ&s',
-      linkedin: 'https://linkedin.com/in/davidgreen',
-      github: 'https://github.com/davidgreen'
-    },
-    {
-      name: 'Raunak Kumar',
-      role: 'Product Manager',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtzfDy-FIb49W1dR_2D1HgGyIEMiCEt-1sOQ&s',
-      linkedin: 'https://linkedin.com/in/davidgreen',
-      github: 'https://github.com/davidgreen'
-    }
+  teamMembers :any = [];
 
-  ];
 
-  constructor() { }
+  teamids = ["princeraj07m", "rohit-irl", "Shankkz", "smalok", "RaunakKumar-byte"]
+  constructor(private http: HttpClient) {
+    this.getuserdata();
+  } 
 
+getuserdata() {
+  this.teamMembers = []; 
+  this.teamids.forEach(id => {
+    this.http.get(`https://api.github.com/users/${id}`).subscribe((result: any) => {
+      this.teamMembers.push(result); 
+    });
+  });
+}
   ngOnInit(): void {
   }
 

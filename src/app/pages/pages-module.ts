@@ -23,7 +23,7 @@ import { CropCycleComponent } from './crop-cycle/crop-cycle';
 import { Weather } from './weather/weather';
 import { GoogleMap } from './google-map/google-map';
 import { NgxSwapyComponent } from '@omnedia/ngx-swapy';
-
+import { HttpClient, httpResource } from '@angular/common/http';
 @NgModule({
   declarations: [
     Home,
@@ -51,7 +51,8 @@ import { NgxSwapyComponent } from '@omnedia/ngx-swapy';
     ReactiveFormsModule,
     PagesRoutingModule,
     SharedModule,
-    NgxSwapyComponent
+    NgxSwapyComponent,
+
   ]
 })
 export class PagesModule { }
