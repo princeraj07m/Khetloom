@@ -8,6 +8,7 @@ import { App } from './app';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared-module';
 import { GoogleMap } from './components/google-map/google-map';
+import { NgxSwapyComponent } from '@omnedia/ngx-swapy';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { GoogleMap } from './components/google-map/google-map';
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxSwapyComponent
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

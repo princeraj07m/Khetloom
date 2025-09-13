@@ -22,6 +22,7 @@ import { NotificationsComponent } from './notifications/notifications';
 import { CropCycleComponent } from './crop-cycle/crop-cycle';
 import { Weather } from './weather/weather';
 import { GoogleMap } from './google-map/google-map';
+import { NgxSwapyComponent } from '@omnedia/ngx-swapy';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { GoogleMap } from './google-map/google-map';
     FormsModule,
     ReactiveFormsModule,
     PagesRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxSwapyComponent
   ]
 })
 export class PagesModule { }

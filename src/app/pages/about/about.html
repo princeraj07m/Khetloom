@@ -3,7 +3,7 @@
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10">
-      <div class="card p-4 shadow-sm">
+      <div class=" p-4">
         <h2 class="text-center mb-4">About Us</h2>
         <div class="row g-4 align-items-center">
           <div class="col-md-6">
@@ -14,20 +14,20 @@
 
             <h3 class="mt-5 mb-3 text-center">{{ missionTitle }}</h3>
             <p class="text-center">{{ missionText }}</p>
-            </div>
-            <h3 class="mt-5 mb-3 text-center">{{ whatWeOfferTitle }}</h3>
-            <div class="row g-4">
-              <div class="col-md-6" *ngFor="let feature of features">
-                <div class="feature-item">
-                  <h4>{{ feature.title }}</h4>
-                  <p>{{ feature.description }}</p>
-                </div>
+          </div>
+          <h3 class="mt-5 mb-3 text-center">{{ whatWeOfferTitle }}</h3>
+          <div class="row g-4">
+            <div class="col-md-6" *ngFor="let feature of features">
+              <div class="feature-item">
+                <h4>{{ feature.title }}</h4>
+                <p>{{ feature.description }}</p>
               </div>
             </div>
+          </div>
 
-            <h3 class="mt-5 mb-3 text-center">{{ ourCommitmentTitle }}</h3>
-            <p class="text-center">{{ ourCommitmentText }}</p>
-          
+          <h3 class="mt-5 mb-3 text-center">{{ ourCommitmentTitle }}</h3>
+          <p class="text-center">{{ ourCommitmentText }}</p>
+
         </div>
         <hr class="my-5">
         <h3 class="text-center mb-4">{{ ourVisionTitle }}</h3>
@@ -35,22 +35,38 @@
 
         <hr class="my-5">
         <h3 class="text-center mb-4">Meet Our Team</h3>
-        <div class="row g-4 justify-content-center">
-          <div class="col-md-4 col-lg-3" *ngFor="let member of teamMembers">
-            <div class="team-member card p-3 text-center">
-              <img [src]="member.image" class="rounded-circle mb-3 mx-auto" [alt]="member.name">
-              <h5>{{ member.name }}</h5>
-              <p class="text-muted">{{ member.role }}</p>
-              <div class="social-links">
-                <a [href]="member.linkedin" target="_blank" class="me-2" *ngIf="member.linkedin"><i class="fab fa-linkedin fa-lg"></i></a>
-                <a [href]="member.github" target="_blank" *ngIf="member.github"><i class="fab fa-github fa-lg"></i></a>
+        <div class="row g-4">
+          <om-swapy>
+            <ng-template class="col-md-4 col-lg-3" *ngFor="let member of teamMembers">
+              <div class="card border-0 shadow-sm team-card h-100">
+                <div class="card-body text-center">
+                  <!-- Profile Image -->
+                  <img [src]="member.image" class="rounded-circle mb-3 mx-auto shadow-sm team-img" [alt]="member.name">
+
+                  <!-- Name & Role -->
+                  <h5 class="fw-bold mb-1">{{ member.name }}</h5>
+                  <p class="text-muted small">{{ member.role }}</p>
+
+                  <!-- Social Links -->
+                  <div class="d-flex justify-content-center gap-3 mt-3">
+                    <a [href]="member.linkedin" target="_blank" *ngIf="member.linkedin"
+                      class="text-decoration-none text-primary fs-5">
+                      <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a [href]="member.github" target="_blank" *ngIf="member.github"
+                      class="text-decoration-none text-dark fs-5">
+                      <i class="fab fa-github"></i>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </ng-template>
+          </om-swapy>
+        </div>
+
       </div>
     </div>
   </div>
-</div>
-</div>
+  </div>
 
-<app-footer></app-footer>
+  <app-footer></app-footer>

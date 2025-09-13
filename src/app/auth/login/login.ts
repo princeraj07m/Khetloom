@@ -27,38 +27,38 @@ export class Login implements OnInit {
   }
 
   onSubmit() {
-    // console.log('🚀 Login form submitted');
-    // console.log('📝 Form valid:', this.loginForm.valid);
-    // console.log('📋 Form value:', this.loginForm.value);
+    console.log('🚀 Login form submitted');
+    console.log('📝 Form valid:', this.loginForm.valid);
+    console.log('📋 Form value:', this.loginForm.value);
     
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.errorMessage = '';
       
       const credentials = this.loginForm.value;
-      // console.log('🔐 Sending credentials to auth service:', credentials);
+      console.log('🔐 Sending credentials to auth service:', credentials);
       
       this.authService.login(credentials).subscribe({
         next: (response) => {
           this.isLoading = false;
-          // console.log('✅ Login successful:', response);
-          // console.log('🎉 Full response object:', JSON.stringify(response, null, 2));
+          console.log('✅ Login successful:', response);
+          console.log('🎉 Full response object:', JSON.stringify(response, null, 2));
           alert('Login Successful! Redirecting to dashboard...');
           this.authService.navigateToDashboard();
         },
         error: (error) => {
           this.isLoading = false;
           this.errorMessage = error.message || 'Login failed. Please try again.';
-          // console.error('❌ Login error:', error);
-          // console.error('❌ Error message:', error.message);
-          // console.error('❌ Full error object:', JSON.stringify(error, null, 2));
+          console.error('❌ Login error:', error);
+          console.error('❌ Error message:', error.message);
+          console.error('❌ Full error object:', JSON.stringify(error, null, 2));
           alert(`Login failed: ${this.errorMessage}`);
         }
       });
     } else {
       this.markFormGroupTouched();
-      // console.log('❌ Form is invalid');
-      // console.log('❌ Form errors:', this.getFormErrors());
+      console.log('❌ Form is invalid');
+      console.log('❌ Form errors:', this.getFormErrors());
       alert('Please enter valid credentials.');
     }
   }

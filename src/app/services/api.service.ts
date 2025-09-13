@@ -142,9 +142,9 @@ export class ApiService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap(response => {
-          console.log('📨 API Service: Raw response received:', response);
-          console.log('📊 API Service: Response type:', typeof response);
-          console.log('📊 API Service: Response keys:', Object.keys(response || {}));
+          // console.log('📨 API Service: Raw response received:', response);
+          // console.log('📊 API Service: Response type:', typeof response);
+          // console.log('📊 API Service: Response keys:', Object.keys(response || {}));
         }),
         catchError(this.handleError)
       );

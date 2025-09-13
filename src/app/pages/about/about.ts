@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSwapyComponent } from '@omnedia/ngx-swapy';
 
 @Component({
   selector: 'app-about',
@@ -85,12 +86,13 @@ export class About implements OnInit {
       github: 'https://github.com/davidgreen'
     },
     {
-      name: 'Sarah Brown',
-      role: 'Operations Lead',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNRJZL1up7wDDMPOpKuuIpK-3LQTmwd2Hutw&s',
-      linkedin: 'https://linkedin.com/in/sarahbrown',
-      github: 'https://github.com/sarahbrown'
+      name: 'Raunak Kumar',
+      role: 'Product Manager',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtzfDy-FIb49W1dR_2D1HgGyIEMiCEt-1sOQ&s',
+      linkedin: 'https://linkedin.com/in/davidgreen',
+      github: 'https://github.com/davidgreen'
     }
+
   ];
 
   constructor() { }
