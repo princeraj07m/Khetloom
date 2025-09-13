@@ -1,10 +1,3 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
-})
 export class DashboardComponent {
   userName = 'Ethan';
   farmInfo = { name: 'Green Acres', crop: 'Corn', location: 'Iowa' };
