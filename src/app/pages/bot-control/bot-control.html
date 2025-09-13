@@ -1,0 +1,200 @@
+<app-header></app-header>
+<div class="app-container container">
+
+
+  <!-- Dashboard Main -->
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center mb-4">🤖 Fertilizer Bot Control Dashboard</h1>
+      </div>
+    </div>
+
+    <!-- Status Card -->
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="status-card">
+          <h4 class="mb-3">🤖 Bot Status</h4>
+          <div class="row">
+            <div class="col-6">
+              <p class="mb-2"><strong>Position:</strong></p>
+              <p class="h5">
+                ({{ botStatus.x }}, {{ botStatus.y }})
+                <span *ngIf="botStatus.isMoving" class="moving-indicator">🚀</span>
+              </p>
+            </div>
+            <div class="col-6">
+              <p class="mb-2"><strong>Battery:</strong></p>
+              <p class="h5">{{ botStatus.battery }}% 🔋</p>
+              <div class="battery-bar bg-light">
+                <div class="battery-fill" [class]="getBatteryClass()"
+                     [style.width.%]="botStatus.battery"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <p class="mb-1"><strong>Status:</strong>
+              <span class="badge"
+                    [class]="botStatus.isMoving ? 'badge-warning' : 'badge-success'">
+                {{ botStatus.isMoving ? 'Moving' : 'Idle' }}
+              </span>
+            </p>
+            <small>Last Update: {{ formatTimestamp(botStatus.lastUpdate) }}</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Panel -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="control-card">
+          <h4 class="mb-3">🎮 Controls</h4>
+
+          <!-- Alert Messages -->
+          <div *ngIf="error" class="alert alert-danger alert-dismissible">
+            {{ error }}
+            <button type="button" class="btn-close" (click)="clearMessages()"></button>
+          </div>
+          <div *ngIf="success" class="alert alert-success alert-dismissible">
+            {{ success }}
+            <button type="button" class="btn-close" (click)="clearMessages()"></button>
+          </div>
+
+          <!-- Move Controls -->
+          <div class="mb-4">
+            <h6>Move Bot</h6>
+            <div class="d-flex align-items-center justify-content-center mb-3">
+              <label class="me-2">X:</label>
+              <input type="number" class="coordinate-input"
+                     [(ngModel)]="moveX" min="0" max="4">
+              <label class="mx-2">Y:</label>
+              <input type="number" class="coordinate-input"
+                     [(ngModel)]="moveY" min="0" max="4">
+            </div>
+            <button class="btn btn-primary btn-custom w-100"
+                    (click)="moveBot()"
+                    [disabled]="loading || botStatus.isMoving">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              📍 Move to ({{ moveX }}, {{ moveY }})
+            </button>
+          </div>
+
+          <!-- Drop Fertilizer -->
+          <div class="mb-3">
+            <h6>Actions</h6>
+            <button class="btn btn-success btn-custom w-100"
+                    (click)="dropFertilizer()"
+                    [disabled]="loading || botStatus.isMoving">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              💧 Drop Fertilizer
+            </button>
+          </div>
+
+          <small class="text-muted">
+            Click on grid cells to set coordinates quickly
+          </small>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="control-card">
+          <h4 class="mb-3">📊 Quick Stats</h4>
+          <div class="row text-center">
+            <div class="col-6">
+              <div class="h3 text-primary">{{ logs.length }}</div>
+              <small class="text-muted">Fertilizer Drops</small>
+            </div>
+            <div class="col-6">
+              <div class="h3 text-info">{{ botStatus.battery }}%</div>
+              <small class="text-muted">Battery Level</small>
+            </div>
+          </div>
+          <div class="row text-center mt-3">
+            <div class="col-6">
+              <div class="h3 text-warning">{{ botStatus.isMoving ? 'Active' : 'Idle' }}</div>
+              <small class="text-muted">Bot Status</small>
+            </div>
+            <div class="col-6">
+              <div class="h3 text-success">Online</div>
+              <small class="text-muted">Connection</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Garden Grid -->
+    <div class="row">
+      <div class="col-12">
+        <div class="control-card">
+          <h4 class="text-center mb-4">🌱 Garden Grid (5x5)</h4>
+          <div class="grid-container">
+            <div *ngFor="let row of grid; let y = index" class="grid-row">
+              <div *ngFor="let cell of row; let x = index"
+                   class="grid-cell"
+                   [class.has-bot]="cell.hasBot"
+                   [class.has-fertilizer]="cell.hasFertilizer"
+                   (click)="onGridCellClick(cell)"
+                   [title]="'Position: (' + cell.x + ', ' + cell.y + ')'">
+
+                <span *ngIf="cell.hasBot" class="bot-icon">🤖</span>
+                <span *ngIf="!cell.hasBot && !cell.hasFertilizer">🌱({{ cell.x }},{{ cell.y }})</span>
+
+                <span *ngIf="cell.hasFertilizer && !cell.hasBot" class="fertilizer-icon">💧</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <small class="text-muted">
+              <span class="badge bg-primary me-2">🤖 Bot Position</span>
+              <span class="badge bg-success me-2">💧 Fertilizer Applied</span>
+
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logs Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="logs-card">
+          <h4 class="mb-3">📋 Fertilizer Application Logs</h4>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Position</th>
+                  <th>Timestamp</th>
+                  <th>Battery Level</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let log of logs; let i = index"
+                    [class]="i === 0 ? 'table-success' : ''">
+                  <td><strong>({{ log.x }}, {{ log.y }})</strong></td>
+                  <td>{{ formatTimestamp(log.timestamp) }}</td>
+                  <td>
+                    <span [class]="log.batteryLevel > 20 ? 'text-success' : 'text-danger'">
+                      {{ log.batteryLevel }}% 🔋
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge"
+                          [class]="log.success ? 'badge-success' : 'badge-danger'">
+                      {{ log.success ? '✅ Success' : '❌ Failed' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="logs.length === 0" class="text-center py-4 text-muted">
+              <p>No fertilizer applications yet. Send some drop commands!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

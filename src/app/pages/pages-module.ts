@@ -22,8 +22,8 @@ import { NotificationsComponent } from './notifications/notifications';
 import { CropCycleComponent } from './crop-cycle/crop-cycle';
 import { Weather } from './weather/weather';
 import { GoogleMap } from './google-map/google-map';
-import { NgxSwapyComponent } from '@omnedia/ngx-swapy';
-import { HttpClient, httpResource } from '@angular/common/http';
+import { Botcontrol } from './bot-control/bot-control';
+
 @NgModule({
   declarations: [
     Home,
@@ -44,15 +44,14 @@ import { HttpClient, httpResource } from '@angular/common/http';
     CropCycleComponent,
     Weather,
     GoogleMap,
+    Botcontrol,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     PagesRoutingModule,
-    SharedModule,
-    NgxSwapyComponent,
-
+    SharedModule
   ]
 })
 export class PagesModule { }
