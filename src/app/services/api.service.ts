@@ -79,8 +79,8 @@ export interface UsersResponse {
   providedIn: 'root'
 })
 export class ApiService {
-  // private readonly apiUrl = 'http://13.60.157.181:5001/api';
-  private readonly apiUrl = 'http://13.60.157.181:5001/api';
+  // private readonly apiUrl = 'https://khetloom-backend.vercel.app/api';
+  private readonly apiUrl = 'https://khetloom-backend.vercel.app/api';
   
 
   
