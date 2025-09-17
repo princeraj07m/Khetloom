@@ -1,72 +1,79 @@
 <app-header></app-header>
 <div class="main-content" style="min-height: 100vh;">
-  <!-- Left Sidebar -->
-  <nav class="d-md-block navbar-light bg-light p-3" style="max-height: 100vh;">
-    <div class="container-fluid">
-      
-      <div class="d-flex justify-content-between">
-        <h3 class="navbar-brand ">Profile & Settings</h3>
-<button class="navbar-toggler d-md-none"
-        type="button"
-        (click)="toggleSidebar()"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-  <i class="fa-solid fa-caret-down fa-beat fa-lg" style="color: #335620;"></i>
-</button>
 
+<nav class="sidebar d-md-block p-3">
+  <div class="container-fluid">
 
-      </div>
-
-      <!-- Collapsible Sidebar -->
-      <div class="collapse navbar-collapse d-md-block" id="sidebarMenu">
-        <ul class="navbar-nav flex-column">
-          <li class="nav-item">
-            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'farm-details'"
-              (click)="setActiveSection('farm-details', $event)">
-              <i class="fas fa-tractor"></i> Farm Details
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'edit-details'"
-              (click)="setActiveSection('edit-details', $event)">
-              <i class="fas fa-edit"></i> Edit Details
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'subscription'"
-              (click)="setActiveSection('subscription', $event)">
-              <i class="fas fa-star"></i> Subscription
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'preferences'"
-              (click)="setActiveSection('preferences', $event)">
-              <i class="fas fa-sliders-h"></i> Preferences
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'integrations'"
-              (click)="setActiveSection('integrations', $event)">
-              <i class="fas fa-puzzle-piece"></i> Integrations
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'security'"
-              (click)="setActiveSection('security', $event)">
-              <i class="fas fa-shield-alt"></i> Security
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'system'"
-              (click)="setActiveSection('system', $event)">
-              <i class="fas fa-cog"></i> System
-            </button>
-          </li>
-        </ul>
-      </div>
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center ">
+      <h3 class="sidebar-title">🌿 Profile & Settings</h3>
+      <button class="navbar-toggler d-md-none toggle-btn"
+              type="button"
+              (click)="toggleSidebar()"
+              aria-controls="sidebarMenu"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <i class="fa-solid fa-caret-down fa-beat fa-lg"></i>
+      </button>
     </div>
-  </nav>
+
+    <!-- Collapsible Sidebar -->
+    <div class="collapse navbar-collapse d-md-block" id="sidebarMenu">
+      <ul class="navbar-nav flex-column gap-2">
+        <li class="nav-item">
+          <button class="nav-link btn btn-link"
+            [class.active]="activeSection === 'farm-details'"
+            (click)="setActiveSection('farm-details', $event)">
+            <i class="fas fa-tractor"></i> Farm Details
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link"
+            [class.active]="activeSection === 'edit-details'"
+            (click)="setActiveSection('edit-details', $event)">
+            <i class="fas fa-edit"></i> Edit Details
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link"
+            [class.active]="activeSection === 'subscription'"
+            (click)="setActiveSection('subscription', $event)">
+            <i class="fas fa-star"></i> Subscription
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link"
+            [class.active]="activeSection === 'preferences'"
+            (click)="setActiveSection('preferences', $event)">
+            <i class="fas fa-sliders-h"></i> Preferences
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link"
+            [class.active]="activeSection === 'integrations'"
+            (click)="setActiveSection('integrations', $event)">
+            <i class="fas fa-puzzle-piece"></i> Integrations
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link"
+            [class.active]="activeSection === 'security'"
+            (click)="setActiveSection('security', $event)">
+            <i class="fas fa-shield-alt"></i> Security
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link"
+            [class.active]="activeSection === 'system'"
+            (click)="setActiveSection('system', $event)">
+            <i class="fas fa-cog"></i> System
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 
 
 
