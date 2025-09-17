@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md bg-white shadow-sm px-3 px-md-5 sticky-top" style="height: 75px;">
-  <div class="d-flex align-items-center " routerLink="/">
+  <div class="d-flex align-items-center btn " routerLink="/">
     <div class="logo-circle mx-auto me-2">
       <i class="fa-solid fa-leaf text-success"></i>
     </div>
@@ -38,15 +38,13 @@
         </li>
       </ng-container>
       <ng-container class="loggedin-dash" *ngIf="isLoggedIn">
-        <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
-            routerLink="/dashboard">📊
+        <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/dashboard">📊
             Dashboard</a></li>
         <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
             routerLink="/main/control-panel">⚙️
             Control Panel</a></li>
-             <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
-            routerLink="/bot-control">
-           🤖 Bot Control</a></li>
+        <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/bot-control">
+            🤖 Bot Control</a></li>
         <li class="nav-item dropdown px-2">
           <a class="nav-link dropdown-toggle text-success fw-semibold" href="#" id="menuDropdown" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,12 +53,11 @@
           <ul class="dropdown-menu custom-dropdown shadow-lg rounded-3 border-0 p-2" aria-labelledby="menuDropdown">
             <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/field-demo">🌱
                 Field Layout</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
-                routerLink="/financial-overview">💰 Financials</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/financial-overview">💰
+                Financials</a></li>
             <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/devices">🔌
                 Devices</a></li>
             <li>
-              <hr class="dropdown-divider">
             </li>
             <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/crop-cycles">🌾
                 Crop Cycles</a></li>
@@ -70,13 +67,31 @@
                 History & Logs</a></li>
             <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/notifications">🔔
                 Notifications</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/fields">🌾 Fields</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/crops">🌱 Crops</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/fields">🌾 Fields</a>
+            </li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/crops">🌱 Crops</a>
+            </li>
             <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/jobs">🧰 Jobs</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/health-reports">🩺 Health Reports</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/activities">📝 Activities</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/weather-cache">☁️ Weather Cache</a></li>
-            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" (click)="navigateToProfile()">👤
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/fieldlayout">🌱 Field
+                Map</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/health">🩺 Health</a>
+            </li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/sprayer">🚜 Sprayer</a>
+            </li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/analytics">📊
+                Analytics</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/setting">⚙️
+                Settings</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/users">👥 Users</a>
+            </li>
+
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/health-reports">🩺
+                Health Reports</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/activities">📝
+                Activities</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/weather-cache">☁️
+                Weather Cache</a></li>
+            <li><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/profile">👤
                 Edit Profile</a></li>
           </ul>
         </li>
@@ -85,7 +100,7 @@
 
         <li class="nav-item px-2">
           <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/user-profile">
-            Profile
+            <i class="fa-slab fa-regular fa-circle-user" style="color: #1d7258;"></i>
           </button>
         </li>
         <li class="nav-item px-2">
@@ -102,8 +117,8 @@
 <!-- Offcanvas Left Sidebar -->
 <div class="offcanvas offcanvas-start rounded-end shadow-lg" tabindex="-1" id="mobileMenu"
   aria-labelledby="mobileMenuLabel">
-  <div class="offcanvas-header border-bottom">
-    <h5 class="offcanvas-title fw-bold text-success d-flex align-items-center" id="mobileMenuLabel"  routerLink="/">
+  <div class="offcanvas-header border-bottom d-flex align-items-center btn" class=" " routerLink="/">
+    <h5 class="offcanvas-title fw-bold text-success d-flex align-items-center" id="mobileMenuLabel" routerLink="/">
       <i class="fa-solid fa-leaf me-2"></i> FertiFarm
     </h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -155,7 +170,7 @@
         routerLink="/field-demo">
         <i class="fa-solid fa-table-columns me-2 text-success"></i> Field Layout
       </a>
-       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
         routerLink="/bot-control">
         <i class="fa-solid fa-table-columns me-2 text-success"></i> 🤖 Bot Control
       </a>
@@ -188,8 +203,7 @@
         (click)="navigateToProfile()">
         <i class="fa-solid fa-user-edit me-2 text-success"></i> Edit Profile
       </a>
-      <button class="btn btn-success text-white mt-3 w-100 rounded-pill shadow-sm py-2"
-        routerLink="/user-profile">
+      <button class="btn btn-success text-white mt-3 w-100 rounded-pill shadow-sm py-2" routerLink="/user-profile">
         <i class="fa-solid fa-circle-user"></i> Profile
       </button>
 
