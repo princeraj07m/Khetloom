@@ -1,450 +1,456 @@
 <app-header></app-header>
-  <div class="main-content" style="min-height: 100vh;">
-    <!-- Left Sidebar -->
-    <div class="sidebar">
-      <h3 class="sidebar-title">Profile & Settings</h3>
-      <nav class="sidebar-nav">
-        <a href="#"
-           class="nav-item"
-           [class.active]="activeSection === 'farm-details'"
-           (click)="setActiveSection('farm-details', $event)">
-          <i class="fas fa-tractor"></i>
-          Farm Details
-        </a>
-        <a href="#"
-           class="nav-item"
-           [class.active]="activeSection === 'edit-details'"
-           (click)="setActiveSection('edit-details', $event)">
-          <i class="fas fa-edit"></i>
-          Edit Details
-        </a>
-        <a href="#"
-           class="nav-item"
-           [class.active]="activeSection === 'subscription'"
-           (click)="setActiveSection('subscription', $event)">
-          <i class="fas fa-star"></i>
-          Subscription
-        </a>
-        <a href="#"
-           class="nav-item"
-           [class.active]="activeSection === 'preferences'"
-           (click)="setActiveSection('preferences', $event)">
-          <i class="fas fa-sliders-h"></i>
-          Preferences
-        </a>
-        <a href="#"
-           class="nav-item"
-           [class.active]="activeSection === 'integrations'"
-           (click)="setActiveSection('integrations', $event)">
-          <i class="fas fa-puzzle-piece"></i>
-          Integrations
-        </a>
-        <a href="#"
-           class="nav-item"
-           [class.active]="activeSection === 'security'"
-           (click)="setActiveSection('security', $event)">
-          <i class="fas fa-shield-alt"></i>
-          Security
-        </a>
-        <a href="#"
-           class="nav-item"
-           [class.active]="activeSection === 'system'"
-           (click)="setActiveSection('system', $event)">
-          <i class="fas fa-cog"></i>
-          System
-        </a>
-      </nav>
+<div class="main-content" style="min-height: 100vh;">
+  <!-- Left Sidebar -->
+  <nav class="d-md-block navbar-light bg-light p-3" style="max-height: 100vh;">
+    <div class="container-fluid">
+      
+      <div class="d-flex justify-content-between">
+        <h3 class="navbar-brand ">Profile & Settings</h3>
+<button class="navbar-toggler d-md-none"
+        type="button"
+        (click)="toggleSidebar()"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+  <i class="fa-solid fa-caret-down fa-beat fa-lg" style="color: #335620;"></i>
+</button>
+
+
+      </div>
+
+      <!-- Collapsible Sidebar -->
+      <div class="collapse navbar-collapse d-md-block" id="sidebarMenu">
+        <ul class="navbar-nav flex-column">
+          <li class="nav-item">
+            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'farm-details'"
+              (click)="setActiveSection('farm-details', $event)">
+              <i class="fas fa-tractor"></i> Farm Details
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'edit-details'"
+              (click)="setActiveSection('edit-details', $event)">
+              <i class="fas fa-edit"></i> Edit Details
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'subscription'"
+              (click)="setActiveSection('subscription', $event)">
+              <i class="fas fa-star"></i> Subscription
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'preferences'"
+              (click)="setActiveSection('preferences', $event)">
+              <i class="fas fa-sliders-h"></i> Preferences
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'integrations'"
+              (click)="setActiveSection('integrations', $event)">
+              <i class="fas fa-puzzle-piece"></i> Integrations
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'security'"
+              (click)="setActiveSection('security', $event)">
+              <i class="fas fa-shield-alt"></i> Security
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-link text-start w-100" [class.active]="activeSection === 'system'"
+              (click)="setActiveSection('system', $event)">
+              <i class="fas fa-cog"></i> System
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- Main Content Area -->
+  <div class="content-area">
+    <!-- Welcome Message -->
+    <div class="welcome-message">
+      <p>Welcome back, {{ userProfile.name }}. Manage your farm and account details here.</p>
     </div>
 
-    <!-- Main Content Area -->
-    <div class="content-area">
-      <!-- Welcome Message -->
-      <div class="welcome-message">
-        <p>Welcome back, {{ userProfile.name }}. Manage your farm and account details here.</p>
+    <!-- User Profile Card -->
+    <div class="card profile-card p-3">
+      <div class="profile-info">
+        <img src="https://pics.craiyon.com/2023-07-15/dc2ec5a571974417a5551420a4fb0587.webp" alt="Profile"
+          class="profile-avatar">
+        <div class="profile-details">
+          <h2>{{ userProfile.name }}</h2>
+          <p><strong>Farm ID:</strong> {{ userProfile.farmId }}</p>
+          <p><strong>Contact:</strong> {{ userProfile.contact }}</p>
+        </div>
       </div>
+    </div>
 
-      <!-- User Profile Card -->
-      <div class="card profile-card">
-        <div class="profile-info">
-          <img [src]="userProfile.profileImage" alt="Profile" class="profile-avatar">
-          <div class="profile-details">
-            <h2>{{ userProfile.name }}</h2>
-            <p><strong>Farm ID:</strong> {{ userProfile.farmId }}</p>
-            <p><strong>Contact:</strong> {{ userProfile.contact }}</p>
+    <!-- Farm Details Section -->
+    <div *ngIf="activeSection === 'farm-details'" class="section-content">
+      <div class="card">
+        <div class="card-header">
+          <h4>Farm Details</h4>
+        </div>
+        <div class="card-body">
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Farm Name:</label>
+              <span>{{ farmDetails.farmName }}</span>
+            </div>
+            <div class="info-item">
+              <label>Location:</label>
+              <span>{{ farmDetails.location }}</span>
+            </div>
+            <div class="info-item">
+              <label>Size:</label>
+              <span>{{ farmDetails.size }} acres</span>
+            </div>
+            <div class="info-item">
+              <label>Primary Crop Type:</label>
+              <span>{{ farmDetails.primaryCrop }}</span>
+            </div>
+            <div class="info-item">
+              <label>Secondary Crop Type:</label>
+              <span>{{ farmDetails.secondaryCrop }}</span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Farm Details Section -->
-      <div *ngIf="activeSection === 'farm-details'" class="section-content">
-        <div class="card">
-          <div class="card-header">
-            <h4>Farm Details</h4>
-            <button class="btn btn-outline-primary btn-sm">Edit Details</button>
-          </div>
-          <div class="card-body">
-            <div class="info-grid">
-              <div class="info-item">
-                <label>Farm Name:</label>
-                <span>{{ farmDetails.farmName }}</span>
+    <!-- Edit Details Section -->
+    <div *ngIf="activeSection === 'edit-details'" class="section-content">
+      <!-- Personal Info -->
+      <div class="card">
+        <div class="card-header">
+          <h4>Edit Details</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="personalInfoForm">
+            <h5>Personal Info</h5>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" formControlName="fullName" class="form-control">
               </div>
-              <div class="info-item">
-                <label>Location:</label>
-                <span>{{ farmDetails.location }}</span>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" formControlName="email" class="form-control">
               </div>
-              <div class="info-item">
-                <label>Size:</label>
-                <span>{{ farmDetails.size }} acres</span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control" placeholder="Enter new password">
               </div>
-              <div class="info-item">
-                <label>Primary Crop Type:</label>
-                <span>{{ farmDetails.primaryCrop }}</span>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" formControlName="phoneNumber" class="form-control">
               </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Communication Preferences</label>
+                <select formControlName="communicationPreference" class="form-control">
+                  <option value="Email Only">Email Only</option>
+                  <option value="SMS Only">SMS Only</option>
+                  <option value="Both">Both</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Language</label>
+                <select formControlName="language" class="form-control">
+                  <option value="English">English</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="French">French</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Farm Info -->
+      <div class="card">
+        <div class="card-header">
+          <h4>Farm Info</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="farmInfoForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Farm Name</label>
+                <input type="text" formControlName="farmName" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Farm Location</label>
+                <input type="text" formControlName="farmLocation" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Farm Size (acres)</label>
+                <input type="number" formControlName="farmSize" class="form-control">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Crop Info -->
+      <div class="card">
+        <div class="card-header">
+          <h4>Crop Info</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="farmInfoForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Primary Crops</label>
+                <input type="text" formControlName="primaryCrops" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Secondary Crops</label>
+                <input type="text" formControlName="secondaryCrops" class="form-control">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Equipment Info -->
+      <div class="card">
+        <div class="card-header">
+          <h4>Equipment Info</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="equipmentForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Sprayer Type</label>
+                <input type="text" formControlName="sprayerType" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>IoT Devices</label>
+                <input type="text" formControlName="iotDevices" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Machinery</label>
+                <input type="text" formControlName="machinery" class="form-control">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Pesticide & Fertilizer -->
+      <div class="card">
+        <div class="card-header">
+          <h4>Pesticide & Fertilizer</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="pesticideForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Pesticides Used</label>
+                <input type="text" formControlName="pesticides" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Fertilizer Preference</label>
+                <select formControlName="fertilizerType" class="form-control">
+                  <option value="Conventional">Conventional</option>
+                  <option value="Organic">Organic</option>
+                  <option value="Mixed">Mixed</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Monthly Expenditure ($)</label>
+                <input type="number" formControlName="monthlyExpenditure" class="form-control">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscription Section -->
+    <div *ngIf="activeSection === 'subscription'" class="section-content">
+      <div class="card">
+        <div class="card-header">
+          <h4>Subscription Management</h4>
+        </div>
+        <div class="card-body">
+          <div class="subscription-info">
+            <h5>Current Plan</h5>
+            <div class="plan-details">
+              <span class="plan-name">{{ subscription.plan }}</span>
+              <span class="renewal-date">Renews on: {{ subscription.renewsOn }}</span>
+              <button class="btn btn-outline-primary btn-sm">Change Plan</button>
+            </div>
+            <div class="premium-features">
+              <h6>Premium Features</h6>
+              <ul>
+                <li *ngFor="let feature of subscription.features">{{ feature }}</li>
+              </ul>
+              <a href="#" class="feature-link">Explore all premium features</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Edit Details Section -->
-      <div *ngIf="activeSection === 'edit-details'" class="section-content">
-        <!-- Personal Info -->
-        <div class="card">
-          <div class="card-header">
-            <h4>Edit Details</h4>
-          </div>
-          <div class="card-body">
-            <form [formGroup]="personalInfoForm">
-              <h5>Personal Info</h5>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Full Name</label>
-                  <input type="text" formControlName="fullName" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>Email Address</label>
-                  <input type="email" formControlName="email" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" formControlName="password" class="form-control" placeholder="Enter new password">
-                </div>
-                <div class="form-group">
-                  <label>Phone Number</label>
-                  <input type="tel" formControlName="phoneNumber" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Communication Preferences</label>
-                  <select formControlName="communicationPreference" class="form-control">
-                    <option value="Email Only">Email Only</option>
-                    <option value="SMS Only">SMS Only</option>
-                    <option value="Both">Both</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Language</label>
-                  <select formControlName="language" class="form-control">
-                    <option value="English">English</option>
-                    <option value="Spanish">Spanish</option>
-                    <option value="French">French</option>
-                  </select>
-                </div>
-              </div>
-            </form>
-          </div>
+      <div class="card">
+        <div class="card-header">
+          <h4>Payment Details</h4>
         </div>
-
-        <!-- Farm Info -->
-        <div class="card">
-          <div class="card-header">
-            <h4>Farm Info</h4>
-          </div>
-          <div class="card-body">
-            <form [formGroup]="farmInfoForm">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Farm Name</label>
-                  <input type="text" formControlName="farmName" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>Farm Location</label>
-                  <input type="text" formControlName="farmLocation" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Farm Size (acres)</label>
-                  <input type="number" formControlName="farmSize" class="form-control">
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Crop Info -->
-        <div class="card">
-          <div class="card-header">
-            <h4>Crop Info</h4>
-          </div>
-          <div class="card-body">
-            <form [formGroup]="farmInfoForm">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Primary Crops</label>
-                  <input type="text" formControlName="primaryCrops" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>Secondary Crops</label>
-                  <input type="text" formControlName="secondaryCrops" class="form-control">
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Equipment Info -->
-        <div class="card">
-          <div class="card-header">
-            <h4>Equipment Info</h4>
-          </div>
-          <div class="card-body">
-            <form [formGroup]="equipmentForm">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Sprayer Type</label>
-                  <input type="text" formControlName="sprayerType" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>IoT Devices</label>
-                  <input type="text" formControlName="iotDevices" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Machinery</label>
-                  <input type="text" formControlName="machinery" class="form-control">
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Pesticide & Fertilizer -->
-        <div class="card">
-          <div class="card-header">
-            <h4>Pesticide & Fertilizer</h4>
-          </div>
-          <div class="card-body">
-            <form [formGroup]="pesticideForm">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Pesticides Used</label>
-                  <input type="text" formControlName="pesticides" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>Fertilizer Preference</label>
-                  <select formControlName="fertilizerType" class="form-control">
-                    <option value="Conventional">Conventional</option>
-                    <option value="Organic">Organic</option>
-                    <option value="Mixed">Mixed</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Monthly Expenditure ($)</label>
-                  <input type="number" formControlName="monthlyExpenditure" class="form-control">
-                </div>
-              </div>
-            </form>
+        <div class="card-body">
+          <div class="payment-info">
+            <div class="card-details">
+              <i class="fas fa-credit-card"></i>
+              <span>{{ paymentDetails.cardType }} ending in {{ paymentDetails.lastFour }}</span>
+              <span class="expiry">Expires {{ paymentDetails.expires }}</span>
+            </div>
+            <button class="btn btn-outline-primary btn-sm" (click)="updatePayment()">Update</button>
           </div>
         </div>
       </div>
 
-      <!-- Subscription Section -->
-      <div *ngIf="activeSection === 'subscription'" class="section-content">
-        <div class="card">
-          <div class="card-header">
-            <h4>Subscription Management</h4>
-          </div>
-          <div class="card-body">
-            <div class="subscription-info">
-              <h5>Current Plan</h5>
-              <div class="plan-details">
-                <span class="plan-name">{{ subscription.plan }}</span>
-                <span class="renewal-date">Renews on: {{ subscription.renewsOn }}</span>
-                <button class="btn btn-outline-primary btn-sm">Change Plan</button>
-              </div>
-              <div class="premium-features">
-                <h6>Premium Features</h6>
-                <ul>
-                  <li *ngFor="let feature of subscription.features">{{ feature }}</li>
-                </ul>
-                <a href="#" class="feature-link">Explore all premium features</a>
-              </div>
-            </div>
-          </div>
+      <div class="card">
+        <div class="card-header">
+          <h4>Billing Information</h4>
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h4>Payment Details</h4>
-          </div>
-          <div class="card-body">
-            <div class="payment-info">
-              <div class="card-details">
-                <i class="fas fa-credit-card"></i>
-                <span>{{ paymentDetails.cardType }} ending in {{ paymentDetails.lastFour }}</span>
-                <span class="expiry">Expires {{ paymentDetails.expires }}</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm" (click)="updatePayment()">Update</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h4>Billing Information</h4>
-          </div>
-          <div class="card-body">
-            <p>View your billing history and invoices.</p>
-            <button class="btn btn-outline-primary btn-sm" (click)="viewBillingHistory()">View History</button>
-          </div>
+        <div class="card-body">
+          <p>View your billing history and invoices.</p>
+          <button class="btn btn-outline-primary btn-sm" (click)="viewBillingHistory()">View History</button>
         </div>
       </div>
+    </div>
 
-      <!-- Preferences Section -->
-      <div *ngIf="activeSection === 'preferences'" class="section-content">
-        <div class="card">
-          <div class="card-header">
-            <h4>Preferences</h4>
+    <!-- Preferences Section -->
+    <div *ngIf="activeSection === 'preferences'" class="section-content">
+      <div class="card">
+        <div class="card-header">
+          <h4>Preferences</h4>
+        </div>
+        <div class="card-body">
+          <div class="preference-item">
+            <label>Language</label>
+            <select class="form-control" [(ngModel)]="preferences.language">
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+              <option value="French">French</option>
+            </select>
           </div>
-          <div class="card-body">
-            <div class="preference-item">
-              <label>Language</label>
-              <select class="form-control" [(ngModel)]="preferences.language">
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
-                <option value="French">French</option>
-              </select>
+          <div class="preference-item">
+            <label>Theme</label>
+            <div class="theme-toggle">
+              <button class="btn" [class.btn-success]="preferences.theme === 'light'"
+                [class.btn-outline-secondary]="preferences.theme !== 'light'"
+                (click)="toggleTheme('light')">Light</button>
+              <button class="btn" [class.btn-success]="preferences.theme === 'dark'"
+                [class.btn-outline-secondary]="preferences.theme !== 'dark'" (click)="toggleTheme('dark')">Dark</button>
             </div>
-            <div class="preference-item">
-              <label>Theme</label>
-              <div class="theme-toggle">
-                <button class="btn"
-                        [class.btn-success]="preferences.theme === 'light'"
-                        [class.btn-outline-secondary]="preferences.theme !== 'light'"
-                        (click)="toggleTheme('light')">Light</button>
-                <button class="btn"
-                        [class.btn-success]="preferences.theme === 'dark'"
-                        [class.btn-outline-secondary]="preferences.theme !== 'dark'"
-                        (click)="toggleTheme('dark')">Dark</button>
-              </div>
-            </div>
-            <div class="preference-item">
-              <label>Notification Methods</label>
-              <div class="notification-options">
-                <label class="checkbox-label">
-                  <input type="checkbox"
-                         [checked]="preferences.notifications.email"
-                         (change)="toggleNotification('email')">
-                  Email
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox"
-                         [checked]="preferences.notifications.sms"
-                         (change)="toggleNotification('sms')">
-                  SMS
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox"
-                         [checked]="preferences.notifications.inApp"
-                         (change)="toggleNotification('inApp')">
-                  In-app
-                </label>
-              </div>
+          </div>
+          <div class="preference-item">
+            <label>Notification Methods</label>
+            <div class="notification-options">
+              <label class="checkbox-label">
+                <input type="checkbox" [checked]="preferences.notifications.email"
+                  (change)="toggleNotification('email')">
+                Email
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" [checked]="preferences.notifications.sms" (change)="toggleNotification('sms')">
+                SMS
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" [checked]="preferences.notifications.inApp"
+                  (change)="toggleNotification('inApp')">
+                In-app
+              </label>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Integrations Section -->
-      <div *ngIf="activeSection === 'integrations'" class="section-content">
-        <div class="card">
-          <div class="card-header">
-            <h4>Integrations</h4>
-            <button class="btn btn-primary btn-sm">Add New</button>
-          </div>
-          <div class="card-body">
-            <div class="integration-list">
-              <div class="integration-item" *ngFor="let integration of integrations">
-                <div class="integration-info">
-                  <h6>{{ integration.name }}</h6>
-                  <span class="status"
-                        [class.connected]="integration.status === 'Connected'"
-                        [class.not-connected]="integration.status === 'Not Connected'">
-                    {{ integration.status }}
-                  </span>
-                </div>
-                <button class="btn btn-outline-primary btn-sm"
-                        (click)="handleIntegrationAction(integration)">
-                  {{ integration.action }}
-                </button>
+    <!-- Integrations Section -->
+    <div *ngIf="activeSection === 'integrations'" class="section-content">
+      <div class="card">
+        <div class="card-header">
+          <h4>Integrations</h4>
+          <button class="btn btn-primary btn-sm">Add New</button>
+        </div>
+        <div class="card-body">
+          <div class="integration-list">
+            <div class="integration-item" *ngFor="let integration of integrations">
+              <div class="integration-info">
+                <h6>{{ integration.name }}</h6>
+                <span class="status" [class.connected]="integration.status === 'Connected'"
+                  [class.not-connected]="integration.status === 'Not Connected'">
+                  {{ integration.status }}
+                </span>
               </div>
+              <button class="btn btn-outline-primary btn-sm" (click)="handleIntegrationAction(integration)">
+                {{ integration.action }}
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Security Section -->
-      <div *ngIf="activeSection === 'security'" class="section-content">
-        <div class="card">
-          <div class="card-header">
-            <h4>Security</h4>
-          </div>
-          <div class="card-body">
-            <button class="btn btn-outline-primary" (click)="changePassword()">Change Password</button>
-            <div class="security-item">
-              <h6>Two-Factor Authentication</h6>
-              <p>Add an extra layer of security to your account.</p>
-              <div class="toggle-switch">
-                <input type="checkbox"
-                       [checked]="security.twoFactorEnabled"
-                       (change)="toggleTwoFactor()"
-                       id="twoFactor">
-                <label for="twoFactor" class="toggle-label"></label>
-              </div>
+    <!-- Security Section -->
+    <div *ngIf="activeSection === 'security'" class="section-content">
+      <div class="card">
+        <div class="card-header">
+          <h4>Security</h4>
+        </div>
+        <div class="card-body">
+          <button class="btn btn-outline-primary" (click)="changePassword()">Change Password</button>
+          <div class="security-item">
+            <h6>Two-Factor Authentication</h6>
+            <p>Add an extra layer of security to your account.</p>
+            <div class="toggle-switch">
+              <input type="checkbox" [checked]="security.twoFactorEnabled" (change)="toggleTwoFactor()" id="twoFactor">
+              <label for="twoFactor" class="toggle-label"></label>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- System Section -->
-      <div *ngIf="activeSection === 'system'" class="section-content">
-        <div class="card">
-          <div class="card-header">
-            <h4>System Preferences</h4>
-          </div>
-          <div class="card-body">
-            <div class="preference-item">
-              <label>Measurement Units</label>
-              <select class="form-control" [(ngModel)]="preferences.measurementUnits">
-                <option value="Imperial (acres, lbs)">Imperial (acres, lbs)</option>
-                <option value="Metric (hectares, kg)">Metric (hectares, kg)</option>
-              </select>
-            </div>
+    <!-- System Section -->
+    <div *ngIf="activeSection === 'system'" class="section-content">
+      <div class="card">
+        <div class="card-header">
+          <h4>System Preferences</h4>
+        </div>
+        <div class="card-body">
+          <div class="preference-item">
+            <label>Measurement Units</label>
+            <select class="form-control" [(ngModel)]="preferences.measurementUnits">
+              <option value="Imperial (acres, lbs)">Imperial (acres, lbs)</option>
+              <option value="Metric (hectares, kg)">Metric (hectares, kg)</option>
+            </select>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Action Buttons -->
-      <div class="action-buttons">
-        <button class="btn btn-outline-secondary" (click)="logout()">Logout</button>
-        <button class="btn btn-success" (click)="saveChanges()">Save Changes</button>
-      </div>
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-outline-secondary" (click)="logout()">Logout</button>
+      <button class="btn btn-success" (click)="saveChanges()">Save Changes</button>
     </div>
   </div>
+</div>
 <app-footer></app-footer>

@@ -2,7 +2,9 @@ body {
   background: linear-gradient(45deg, #f3ec78, #af4261);
   font-family: 'Comic Sans MS', cursive, sans-serif;
 }
-
+.login-main-container{
+  min-height: 77vh;
+}
 .login-header {
   max-width: 450px;
   border-radius: 20px;

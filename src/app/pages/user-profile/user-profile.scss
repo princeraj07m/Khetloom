@@ -625,3 +625,19 @@
     flex-direction: column;
   }
 }
+
+
+
+/* Sidebar stays vertical on desktop */
+@media (min-width: 768px) {
+  #sidebarMenu {
+    display: block !important; /* always open */
+  }
+  .navbar-nav {
+    flex-direction: column;
+    width: 220px;
+  }
+  .content-area {
+    margin-left: 240px; /* give space for sidebar */
+  }
+}

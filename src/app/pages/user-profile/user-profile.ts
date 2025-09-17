@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ApiService, User } from '../../services/api.service';
 import { Subscription } from 'rxjs';
+import { Collapse } from 'bootstrap';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -271,12 +273,28 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  setActiveSection(section: string, event?: Event): void {
-    if (event) {
-      event.preventDefault();
-    }
-    this.activeSection = section;
+
+setActiveSection(section: string, event?: Event): void {
+  if (event) {
+    event.preventDefault();
   }
+  this.activeSection = section;
+
+  // Close sidebar ONLY on small screens
+  const sidebarMenu = document.getElementById('sidebarMenu');
+  if (window.innerWidth < 768 && sidebarMenu?.classList.contains('show')) {
+    const bsCollapse = Collapse.getInstance(sidebarMenu);
+    bsCollapse?.hide();
+  }
+}
+toggleSidebar(): void {
+  const sidebarMenu = document.getElementById('sidebarMenu');
+  if (sidebarMenu) {
+    const bsCollapse = Collapse.getInstance(sidebarMenu) || new Collapse(sidebarMenu);
+    bsCollapse.toggle();
+  }
+}
+
 
   saveChanges(): void {
     if (!this.currentUser) {
@@ -306,7 +324,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       sprayerType: equipmentData.sprayerType,
       iotDevices: equipmentData.iotDevices ? equipmentData.iotDevices.split(',').map((device: string) => device.trim()) : [],
       machinery: equipmentData.machinery ? equipmentData.machinery.split(',').map((machine: string) => machine.trim()) : [],
-      pesticides: pesticideData.pesticides ? [{ name: pesticideData.pesticides, frequency: 'Monthly' }] : [],
+      pesticides: pesticideData.pesticides ? pesticideData.pesticides.split(',').map((p: string) => ({ name: p.trim(), frequency: 'Monthly' })) : [],
       fertilizerPreference: pesticideData.fertilizerType,
       monthlyExpenditure: pesticideData.monthlyExpenditure,
       farmingExperience: this.currentUser.farmingExperience || 'Beginner'
@@ -376,4 +394,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     console.log(`${integration.action} ${integration.name}`);
     // Implement integration logic here
   }
+
+
+
+
 }
+
+
+
+

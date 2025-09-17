@@ -28,6 +28,7 @@ export class Dashboard implements OnInit, OnDestroy {
   avgFarmSize?: number;
   newThisWeek?: number;
   avgMonthlyExpenditure?: number;
+  recentUsers: any[] = [];
 
   // UI state
   isLoading = true;
@@ -58,7 +59,7 @@ export class Dashboard implements OnInit, OnDestroy {
       });
 
     this.loadDashboardData();
-    this.loadBackendSummary();
+    // this.loadBackendSummary();
     this.loadWeatherData();
   }
 
@@ -67,89 +68,97 @@ export class Dashboard implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private loadBackendSummary(): void {
-    // Load summary numbers
-    this.apiService.getSummary()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (summary) => {
-          this.totalUsers = summary.totalUsers;
-          this.newThisWeek = summary.newThisWeek;
-          this.avgFarmSize = summary.avgFarmSize;
-          this.mergeSummaryIntoMetrics();
-        },
-        error: () => {}
-      });
+  // private loadBackendSummary(): void {
+  //   // Load summary numbers
+  //   this.apiService.getSummary()
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe({
+  //       next: (summary) => {
+  //         this.totalUsers = summary.totalUsers;
+  //         this.newThisWeek = summary.newThisWeek;
+  //         this.avgFarmSize = summary.avgFarmSize;
+  //         // this.mergeSummaryIntoMetrics();
+  //       },
+  //       error: () => {}
+  //     });
 
-    // Load public stats
-    this.apiService.getPublicStats()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (stats) => {
-          this.avgMonthlyExpenditure = stats.avgMonthlyExpenditure;
-          // Optionally merge into metrics as an extra card if present
-          this.mergePublicStatsIntoMetrics(stats);
-        },
-        error: () => {}
-      });
-  }
+  //   // Load public stats
+  //   this.apiService.getPublicStats()
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe({
+  //       next: (stats) => {
+  //         this.avgMonthlyExpenditure = stats.avgMonthlyExpenditure;
+  //         // Optionally merge into metrics as an extra card if present
+  //         this.mergePublicStatsIntoMetrics(stats);
+  //       },
+  //       error: () => {}
+  //     });
 
-  private mergeSummaryIntoMetrics(): void {
-    if (!this.keyMetrics || this.keyMetrics.length === 0) return;
+  //   // Load recent users (public)
+  //   // this.apiService.getRecentUsers(10)
+  //   //   .pipe(takeUntil(this.destroy$))
+  //   //   .subscribe({
+  //   //     next: (users) => { this.recentUsers = users || []; },
+  //   //     error: () => {}
+  //   //   });
+  // }
 
-    // Update or append metrics for total users and new users this week
-    const upsert = (id: string, partial: Partial<KeyMetric>) => {
-      const idx = this.keyMetrics.findIndex(m => m.id === id);
-      if (idx >= 0) {
-        this.keyMetrics[idx] = { ...this.keyMetrics[idx], ...partial } as KeyMetric;
-      } else {
-        this.keyMetrics.push({
-          id,
-          title: partial.title || '',
-          value: partial.value as number,
-          unit: partial.unit || '',
-          trend: partial.trend ?? 0,
-          trendDirection: (partial.trendDirection as any) || 'up',
-          icon: partial.icon || 'bi-info-circle',
-          color: partial.color || 'primary',
-          description: partial.description || ''
-        } as KeyMetric);
-      }
-    };
+  // private mergeSummaryIntoMetrics(): void {
+  //   if (!this.keyMetrics || this.keyMetrics.length === 0) return;
 
-    if (typeof this.totalUsers === 'number') {
-      upsert('total-users', {
-        title: 'Total Users',
-        value: this.totalUsers,
-        unit: '',
-        icon: 'bi-people-fill',
-        color: 'primary',
-        description: 'Users registered in the system'
-      });
-    }
+  //   // Update or append metrics for total users and new users this week
+  //   const upsert = (id: string, partial: Partial<KeyMetric>) => {
+  //     const idx = this.keyMetrics.findIndex(m => m.id === id);
+  //     if (idx >= 0) {
+  //       this.keyMetrics[idx] = { ...this.keyMetrics[idx], ...partial } as KeyMetric;
+  //     } else {
+  //       this.keyMetrics.push({
+  //         id,
+  //         title: partial.title || '',
+  //         value: partial.value as number,
+  //         unit: partial.unit || '',
+  //         trend: partial.trend ?? 0,
+  //         trendDirection: (partial.trendDirection as any) || 'up',
+  //         icon: partial.icon || 'bi-info-circle',
+  //         color: partial.color || 'primary',
+  //         description: partial.description || ''
+  //       } as KeyMetric);
+  //     }
+  //   };
 
-    if (typeof this.newThisWeek === 'number') {
-      upsert('new-users-week', {
-        title: 'New Users (7d)',
-        value: this.newThisWeek,
-        unit: '',
-        icon: 'bi-person-plus-fill',
-        color: 'success',
-        description: 'New registrations this week'
-      });
-    }
+  //   if (typeof this.totalUsers === 'number') {
+  //     upsert('total-users', {
+  //       title: 'Total Users',
+  //       value: this.totalUsers,
+  //       unit: '',
+  //       icon: 'bi-people-fill',
+  //       color: 'primary',
+  //       description: 'Users registered in the system'
+  //     });
+  //   }
 
-    if (typeof this.avgFarmSize === 'number') {
-      upsert('avg-farm-size', {
-        title: 'Avg. Farm Size',
-        value: this.avgFarmSize,
-        unit: 'acres',
-        icon: 'bi-bar-chart',
-        color: 'secondary',
-        description: 'Average farm size across users'
-      });
-    }
-  }
+  //   if (typeof this.newThisWeek === 'number') {
+  //     upsert('new-users-week', {
+  //       title: 'New Users (7d)',
+  //       value: this.newThisWeek,
+  //       unit: '',
+  //       icon: 'bi-person-plus-fill',
+  //       color: 'success',
+  //       description: 'New registrations this week'
+  //     });
+  //   }
+
+  //   if (typeof this.avgFarmSize === 'number') {
+  //     upsert('avg-farm-size', {
+  //       title: 'Avg. Farm Size',
+  //       value: this.avgFarmSize,
+  //       unit: 'acres',
+  //       icon: 'bi-bar-chart',
+  //       color: 'secondary',
+  //       description: 'Average farm size across users'
+  //     });
+  //   }
+  // }
 
   private mergePublicStatsIntoMetrics(stats: { totalUsers: number; avgFarmSize: number; avgMonthlyExpenditure: number }): void {
     const idx = this.keyMetrics.findIndex(m => m.id === 'avg-monthly-expenditure');
@@ -177,7 +186,7 @@ export class Dashboard implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(metrics => {
         this.keyMetrics = metrics;
-        this.mergeSummaryIntoMetrics();
+        // this.mergeSummaryIntoMetrics();
         this.isLoading = false;
       });
 
@@ -312,7 +321,7 @@ export class Dashboard implements OnInit, OnDestroy {
   refreshData(): void {
     this.isLoading = true;
     this.loadDashboardData();
-    this.loadBackendSummary();
+    // this.loadBackendSummary();
     this.loadWeatherData();
   }
 }

@@ -23,6 +23,13 @@ import { CropCycleComponent } from './crop-cycle/crop-cycle';
 import { Weather } from './weather/weather';
 import { GoogleMap } from './google-map/google-map';
 import { Botcontrol } from './bot-control/bot-control';
+import { Devices } from './devices/devices';
+import { Fields } from './fields/fields';
+import { Crops } from './crops/crops';
+import { Jobs } from './jobs/jobs';
+import { HealthReports } from './health-reports/health-reports';
+import { Activities } from './activities/activities';
+import { WeatherCache } from './weather-cache/weather-cache';
 
 @NgModule({
   declarations: [
@@ -45,6 +52,13 @@ import { Botcontrol } from './bot-control/bot-control';
     Weather,
     GoogleMap,
     Botcontrol,
+    Devices,
+    Fields,
+    Crops,
+    Jobs,
+    HealthReports,
+    Activities,
+    WeatherCache,
   ],
   imports: [
     CommonModule,
