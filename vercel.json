@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://khetloom-backend.vercel.app/api/$1" }
+    { "source": "/api/(.*)", "destination": "http://13.60.157.181:5001/api/$1" }
   ]
 }
 
