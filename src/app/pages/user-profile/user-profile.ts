@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   activeSection = 'farm-details';
   private userSubscription?: Subscription;
   currentUser: User | null = null;
-  
+
   // User profile data - will be loaded from auth service
   userProfile = {
     name: '',
@@ -386,7 +386,7 @@ toggleSidebar(): void {
   }
 
   toggleNotification(type: string): void {
-    this.preferences.notifications[type as keyof typeof this.preferences.notifications] = 
+    this.preferences.notifications[type as keyof typeof this.preferences.notifications] =
       !this.preferences.notifications[type as keyof typeof this.preferences.notifications];
   }
 

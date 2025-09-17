@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BotStatus, FertilizerLog, ApiResponse, Command } from '../models/bot.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BotService {
-private baseUrl = 'http://localhost:5001/api';
+private baseUrl = environment.backendUrl;
 
 
   constructor(private http: HttpClient) { }
