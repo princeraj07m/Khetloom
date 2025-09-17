@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -282,6 +283,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   };
   selectedNotifications: string[] = [];
   showBulkActions: boolean = false;
+  
+  constructor(private api: ApiService) {}
 
   ngOnInit() {
     this.loadPreferences();
@@ -289,6 +292,52 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.updateStats();
     this.initializeSound();
     this.startRealTimeUpdates();
+    this.fetchNotificationsFromApi();
+  }
+  // API integration
+  fetchNotificationsFromApi() {
+    // Load list
+    try {
+      (window as any).requestIdleCallback?.(() => {})
+    } catch {}
+    (async () => {})();
+    // Subscribe via service
+    this.api.getNotifications().subscribe({
+      next: (items: any[]) => {
+        // Map backend format to local Notification interface if needed
+        const mapped: Notification[] = (items || []).map((n: any) => ({
+          id: n._id || n.id,
+          type: (n.type || 'info') as any,
+          priority: (n.priority || 'low') as any,
+          title: n.title || 'Notification',
+          description: n.description || n.message || '',
+          timestamp: n.createdAt ? new Date(n.createdAt) : new Date(),
+          icon: '🔔',
+          iconColor: '#007bff',
+          isRead: !!n.isRead,
+          isArchived: !!n.isArchived,
+          category: n.category || 'General',
+          source: n.source || 'System'
+        }));
+        // Prepend API items to existing demo list (or replace)
+        this.notifications = [...mapped, ...this.notifications.filter(d => !mapped.find(m => m.id === d.id))];
+        this.updateFilteredNotifications();
+        this.updateStats();
+      },
+      error: () => {}
+    });
+  }
+
+  markAsReadViaApi(id: string) {
+    this.api.markNotificationRead(id).subscribe({
+      next: () => {
+        const n = this.notifications.find(x => x.id === id);
+        if (n) n.isRead = true;
+        this.updateFilteredNotifications();
+        this.updateStats();
+      },
+      error: () => {}
+    });
   }
 
   ngOnDestroy() {
@@ -366,12 +415,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   dismissNotification(id: string) {
-    const notification = this.notifications.find(n => n.id === id);
-    if (notification) {
-      notification.isRead = true;
-      this.updateFilteredNotifications();
-      this.updateStats();
-    }
+    this.markAsReadViaApi(id);
   }
 
   resolveNotification(id: string) {

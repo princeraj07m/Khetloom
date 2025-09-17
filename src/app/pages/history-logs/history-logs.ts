@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angul
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil, debounceTime } from 'rxjs';
 import { LogsService, SystemLog, LogFilter, DataSet, ComparisonResult } from '../../services/logs.service';
+import { ApiService } from '../../services/api.service';
 import { SharedModule } from '../../shared/shared-module';
 
 
@@ -87,7 +88,8 @@ export class HistoryLogsComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly logsService: LogsService
+    private readonly logsService: LogsService,
+    private readonly api: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -130,6 +132,35 @@ export class HistoryLogsComponent implements OnInit, OnDestroy {
       .subscribe(logs => {
         this.logs = [...this.sampleLogs, ...logs];
         this.applyFilters();
+      });
+
+    // Load recent logs from backend API and merge
+    this.api.getRecentLogs()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (recent: any[]) => {
+          const apiLogs: SystemLog[] = (recent || []).map(item => ({
+            id: item._id || item.id,
+            type: (item.type || 'system_update'),
+            title: item.title || item.message || 'Log',
+            message: item.message || '',
+            timestamp: item.createdAt ? new Date(item.createdAt) : new Date(),
+            severity: item.severity || 'low',
+            isRead: !!item.isRead,
+            scanId: item.scanId,
+            zone: item.zone,
+            infectionRate: item.infectionRate,
+            sprayDuration: item.sprayDuration,
+            costSaved: item.costSaved,
+            note: item.note
+          } as SystemLog));
+          // Merge and dedupe by id
+          const byId: { [k: string]: SystemLog } = {};
+          [...this.sampleLogs, ...this.logs, ...apiLogs].forEach(l => { if (l) byId[l.id] = l; });
+          this.logs = Object.values(byId).sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+          this.applyFilters();
+        },
+        error: () => {}
       });
 
     this.applyFilters();

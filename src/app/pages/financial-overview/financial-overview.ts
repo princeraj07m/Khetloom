@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { FinancialService, FinancialData, FinancialMetrics, TrendData, ExpenseCategory, CropProfitability } from '../../services/financial.service';
+import { ApiService } from '../../services/api.service';
 import { SharedModule } from '../../shared/shared-module';
 
 declare var Chart: any;
@@ -31,6 +32,10 @@ export class FinancialOverviewComponent implements OnInit, OnDestroy {
   exportFormat: 'csv' | 'json' | 'pdf' = 'csv';
   isLoading = false;
   
+  // Backend finance
+  financeSummary: any = null;
+  financeRecords: any[] = [];
+
   // Period options
   periodOptions = [
     'Last 30 Days',
@@ -40,7 +45,8 @@ export class FinancialOverviewComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private readonly financialService: FinancialService
+    private readonly financialService: FinancialService,
+    private readonly api: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +75,14 @@ export class FinancialOverviewComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.initializeCharts();
       });
+
+    // Also load backend finance summary and records
+    this.api.getFinanceSummary()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({ next: (s) => this.financeSummary = s, error: () => {} });
+    this.api.getFinanceRecords()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({ next: (r) => this.financeRecords = r || [], error: () => {} });
   }
 
   onPeriodChange(): void {

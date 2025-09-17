@@ -28,6 +28,7 @@ export class Dashboard implements OnInit, OnDestroy {
   avgFarmSize?: number;
   newThisWeek?: number;
   avgMonthlyExpenditure?: number;
+  recentUsers: any[] = [];
 
   // UI state
   isLoading = true;
@@ -90,6 +91,14 @@ export class Dashboard implements OnInit, OnDestroy {
           // Optionally merge into metrics as an extra card if present
           this.mergePublicStatsIntoMetrics(stats);
         },
+        error: () => {}
+      });
+
+    // Load recent users (public)
+    this.apiService.getRecentUsers(10)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (users) => { this.recentUsers = users || []; },
         error: () => {}
       });
   }

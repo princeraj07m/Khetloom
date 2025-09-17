@@ -21,6 +21,13 @@ import { Weather } from '../pages/weather/weather';
 import { HistoryLogsComponent } from '../pages/history-logs/history-logs';
 import { FinancialOverviewComponent } from '../pages/financial-overview/financial-overview';
 import { Botcontrol } from './bot-control/bot-control';
+import { Devices } from './devices/devices';
+import { Fields } from './fields/fields';
+import { Crops } from './crops/crops';
+import { Jobs } from './jobs/jobs';
+import { HealthReports } from './health-reports/health-reports';
+import { Activities } from './activities/activities';
+import { WeatherCache } from './weather-cache/weather-cache';
 const routes: Routes = [
   {
     path: '',
@@ -123,6 +130,42 @@ const routes: Routes = [
   {
     path: 'financial-overview',
     component: FinancialOverviewComponent,
+    canActivate: [AuthGuard]
+  }
+  ,
+  {
+    path: 'devices',
+    component: Devices,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'fields',
+    component: Fields,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'crops',
+    component: Crops,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'jobs',
+    component: Jobs,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'health-reports',
+    component: HealthReports,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'activities',
+    component: Activities,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'weather-cache',
+    component: WeatherCache,
     canActivate: [AuthGuard]
   }
 ];
