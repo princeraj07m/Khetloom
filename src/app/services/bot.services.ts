@@ -7,7 +7,8 @@ import { BotStatus, FertilizerLog, ApiResponse, Command } from '../models/bot.mo
   providedIn: 'root'
 })
 export class BotService {
-  private baseUrl = 'http://localhost:3000/api';
+private baseUrl = 'http://localhost:5001/api';
+
 
   constructor(private http: HttpClient) { }
 
