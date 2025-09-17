@@ -26,14 +26,23 @@ export class Crops implements OnInit {
 
   ngOnInit(): void { this.loadCrops(); }
 
-  loadCrops(): void {
-    this.isLoading = true;
-    this.errorMessage = '';
-    this.api.getCrops().subscribe({
-      next: (list) => { this.crops = list || []; this.isLoading = false; },
-      error: (err) => { this.isLoading = false; this.errorMessage = err.message || 'Failed to load crops'; }
-    });
-  }
+loadCrops(): void {
+  this.isLoading = true;
+  this.errorMessage = '';
+
+  this.api.getCrops().subscribe({
+    next: (res: any) => {
+      this.crops = res.crops || [];   // ✅ take the crops array
+      this.isLoading = false;
+    },
+    error: (err) => {
+      this.errorMessage = err.message || 'Failed to load crops';
+      this.isLoading = false;
+    }
+  });
+}
+
+
 
   openCreate(): void {
     this.formVisible = true;
