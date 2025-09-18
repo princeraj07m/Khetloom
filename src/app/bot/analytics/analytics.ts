@@ -74,7 +74,7 @@ export class Analytics implements OnInit{
     ];
 
     stages.forEach(stage => {
-      stage.count = this.plants.filter(p => p.growth_stage === stage.name).length;
+      stage.count = Array.isArray(this.plants) ? this.plants.filter(p => p.growth_stage === stage.name).length : 0;
     });
 
     return stages;
@@ -113,6 +113,9 @@ export class Analytics implements OnInit{
   // Recent performance
   getTodayActions(): number {
     const today = new Date().toDateString();
+    if (!Array.isArray(this.recentLogs)) {
+      return 0;
+    }
     return this.recentLogs.filter(log =>
       new Date(log.timestamp).toDateString() === today
     ).length;
@@ -120,6 +123,9 @@ export class Analytics implements OnInit{
 
   getTodayFertilizations(): number {
     const today = new Date().toDateString();
+    if (!Array.isArray(this.recentLogs)) {
+      return 0;
+    }
     return this.recentLogs.filter(log =>
       new Date(log.timestamp).toDateString() === today && log.action === 'fertilization'
     ).length;
@@ -127,6 +133,9 @@ export class Analytics implements OnInit{
 
   getTodayMovements(): number {
     const today = new Date().toDateString();
+    if (!Array.isArray(this.recentLogs)) {
+      return 0;
+    }
     return this.recentLogs.filter(log =>
       new Date(log.timestamp).toDateString() === today && log.action === 'movement'
     ).length;
@@ -184,7 +193,7 @@ export class Analytics implements OnInit{
     }
 
     // Growth stage recommendations
-    const seedlings = this.plants.filter(p => p.growth_stage === 'seedling').length;
+    const seedlings = Array.isArray(this.plants) ? this.plants.filter(p => p.growth_stage === 'seedling').length : 0;
     if (seedlings > 10) {
       recommendations.push({
         title: 'Seedling Care',

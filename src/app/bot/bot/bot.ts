@@ -8,16 +8,17 @@ import { Component } from '@angular/core';
 })
 export class Bot {
  botStatus: any = { x: 0, y: 0, battery: 100, fertilizer_level: 100 };
-
+ currentTime = new Date();
 
   constructor() {
     this.updateBotStatus();
     setInterval(() => this.updateBotStatus(), 3000);
+    setInterval(() => this.currentTime = new Date(), 1000);
   }
 
   async updateBotStatus() {
     try {
-      const response = await fetch('http://localhost:3001/api/status');
+      const response = await fetch('http://localhost:3001/api/bot/status');
       this.botStatus = await response.json();
     } catch (error) {
       console.error('Failed to fetch bot status:', error);

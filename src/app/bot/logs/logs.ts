@@ -58,6 +58,11 @@ export class Logs implements OnInit {
   }
 
   applyFilters() {
+    if (!Array.isArray(this.allLogs)) {
+      this.filteredLogs = [];
+      return;
+    }
+    
     if (this.filterType === '') {
       this.filteredLogs = [...this.allLogs];
     } else {
@@ -66,6 +71,12 @@ export class Logs implements OnInit {
   }
 
   calculateStatistics() {
+    if (!Array.isArray(this.allLogs)) {
+      this.totalLogs = 0;
+      this.movementLogs = 0;
+      this.fertilizationLogs = 0;
+      return;
+    }
     this.totalLogs = this.allLogs.length;
     this.movementLogs = this.allLogs.filter(log => log.action === 'movement').length;
     this.fertilizationLogs = this.allLogs.filter(log => log.action === 'fertilization').length;
@@ -84,6 +95,11 @@ export class Logs implements OnInit {
 
   private generateCSV(): string {
     const headers = ['ID', 'Timestamp', 'Action', 'X', 'Y', 'Details'];
+    
+    if (!Array.isArray(this.filteredLogs)) {
+      return headers.join(',') + '\n';
+    }
+    
     const rows = this.filteredLogs.map(log => [
       log.id,
       log.timestamp,
@@ -153,10 +169,16 @@ export class Logs implements OnInit {
   // Statistics methods
   getRecentLogsCount(): number {
     const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    if (!Array.isArray(this.allLogs)) {
+      return 0;
+    }
     return this.allLogs.filter(log => new Date(log.timestamp) > oneDayAgo).length;
   }
 
   getRecentActivity(): LogEntry[] {
+    if (!Array.isArray(this.allLogs)) {
+      return [];
+    }
     return this.allLogs.slice(0, 10);
   }
 

@@ -56,19 +56,22 @@ export class FieldOverview implements OnInit{
 
   // Statistics methods
   getHealthyPlantsCount(): number {
+    if (!Array.isArray(this.plants)) return 0;
     return this.plants.filter(p => p.health >= 80).length;
   }
 
   getWarningPlantsCount(): number {
+    if (!Array.isArray(this.plants)) return 0;
     return this.plants.filter(p => p.health >= 60 && p.health < 80).length;
   }
 
   getCriticalPlantsCount(): number {
+    if (!Array.isArray(this.plants)) return 0;
     return this.plants.filter(p => p.health < 60).length;
   }
 
   getAverageHealth(): number {
-    if (this.plants.length === 0) return 0;
+    if (!Array.isArray(this.plants) || this.plants.length === 0) return 0;
     const total = this.plants.reduce((sum, plant) => sum + plant.health, 0);
     return Math.round(total / this.plants.length);
   }
@@ -77,7 +80,7 @@ export class FieldOverview implements OnInit{
     const stages = ['seedling', 'growing', 'mature', 'flowering'];
     return stages.map(stage => ({
       name: stage,
-      count: this.plants.filter(p => p.growth_stage === stage).length
+      count: Array.isArray(this.plants) ? this.plants.filter(p => p.growth_stage === stage).length : 0
     }));
   }
 

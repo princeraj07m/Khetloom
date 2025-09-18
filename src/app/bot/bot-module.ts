@@ -15,6 +15,7 @@ import { Logs } from './logs/logs';
 import { Settings } from './settings/settings';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from "../shared/shared-module";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     BotRoutingModule,
-    FormsModule
-  ]
+    FormsModule,
+    SharedModule
+]
 })
 export class BotModule { }

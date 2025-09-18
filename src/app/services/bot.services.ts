@@ -101,32 +101,34 @@ export class BotService {
   private async refreshPlants() {
     try {
       const plants = await this.getPlants().toPromise();
-      this.plantsSubject.next(plants!);
+      this.plantsSubject.next(plants || []);
     } catch (error) {
       console.error('Failed to refresh plants:', error);
+      this.plantsSubject.next([]);
     }
   }
 
   private async refreshLogs() {
     try {
       const logs = await this.getLogs().toPromise();
-      this.logsSubject.next(logs!);
+      this.logsSubject.next(logs || []);
     } catch (error) {
       console.error('Failed to refresh logs:', error);
+      this.logsSubject.next([]);
     }
   }
 
   // API Methods
   moveBot(x: number, y: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/move`, { x, y });
+    return this.http.post(`${this.baseUrl}/bot/move`, { x, y });
   }
 
   dropFertilizer(): Observable<any> {
-    return this.http.post(`${this.baseUrl}/drop`, {});
+    return this.http.post(`${this.baseUrl}/bot/drop`, {});
   }
 
   getBotStatus(): Observable<BotStatus> {
-    return this.http.get<any>(`${this.baseUrl}/status`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/bot/status`).pipe(
       map((data: any) => ({
         x: data.x || 0,
         y: data.y || 0,
@@ -153,15 +155,15 @@ export class BotService {
   }
 
   getCommands(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/commands`);
+    return this.http.get<any[]>(`${this.baseUrl}/bot/commands`);
   }
 
   emergencyStop(): Observable<any> {
-    return this.http.post(`${this.baseUrl}/emergency-stop`, {});
+    return this.http.post(`${this.baseUrl}/bot/emergency-stop`, {});
   }
 
   refillResources(battery: boolean = false, fertilizer: boolean = false): Observable<any> {
-    return this.http.post(`${this.baseUrl}/refill`, { battery, fertilizer });
+    return this.http.post(`${this.baseUrl}/bot/refill`, { battery, fertilizer });
   }
 
   // Utility methods

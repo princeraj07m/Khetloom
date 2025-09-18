@@ -31,7 +31,13 @@ export class Dashboard implements OnInit {
     // Subscribe to real-time data
     this.farmingApi.botStatus$.subscribe(status => this.botStatus = status);
     this.farmingApi.plants$.subscribe(plants => this.plants = plants);
-    this.farmingApi.logs$.subscribe(logs => this.recentLogs = logs.slice(0, 10));
+    this.farmingApi.logs$.subscribe(logs => {
+      if (Array.isArray(logs)) {
+        this.recentLogs = logs.slice(0, 10);
+      } else {
+        this.recentLogs = [];
+      }
+    });
 
     // Load analytics
     this.loadAnalytics();
