@@ -1,8 +1,8 @@
-<!-- <app-header></app-header> -->
 <div class="container py-3" style="min-height: 86vh;">
-  <div class="d-flex justify-content-between align-items-center mb-3">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
     <h4 class="m-0">🌱 Crops</h4>
-    <button class="btn btn-primary" (click)="openCreate()">
+    <button class="btn btn-primary mt-2 mt-md-0" (click)="openCreate()">
       <i class="bi bi-plus-circle me-1"></i> Add Crop
     </button>
   </div>
@@ -18,36 +18,47 @@
     <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}
   </div>
 
-  <!-- Crops Table -->
-  <div class="table-responsive" *ngIf="!isLoading && crops.length > 0">
-    <table class="table table-hover table-striped align-middle shadow-sm">
-      <thead class="table-dark">
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Field</th>
-          <th>Planting Date</th>
-          <th style="width: 160px">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let c of crops">
-          <td>{{ c.name }}</td>
-          <td>{{ c.type }}</td>
-          <td>{{ c.field }}</td>
-          <td>{{ c.createdAt | date:'yyyy-MM-dd' }}</td>
-          <td>
-            <button class="btn btn-sm btn-outline-primary me-2" (click)="openEdit(c)" title="Edit Crop">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-            <button class="btn btn-sm btn-outline-danger" (click)="remove(c)" title="Delete Crop">
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+  <!-- From Uiverse.io by gharsh11032000 -->
+  <!-- <div class="card">
+  <div class="content">
+    <p class="heading">Card</p>
+    <p class="para">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi laboriosam
+      at voluptas minus culpa deserunt delectus sapiente inventore pariatur
+    </p>
   </div>
+</div> -->
+
+
+  <!-- Crop Cards -->
+<div class="row g-5" *ngIf="!isLoading && crops.length > 0">
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" *ngFor="let c of crops">
+    <div class="card themed-card ">
+      <div class="content d-flex flex-column h-100">
+        <!-- Crop Name -->
+        <p class="heading">{{ c.name }}</p>
+
+        <!-- Crop Details -->
+        <p class="para mb-1"><strong>Type:</strong> {{ c.season }}</p>
+        <p class="para mb-1"><strong>Field:</strong> Test field</p>
+        <p class="para mb-1"><strong>Area:</strong> {{ c.area }}</p>
+        <p class="para mb-1"><strong>Expected Yield:</strong> {{ c.expectedYield }}</p>
+        <p class="para mb-2"><strong>Planting Date:</strong> {{ c.createdAt | date:'d MMMM ' }}</p>
+
+        <!-- Action Buttons -->
+        <div class="mt-auto d-flex gap-2 flex-wrap">
+          <button class="btn btn-sm btn-outline-primary flex-grow-1" (click)="openEdit(c)">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger flex-grow-1" (click)="remove(c)">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Empty State -->
   <div *ngIf="!isLoading && crops.length === 0" class="text-center text-muted my-5">
@@ -55,43 +66,49 @@
     <p>No crops found</p>
   </div>
 
-  <!-- Crop Form -->
-  <div *ngIf="formVisible" class="card mt-4 shadow-sm">
-    <div class="card-body">
-      <h5 class="card-title">
-        <i class="bi bi-journal-plus me-2"></i>
-        {{ isEditing ? 'Edit Crop' : 'Create Crop' }}
-      </h5>
+  <!-- Crop Modal -->
+<div class="modal fade" id="cropModal" tabindex="-1" aria-labelledby="cropModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
 
-      <div class="row g-3">
-        <div class="col-md-3">
-          <label class="form-label">Name</label>
-          <input class="form-control" [(ngModel)]="form.name" placeholder="Crop name" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Type</label>
-          <input class="form-control" [(ngModel)]="form.type" placeholder="e.g. Cereal" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Field</label>
-          <input class="form-control" [(ngModel)]="form.field" placeholder="e.g. Field A" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Planting Date</label>
-          <input type="date" class="form-control" [(ngModel)]="form.plantingDate" />
-        </div>
-      </div>
+      <!-- Wrap everything inside the "model" class -->
+      <div class="model">
 
-      <div class="mt-3 d-flex gap-2">
-        <button class="btn btn-success" (click)="save()">
-          <i class="bi bi-check-circle me-1"></i> Save
-        </button>
-        <button class="btn btn-outline-secondary" (click)="cancel()">
-          <i class="bi bi-x-circle me-1"></i> Cancel
-        </button>
-      </div>
+        <!-- Custom Container for styling -->
+        <div class="container">
+
+          <!-- Modal Heading -->
+          <div class="heading">
+            <i class="bi bi-journal-plus me-2"></i>
+            {{ isEditing ? 'Edit Crop' : 'Create Crop' }}
+          </div>
+
+          <!-- Custom Styled Form -->
+          <form class="form">
+
+            <input required class="input" type="text" [(ngModel)]="form.name" name="name" placeholder="Crop name">
+            <input required class="input" type="text" [(ngModel)]="form.type" name="type" placeholder="Type e.g. Cereal">
+            <input required class="input" type="text" [(ngModel)]="form.field" name="field" placeholder="Field e.g. Field A">
+            <input required class="input" type="date" [(ngModel)]="form.plantingDate" name="plantingDate">
+
+
+
+            <!-- Agreement Text -->
+            <!-- <div class="agreement">
+              By creating a crop, you agree to our <a href="#">terms</a>
+            </div> -->
+
+            <!-- Save Button -->
+            <input class="login-button" type="button" value="Save" (click)="save()" data-bs-dismiss="modal">
+
+          </form>
+
+        </div> <!-- container end -->
+
+      </div> <!-- model end -->
+
     </div>
   </div>
 </div>
 
-<!-- <app-footer></app-footer> -->
+</div>

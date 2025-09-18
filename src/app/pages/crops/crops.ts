@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-crops',
@@ -12,69 +13,77 @@ export class Crops implements OnInit {
   isLoading = false;
   errorMessage = '';
 
-  formVisible = false;
-  isEditing = false;
-  currentId: string | null = null;
   form: any = {
     name: '',
     type: '',
     field: '',
     plantingDate: ''
   };
+  isEditing = false;
+  currentId: string | null = null;
+
+  modal: any; // Bootstrap modal instance
 
   constructor(private api: ApiService) {}
 
-  ngOnInit(): void { this.loadCrops(); }
+  ngOnInit(): void {
+    this.loadCrops();
 
-loadCrops(): void {
-  this.isLoading = true;
-  this.errorMessage = '';
+    // Initialize Bootstrap modal
+    const modalEl = document.getElementById('cropModal');
+    if (modalEl) this.modal = new bootstrap.Modal(modalEl);
+  }
 
-  this.api.getCrops().subscribe({
-    next: (res: any) => {
-      this.crops = res.crops || [];   // ✅ take the crops array
-      this.isLoading = false;
-    },
-    error: (err) => {
-      this.errorMessage = err.message || 'Failed to load crops';
-      this.isLoading = false;
-    }
-  });
-}
-
-
+  loadCrops(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.api.getCrops().subscribe({
+      next: (res: any) => {
+        this.crops = res.crops || [];
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.message || 'Failed to load crops';
+        this.isLoading = false;
+      }
+    });
+  }
 
   openCreate(): void {
-    this.formVisible = true;
     this.isEditing = false;
     this.currentId = null;
     this.form = { name: '', type: '', field: '', plantingDate: '' };
+    this.modal.show();
   }
 
   openEdit(item: any): void {
-    this.formVisible = true;
     this.isEditing = true;
-    this.currentId = item._id || item.id;
+    this.currentId = item._id || item.id || null;
     this.form = {
       name: item.name || '',
       type: item.type || '',
       field: item.field || '',
-      plantingDate: (item.plantingDate ? String(item.plantingDate).substring(0,10) : '')
+      plantingDate: item.plantingDate ? String(item.plantingDate).substring(0,10) : ''
     };
+    this.modal.show();
   }
-
-  cancel(): void { this.formVisible = false; this.isEditing = false; this.currentId = null; }
 
   save(): void {
     const payload = { ...this.form };
     if (this.isEditing && this.currentId) {
       this.api.updateCrop(this.currentId, payload).subscribe({
-        next: () => { this.formVisible = false; this.loadCrops(); },
+        next: () => {
+          this.modal.hide();
+          this.loadCrops();
+        },
         error: (err) => { alert(err.message || 'Update failed'); }
       });
     } else {
       this.api.createCrop(payload).subscribe({
-        next: () => { this.formVisible = false; this.loadCrops(); },
+        next: () => {
+          this.modal.hide();
+          this.loadCrops();
+        },
         error: (err) => { alert(err.message || 'Create failed'); }
       });
     }
@@ -84,11 +93,17 @@ loadCrops(): void {
     const id = item._id || item.id;
     if (!id) return;
     if (!confirm('Delete this crop?')) return;
+
     this.api.deleteCrop(id).subscribe({
       next: () => this.loadCrops(),
       error: (err) => { alert(err.message || 'Delete failed'); }
     });
   }
+
+  cancel(): void {
+    this.modal.hide();
+    this.isEditing = false;
+    this.currentId = null;
+    this.form = { name: '', type: '', field: '', plantingDate: '' };
+  }
 }
-
-
