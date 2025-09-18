@@ -14,6 +14,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class Dashboard implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
+  forecastData = [
+  { day: 'Mon', icon: 'fa-sun', temp: 32, rain: 10 },
+  { day: 'Tue', icon: 'fa-cloud', temp: 30, rain: 20 },
+  { day: 'Wed', icon: 'fa-cloud-showers-heavy', temp: 28, rain: 70 },
+  { day: 'Thu', icon: 'fa-bolt', temp: 29, rain: 40 },
+  { day: 'Fri', icon: 'fa-cloud-sun', temp: 31, rain: 15 },
+  { day: 'Sat', icon: 'fa-snowflake', temp: 18, rain: 50 },
+  { day: 'Sun', icon: 'fa-sun', temp: 33, rain: 5 },
+];
 
   // Dashboard data
   keyMetrics: KeyMetric[] = [];

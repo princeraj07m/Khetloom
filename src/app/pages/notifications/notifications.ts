@@ -64,6 +64,28 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   reportGenerated: boolean = false;
   notificationSound: HTMLAudioElement | null = null;
   private updateInterval: any;
+  // Dashboard-like contextual data
+  isLoadingExtras: boolean = false;
+  publicStats: { totalUsers: number; avgFarmSize: number; avgMonthlyExpenditure: number } | null = null;
+  recentUsers: any[] = [];
+  recentActivities: any[] = [];
+  recentLogs: any[] = [];
+  publicConfig: { environment: string; version: string; time: string } | null = null;
+  weatherTip: string = '';
+  // Quick create notification form
+  newNotification: {
+    title: string;
+    description: string;
+    type: 'critical' | 'warning' | 'normal' | 'info' | 'system';
+    priority: 'high' | 'medium' | 'low';
+    category: string;
+  } = {
+    title: '',
+    description: '',
+    type: 'info',
+    priority: 'low',
+    category: 'General'
+  };
   
   notifications: Notification[] = [
     {
@@ -293,6 +315,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.initializeSound();
     this.startRealTimeUpdates();
     this.fetchNotificationsFromApi();
+    this.loadExtras();
   }
   // API integration
   fetchNotificationsFromApi() {
@@ -325,6 +348,95 @@ export class NotificationsComponent implements OnInit, OnDestroy {
         this.updateStats();
       },
       error: () => {}
+    });
+  }
+
+  // Load public/dashboard-adjacent data to enrich the page
+  loadExtras() {
+    this.isLoadingExtras = true;
+    // public stats
+    this.api.getPublicStats().subscribe({
+      next: (stats) => (this.publicStats = stats),
+      error: () => {},
+    });
+
+    // recent users (limited fields)
+    this.api.getRecentUsers(6).subscribe({
+      next: (users) => (this.recentUsers = users || []),
+      error: () => {},
+    });
+
+    // recent activities
+    this.api.getRecentActivities().subscribe({
+      next: (items) => (this.recentActivities = (items || []).slice(0, 6)),
+      error: () => {},
+    });
+
+    // app logs (auth required)
+    this.api.getRecentLogs().subscribe({
+      next: (items) => (this.recentLogs = (items || []).slice(0, 6)),
+      error: () => {},
+    });
+
+    // public config
+    this.api.getPublicConfig().subscribe({
+      next: (cfg) => (this.publicConfig = cfg),
+      error: () => {},
+    });
+
+    // quick weather-based advisory using cached weather for user's farm location if available
+    const userFarm = localStorage.getItem('farmLocation') || 'Farm';
+    this.api.getCachedWeather(userFarm).subscribe({
+      next: (wx) => {
+        if (wx?.data?.forecast?.length) {
+          const rainDay = wx.data.forecast.find((d: any) => /rain|storm/i.test(d.condition));
+          if (rainDay) {
+            this.weatherTip = `Rain expected soon in ${userFarm}. Consider adjusting irrigation schedules and securing equipment.`;
+          } else {
+            this.weatherTip = `No heavy rain expected. Ideal time for field inspections and scheduled maintenance.`;
+          }
+        }
+      },
+      error: () => {},
+      complete: () => (this.isLoadingExtras = false)
+    });
+  }
+
+  // Quick create notification
+  submitNewNotification() {
+    const payload = {
+      title: this.newNotification.title,
+      description: this.newNotification.description,
+      type: this.newNotification.type,
+      priority: this.newNotification.priority,
+      category: this.newNotification.category,
+      source: 'Farmer Action'
+    };
+    this.api.createNotification(payload).subscribe({
+      next: (created) => {
+        const createdMapped = {
+          id: created?._id || created?.id || String(Date.now()),
+          type: (created?.type || payload.type) as any,
+          priority: (created?.priority || payload.priority) as any,
+          title: created?.title || payload.title,
+          description: created?.description || payload.description,
+          timestamp: created?.createdAt ? new Date(created.createdAt) : new Date(),
+          icon: '🔔',
+          iconColor: '#28a745',
+          isRead: false,
+          isArchived: false,
+          category: created?.category || payload.category,
+          source: created?.source || payload.source
+        } as Notification;
+        this.notifications = [createdMapped, ...this.notifications];
+        this.updateFilteredNotifications();
+        this.updateStats();
+        this.newNotification = { title: '', description: '', type: 'info', priority: 'low', category: 'General' };
+        this.showSuccessMessage('Notification created');
+      },
+      error: (e) => {
+        this.showSuccessMessage('Failed to create notification');
+      }
     });
   }
 

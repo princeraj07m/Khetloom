@@ -847,3 +847,103 @@
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+
+/* FORECAST (carousel) */
+.forecast-list {
+  display: flex;
+  gap: .6rem;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  align-items: stretch;
+}
+
+.forecast-item {
+  flex: 0 0 auto;
+  min-width: 86px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: .6rem;
+  text-align: center;
+  box-shadow: none;
+  scroll-snap-align: center;
+  border: 1px solid rgba(2, 6, 23, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.forecast-item .day {
+  font-weight: 700;
+}
+
+.forecast-item .temp {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+@media (max-width: 575.98px) {
+  .temp-big {
+    font-size: 1.6rem;
+  }
+
+  .forecast-item {
+    min-width: 78%;
+    max-width: 82%;
+    padding: .9rem;
+  }
+
+}
+
+/* small (sm) devices show ~2 cards */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .forecast-item {
+    min-width: 46%;
+    max-width: 48%;
+    padding: .7rem;
+  }
+
+}
+
+/* medium devices show ~3 cards */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .forecast-item {
+    min-width: 30%;
+    max-width: 32%;
+    padding: .7rem;
+  }
+}
+
+/* large and up: use grid to show all 7 cards at once (no horizontal scroll) */
+@media (min-width: 992px) {
+  .forecast-list {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: .6rem;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding-top: 0;
+    align-items: stretch;
+  }
+
+  .forecast-item {
+    min-width: 0;
+    scroll-snap-align: none;
+  }
+
+  /* hide controls and dots on lg+ */
+  .forecast-controls {
+    display: none !important;
+  }
+}
+
+

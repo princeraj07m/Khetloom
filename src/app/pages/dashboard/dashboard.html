@@ -27,7 +27,7 @@
               <i [class]="metric.icon"></i>
             </div>
             <div class="metric-content">
-              <h3 class="metric-value">{{ metric.value | number }}{{ metric.unit }}</h3>
+              <h3 class="metric-value" style="font-size: 1.20rem;">{{ metric.value | number }} {{ metric.unit }}</h3>
               <p class="metric-title">{{ metric.title }}</p>
               <div class="metric-trend" [ngClass]="getTrendColor(metric.trendDirection, metric.id)">
                 <i [class]="getTrendIcon(metric.trendDirection)"></i>
@@ -76,39 +76,28 @@
       <h3 class="section-title mb-4">Weather Forecast</h3>
       <div class="row g-4">
         <!-- Current Weather -->
-        <div class="col-12 col-lg-4">
-          <div class="current-weather-card">
+        <div class="col-12 col-lg-4 h-100">
+          <div class="current-weather-card d-flex justify-content-center">
             <div class="weather-icon-large">
               <i [class]="getWeatherIcon(weatherData.current.condition)"></i>
             </div>
-            <div class="weather-details">
+            <div>
               <h2 class="temperature">{{ weatherData.current.temperature }}°F</h2>
-              <p class="condition">{{ weatherData.current.condition }}</p>
-              <div class="weather-stats">
-                <div class="stat-item">
-                  <i class="bi bi-droplet-fill text-primary me-1"></i>
-                  <span>{{ weatherData.current.humidity }}%</span>
-                </div>
-                <div class="stat-item">
-                  <i class="bi bi-wind text-info me-1"></i>
-                  <span>{{ weatherData.current.windSpeed }} mph</span>
-                </div>
-              </div>
             </div>
+
           </div>
         </div>
 
         <!-- 7-Day Forecast -->
-        <div class="col-12 col-lg-8">
-          <div class="forecast-container">
-            <div *ngFor="let day of weatherData.forecast" class="forecast-day">
-              <div class="forecast-day-name">{{ day.day }}</div>
-              <div class="forecast-icon">
-                <i [class]="getWeatherIcon(day.condition)"></i>
-              </div>
-              <div class="forecast-temp">{{ day.temperature }}°</div>
-            </div>
-          </div>
+        <div class="col-12 col-lg-8 h-100">
+          <div id="forecastContainer" class="forecast-list" tabindex="0" aria-label="7 day forecast">
+        <div *ngFor="let f of forecastData" class="forecast-item trans-style">
+          <div class="day">{{ f.day }}</div>
+          <div style="font-size:1.25rem;"><i class="fa {{ f.icon }}"></i></div>
+          <div class="temp">{{ f.temp }}°</div>
+          <div class="muted-small">{{ f.rain }}%</div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
