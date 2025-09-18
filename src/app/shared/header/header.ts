@@ -21,7 +21,7 @@ export class Header implements OnInit {
   }
 
   navigateToProfile(): void {
-    this.router.navigate(['/pages/profile']);
+    this.router.navigate(['/profile']);
   }
 
   logout(): void {

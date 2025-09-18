@@ -1,6 +1,8 @@
 <!-- Full-screen loader overlay -->
 <div *ngIf="loading$ | async" class="loader-overlay">
   <app-loader message="Loading Dashboard..."></app-loader>
-</div>
+  </div>
 
+<app-header></app-header>
 <router-outlet></router-outlet>
+<app-footer></app-footer>

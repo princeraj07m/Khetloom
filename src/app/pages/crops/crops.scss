@@ -1,2 +1,79 @@
+/* Table Styling */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
+  thead {
+    background: #2f855a; // green accent
+    color: #fff;
 
+    th {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 12px;
+    }
+  }
+
+  tbody tr {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f1f9f4;
+    }
+  }
+
+  td {
+    vertical-align: middle;
+    padding: 12px;
+  }
+}
+
+/* Empty state */
+.text-muted {
+  font-size: 1.05rem;
+  color: #6c757d !important;
+
+  i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 5px;
+    color: #a0aec0;
+  }
+}
+
+/* Card form */
+.card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+  .card-title {
+    font-weight: 600;
+    color: #2d3748;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+}
+
+/* Buttons */
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  }
+
+  i {
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+}
+
+/* Spinner */
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+}

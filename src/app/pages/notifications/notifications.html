@@ -219,8 +219,8 @@
           </select>
         </div>
 
-        <button 
-          class="btn-primary" 
+        <button
+          class="btn-primary"
           (click)="generateReport()"
           [disabled]="isGeneratingReport">
           <span *ngIf="isGeneratingReport">⏳ Generating...</span>
@@ -238,41 +238,41 @@
         <h4>Alert Types</h4>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="criticalAlerts" 
+          <input
+            type="checkbox"
+            id="criticalAlerts"
             [(ngModel)]="preferences.criticalAlerts">
           <label for="criticalAlerts">Critical Alerts</label>
         </div>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="warningAlerts" 
+          <input
+            type="checkbox"
+            id="warningAlerts"
             [(ngModel)]="preferences.warningAlerts">
           <label for="warningAlerts">Warning Alerts</label>
         </div>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="normalAlerts" 
+          <input
+            type="checkbox"
+            id="normalAlerts"
             [(ngModel)]="preferences.normalAlerts">
           <label for="normalAlerts">Normal Alerts</label>
         </div>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="infoAlerts" 
+          <input
+            type="checkbox"
+            id="infoAlerts"
             [(ngModel)]="preferences.infoAlerts">
           <label for="infoAlerts">Info Alerts</label>
         </div>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="systemUpdates" 
+          <input
+            type="checkbox"
+            id="systemUpdates"
             [(ngModel)]="preferences.systemUpdates">
           <label for="systemUpdates">System Updates</label>
         </div>
@@ -280,25 +280,25 @@
         <h4>Delivery Methods</h4>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="emailNotifications" 
+          <input
+            type="checkbox"
+            id="emailNotifications"
             [(ngModel)]="preferences.emailNotifications">
           <label for="emailNotifications">Email Notifications</label>
         </div>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="pushNotifications" 
+          <input
+            type="checkbox"
+            id="pushNotifications"
             [(ngModel)]="preferences.pushNotifications">
           <label for="pushNotifications">Push Notifications</label>
         </div>
 
         <div class="preference-item">
-          <input 
-            type="checkbox" 
-            id="soundEnabled" 
+          <input
+            type="checkbox"
+            id="soundEnabled"
             [(ngModel)]="preferences.soundEnabled">
           <label for="soundEnabled">Sound Alerts</label>
         </div>

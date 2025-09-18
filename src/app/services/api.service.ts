@@ -81,9 +81,9 @@ export interface UsersResponse {
 export class ApiService {
   // private readonly apiUrl = 'https://khetloom-backend.vercel.app/api';
   private readonly apiUrl = 'https://khetloom-backend.vercel.app/api';
-  
 
-  
+
+
   constructor(private readonly http: HttpClient) {
     // console.log('🔧 API Service initialized with URL:', this.apiUrl);
   }
@@ -141,7 +141,7 @@ export class ApiService {
   login(credentials: LoginRequest): Observable<AuthResponse> {
     // console.log('🔐 API Service: Attempting login with API URL:', `${this.apiUrl}/login`);
     // console.log('📧 API Service: Login credentials:', credentials);
-    
+
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap(response => {
