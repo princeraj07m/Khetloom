@@ -1,0 +1,47 @@
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">
+          <i class="bi bi-tree"></i> Smart Farm Dashboard
+        </a>
+
+        <div class="navbar-nav me-auto">
+          <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+          <a class="nav-link" routerLink="field" routerLinkActive="active">
+            <i class="bi bi-grid-3x3-gap"></i> Field
+          </a>
+          <a class="nav-link" routerLink="bot-control" routerLinkActive="active">
+            <i class="bi bi-controller"></i> Bot Control
+          </a>
+          <a class="nav-link" routerLink="plants" routerLinkActive="active">
+            <i class="bi bi-flower1"></i> Plants
+          </a>
+          <a class="nav-link" routerLink="analytics" routerLinkActive="active">
+            <i class="bi bi-graph-up"></i> Analytics
+          </a>
+          <a class="nav-link" routerLink="logs" routerLinkActive="active">
+            <i class="bi bi-list-ul"></i> Logs
+          </a>
+          <a class="nav-link" routerLink="settings" routerLinkActive="active">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </div>
+
+        <div class="navbar-text text-light d-flex align-items-center">
+          <span class="badge bg-info me-2">
+            <i class="bi bi-robot"></i> Bot: ({{botStatus.x}}, {{botStatus.y}})
+          </span>
+          <span class="badge bg-warning me-2">
+            <i class="bi bi-battery-half"></i> {{botStatus.battery}}%
+          </span>
+          <span class="badge bg-primary">
+            <i class="bi bi-droplet"></i> {{botStatus.fertilizer_level}}%
+          </span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid mt-3">
+      <router-outlet></router-outlet>
+    </div>

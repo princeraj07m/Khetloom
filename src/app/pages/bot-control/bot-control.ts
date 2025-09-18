@@ -99,11 +99,11 @@ export class Botcontrol {
 
   loadLogs() {
     this.botService.getFertilizerLogs().subscribe({
-      next: (logs) => {
+      next: (logs: FertilizerLog[]) => {
         this.logs = logs;
         this.updateGrid();
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading logs:', error);
       }
     });

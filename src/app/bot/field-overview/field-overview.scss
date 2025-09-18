@@ -1,0 +1,172 @@
+.field-grid-large {
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .grid-cell {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #dee2e6;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    min-height: 80px;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .plant-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .plant-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .health-bar {
+      width: 90%;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 4px;
+
+      .health-fill {
+        height: 100%;
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+    }
+
+    .coordinates {
+      position: absolute;
+      bottom: 4px;
+      right: 6px;
+      font-size: 0.7rem;
+      opacity: 0.7;
+      font-weight: bold;
+    }
+
+    .bot-icon {
+      color: #fff;
+      font-size: 2.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    // Health-based colors
+    &.plant-success {
+      background: linear-gradient(135deg, #d4edda, #c3e6cb);
+      border-color: #28a745;
+      color: #155724;
+    }
+
+    &.plant-warning {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      border-color: #ffc107;
+      color: #856404;
+    }
+
+    &.plant-orange {
+      background: linear-gradient(135deg, #ffe8cc, #ffd59a);
+      border-color: #fd7e14;
+      color: #8b4513;
+    }
+
+    &.plant-danger {
+      background: linear-gradient(135deg, #f8d7da, #f1b0b7);
+      border-color: #dc3545;
+      color: #721c24;
+    }
+
+    &.bot-present {
+      background: linear-gradient(135deg, #007bff, #0056b3) !important;
+      border-color: #004085 !important;
+      color: white !important;
+      animation: pulse 2s infinite;
+
+      .coordinates {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+
+.stat-item {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+
+  h4 {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(0, 123, 255, 0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.border-primary {
+  border-color: #007bff !important;
+}

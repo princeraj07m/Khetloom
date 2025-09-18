@@ -1,0 +1,273 @@
+.plant-grid {
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .plant-cell {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 3px solid #dee2e6;
+    border-radius: 12px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 100px;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &.selected {
+      border-color: #007bff !important;
+      background-color: rgba(0, 123, 255, 0.1) !important;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .plant-icon-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .plant-icon {
+      font-size: 2.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .health-indicator {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .health-bar {
+      width: 100%;
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 4px;
+
+      .health-fill {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+      }
+    }
+
+    .health-text {
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .position-label {
+      position: absolute;
+      bottom: 4px;
+      right: 6px;
+      font-size: 0.65rem;
+      opacity: 0.7;
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    .warning-indicators {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      display: flex;
+      flex-direction: column;
+
+      .warning-icon {
+        font-size: 0.8rem;
+        margin-bottom: 2px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 2px;
+        border-radius: 50%;
+      }
+    }
+
+    // Health-based styling
+    &.plant-success {
+      background: linear-gradient(135deg, #d4edda, #c3e6cb);
+      border-color: #28a745;
+      color: #155724;
+    }
+
+    &.plant-warning {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      border-color: #ffc107;
+      color: #856404;
+    }
+
+    &.plant-orange {
+      background: linear-gradient(135deg, #ffe8cc, #ffd59a);
+      border-color: #fd7e14;
+      color: #8b4513;
+    }
+
+    &.plant-danger {
+      background: linear-gradient(135deg, #f8d7da, #f1b0b7);
+      border-color: #dc3545;
+      color: #721c24;
+
+      .plant-icon {
+        animation: shake 2s infinite;
+      }
+    }
+  }
+}
+
+// Plant detail view
+.plant-visual {
+  .plant-display {
+    position: relative;
+    display: inline-block;
+  }
+
+  .display-plant-icon {
+    font-size: 8rem;
+    color: #28a745;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  }
+
+  .health-circle {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    &.health-success {
+      background-color: #28a745;
+    }
+
+    &.health-warning {
+      background-color: #ffc107;
+      color: #856404;
+    }
+
+    &.health-orange {
+      background-color: #fd7e14;
+    }
+
+    &.health-danger {
+      background-color: #dc3545;
+    }
+  }
+}
+
+.info-card {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.recommendations {
+  .alert {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+}
+
+.action-buttons {
+  .btn {
+    border-radius: 20px;
+    font-weight: 500;
+  }
+}
+
+.stage-stat {
+  .progress {
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+}
+
+.health-distribution {
+  .distribution-item {
+    .progress {
+      height: 10px;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .progress-bar {
+      border-radius: 5px;
+    }
+  }
+}
+
+// Animations
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .plant-grid .grid-container {
+    gap: 10px;
+  }
+
+  .plant-cell {
+    min-height: 80px;
+    padding: 6px;
+
+    .plant-icon {
+      font-size: 2rem;
+    }
+  }
+
+  .display-plant-icon {
+    font-size: 6rem !important;
+  }
+
+  .health-circle {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+// Print styles
+@media print {
+  .plant-cell {
+    break-inside: avoid;
+  }
+
+  .action-buttons {
+    display: none;
+  }
+}
