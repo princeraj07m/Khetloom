@@ -338,6 +338,15 @@ button {
   font-size: 9px;
 }
 
+/* Responsive Modal */
+@media (max-width: 480px) {
+  .model .container {
+    max-width: 90vw;
+    padding: 25px 20px;
+    margin: 10px;
+  }
+}
+
 /* Remove modal background */
 #fieldModal .modal-content {
   background: transparent;
