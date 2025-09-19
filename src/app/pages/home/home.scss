@@ -1,6 +1,6 @@
 .app{
     background: linear-gradient(98deg, #e8ffe8 0%, #f5fdfa 85%, #e1eaea 100%);
-    
+
 }
 .hero-bg {
   min-height: 85vh;
@@ -86,4 +86,61 @@
 .get-s-btn:hover{
   background-color: #4CAF50;
   color:white !important;
+}
+.testimonial-box {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 0 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  flex: 0 0 300px;
+  height: 270px; /* thoda adjust kiya */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .testimonial-img {
+    width: 90px;  /* pehle 80px tha */
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 0.8rem; /* kam kiya */
+    object-fit: cover;
+    border: 2px solid #28a745;
+  }
+
+  p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem; /* gap kam kiya */
+  }
+
+  h6 {
+    margin-top: 0.2rem; /* name ke upar ka gap kam */
+  }
+}
+
+/* Slider */
+.slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.slide-track {
+  display: flex;
+  animation: scroll 35s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .testimonial-box { flex: 0 0 250px; height: 250px; }
+}
+@media (max-width: 576px) {
+  .testimonial-box { flex: 0 0 80%; height: auto; }
 }
