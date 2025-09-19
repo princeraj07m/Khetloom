@@ -10,14 +10,16 @@ declare var bootstrap: any;
 })
 export class Crops implements OnInit {
   crops: any[] = [];
+  fields: any[] = [];
   isLoading = false;
   errorMessage = '';
 
   form: any = {
     name: '',
-    type: '',
-    field: '',
-    plantingDate: ''
+    season: '',
+    area: null,
+    expectedYield: null,
+    field: ''
   };
   isEditing = false;
   currentId: string | null = null;
@@ -27,54 +29,78 @@ export class Crops implements OnInit {
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.loadCrops();
+    this.loadFieldsAndCrops();
 
     // Initialize Bootstrap modal
     const modalEl = document.getElementById('cropModal');
     if (modalEl) this.modal = new bootstrap.Modal(modalEl);
   }
 
-  loadCrops(): void {
+  // Load fields first, then crops with field names mapped
+  loadFieldsAndCrops(): void {
     this.isLoading = true;
     this.errorMessage = '';
-    this.api.getCrops().subscribe({
+
+    this.api.getFields().subscribe({
       next: (res: any) => {
-        this.crops = res.crops || [];
-        this.isLoading = false;
+        this.fields = res.fields || [];
+
+        // Now load crops
+        this.api.getCrops().subscribe({
+          next: (res: any) => {
+            this.crops = (res.crops || []).map((crop: any) => {
+              const field = this.fields.find(f => f._id === crop.fieldId);
+              return { ...crop, fieldName: field ? field.name : 'Select field' };
+            });
+            this.isLoading = false;
+          },
+          error: (err) => {
+            this.errorMessage = err.message || 'Failed to load crops';
+            this.isLoading = false;
+          }
+        });
       },
       error: (err) => {
-        this.errorMessage = err.message || 'Failed to load crops';
+        this.errorMessage = err.message || 'Failed to load fields';
         this.isLoading = false;
       }
     });
   }
 
   openCreate(): void {
-    this.isEditing = false;
     this.currentId = null;
-    this.form = { name: '', type: '', field: '', plantingDate: '' };
+    this.form = { name: '', season: '', area: null, expectedYield: null, field: '' };
+    this.isEditing = false;
     this.modal.show();
   }
 
   openEdit(item: any): void {
-    this.isEditing = true;
     this.currentId = item._id || item.id || null;
     this.form = {
       name: item.name || '',
-      type: item.type || '',
-      field: item.field || '',
-      plantingDate: item.plantingDate ? String(item.plantingDate).substring(0,10) : ''
+      season: item.season || '',
+      area: item.area || null,
+      expectedYield: item.expectedYield || null,
+      field: item.fieldId || ''
     };
+    this.isEditing = true;
     this.modal.show();
   }
 
   save(): void {
-    const payload = { ...this.form };
+    const payload = {
+      name: this.form.name,
+      season: this.form.season,
+      area: this.form.area,
+      expectedYield: this.form.expectedYield,
+      fieldId: this.form.field
+    };
+
     if (this.isEditing && this.currentId) {
       this.api.updateCrop(this.currentId, payload).subscribe({
         next: () => {
           this.modal.hide();
-          this.loadCrops();
+          this.loadFieldsAndCrops(); // reload crops with mapped field names
         },
         error: (err) => { alert(err.message || 'Update failed'); }
       });
@@ -82,7 +108,7 @@ export class Crops implements OnInit {
       this.api.createCrop(payload).subscribe({
         next: () => {
           this.modal.hide();
-          this.loadCrops();
+          this.loadFieldsAndCrops(); // reload crops with mapped field names
         },
         error: (err) => { alert(err.message || 'Create failed'); }
       });
@@ -95,7 +121,7 @@ export class Crops implements OnInit {
     if (!confirm('Delete this crop?')) return;
 
     this.api.deleteCrop(id).subscribe({
-      next: () => this.loadCrops(),
+      next: () => this.loadFieldsAndCrops(),
       error: (err) => { alert(err.message || 'Delete failed'); }
     });
   }
@@ -104,6 +130,6 @@ export class Crops implements OnInit {
     this.modal.hide();
     this.isEditing = false;
     this.currentId = null;
-    this.form = { name: '', type: '', field: '', plantingDate: '' };
+    this.form = { name: '', season: '', area: null, expectedYield: null, field: '' };
   }
 }

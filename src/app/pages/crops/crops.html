@@ -1,4 +1,4 @@
-<div class="container py-3" style="min-height: 86vh;">
+<div class="container py-3" style="min-height: 86vh; overflow:hidden;">
   <!-- Header -->
   <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
     <h4 class="m-0">🌱 Crops</h4>
@@ -18,47 +18,34 @@
     <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}
   </div>
 
-
-  <!-- From Uiverse.io by gharsh11032000 -->
-  <!-- <div class="card">
-  <div class="content">
-    <p class="heading">Card</p>
-    <p class="para">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi laboriosam
-      at voluptas minus culpa deserunt delectus sapiente inventore pariatur
-    </p>
-  </div>
-</div> -->
-
-
   <!-- Crop Cards -->
-<div class="row g-5" *ngIf="!isLoading && crops.length > 0">
-  <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" *ngFor="let c of crops">
-    <div class="card themed-card ">
-      <div class="content d-flex flex-column h-100">
-        <!-- Crop Name -->
-        <p class="heading">{{ c.name }}</p>
+  <div class="row g-5" *ngIf="!isLoading && crops.length > 0">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" *ngFor="let c of crops">
+      <div class="card themed-card">
+        <div class="content d-flex flex-column h-100">
+          <!-- Crop Name -->
+          <p class="heading">{{ c.name }}</p>
 
-        <!-- Crop Details -->
-        <p class="para mb-1"><strong>Type:</strong> {{ c.season }}</p>
-        <p class="para mb-1"><strong>Field:</strong> Test field</p>
-        <p class="para mb-1"><strong>Area:</strong> {{ c.area }}</p>
-        <p class="para mb-1"><strong>Expected Yield:</strong> {{ c.expectedYield }}</p>
-        <p class="para mb-2"><strong>Planting Date:</strong> {{ c.createdAt | date:'d MMMM ' }}</p>
+          <!-- Crop Details -->
+          <p class="para mb-1"><strong>Season:</strong> {{ c.season }}</p>
+          <p class="para mb-1"><strong>Field:</strong> {{ c.fieldName || 'Select field' }}</p>
+          <p class="para mb-1"><strong>Area:</strong> {{ c.area }} acres</p>
+          <p class="para mb-1"><strong>Expected Yield:</strong> {{ c.expectedYield }}</p>
+          <p class="para mb-2"><strong>Created At:</strong> {{ c.createdAt | date:'d MMM yyyy' }}</p>
 
-        <!-- Action Buttons -->
-        <div class="mt-auto d-flex gap-2 flex-wrap">
-          <button class="btn btn-sm btn-outline-primary flex-grow-1" (click)="openEdit(c)">
-            <i class="bi bi-pencil-square"></i> Edit
-          </button>
-          <button class="btn btn-sm btn-outline-danger flex-grow-1" (click)="remove(c)">
-            <i class="bi bi-trash"></i> Delete
-          </button>
+          <!-- Action Buttons -->
+          <div class="mt-auto d-flex gap-2 flex-wrap">
+            <button class="btn btn-sm btn-outline-primary flex-grow-1" (click)="openEdit(c)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-sm btn-outline-danger flex-grow-1" (click)="remove(c)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- Empty State -->
   <div *ngIf="!isLoading && crops.length === 0" class="text-center text-muted my-5">
@@ -67,48 +54,40 @@
   </div>
 
   <!-- Crop Modal -->
-<div class="modal fade" id="cropModal" tabindex="-1" aria-labelledby="cropModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+  <div class="modal fade" id="cropModal" tabindex="-1" aria-labelledby="cropModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
 
-      <!-- Wrap everything inside the "model" class -->
-      <div class="model">
+        <!-- Wrap everything inside the "model" class -->
+        <div class="model">
+          <div class="container">
 
-        <!-- Custom Container for styling -->
-        <div class="container">
+            <!-- Modal Heading -->
+            <div class="heading">
+              <i class="bi bi-journal-plus me-2"></i>
+              {{ isEditing ? 'Edit Crop' : 'Create Crop' }}
+            </div>
 
-          <!-- Modal Heading -->
-          <div class="heading">
-            <i class="bi bi-journal-plus me-2"></i>
-            {{ isEditing ? 'Edit Crop' : 'Create Crop' }}
+            <!-- Custom Styled Form -->
+            <form class="form">
+
+              <input required class="input" type="text" [(ngModel)]="form.name" name="name" placeholder="Crop name">
+              <input required class="input" type="text" [(ngModel)]="form.season" name="season" placeholder="Season e.g. Kharif">
+              <select required class="input" [(ngModel)]="form.field" name="field">
+                <option value="" disabled selected>Select Field</option>
+                <option *ngFor="let f of fields" [value]="f._id">{{ f.name }}</option>
+              </select>
+              <input required class="input" type="number" [(ngModel)]="form.area" name="area" placeholder="Area in acres">
+              <input required class="input" type="number" [(ngModel)]="form.expectedYield" name="expectedYield" placeholder="Expected Yield">
+              
+              <!-- Save Button -->
+              <input class="login-button" type="button" value="Save" (click)="save()" data-bs-dismiss="modal">
+
+            </form>
           </div>
+        </div>
 
-          <!-- Custom Styled Form -->
-          <form class="form">
-
-            <input required class="input" type="text" [(ngModel)]="form.name" name="name" placeholder="Crop name">
-            <input required class="input" type="text" [(ngModel)]="form.type" name="type" placeholder="Type e.g. Cereal">
-            <input required class="input" type="text" [(ngModel)]="form.field" name="field" placeholder="Field e.g. Field A">
-            <input required class="input" type="date" [(ngModel)]="form.plantingDate" name="plantingDate">
-
-
-
-            <!-- Agreement Text -->
-            <!-- <div class="agreement">
-              By creating a crop, you agree to our <a href="#">terms</a>
-            </div> -->
-
-            <!-- Save Button -->
-            <input class="login-button" type="button" value="Save" (click)="save()" data-bs-dismiss="modal">
-
-          </form>
-
-        </div> <!-- container end -->
-
-      </div> <!-- model end -->
-
+      </div>
     </div>
   </div>
-</div>
-
 </div>

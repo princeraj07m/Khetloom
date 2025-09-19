@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-fields',
@@ -12,74 +13,99 @@ export class Fields implements OnInit {
   isLoading = false;
   errorMessage = '';
 
-  formVisible = false;
-  isEditing = false;
-  currentId: string | null = null;
   form: any = {
     name: '',
+    crop: '',
     location: '',
-    size: null,
-    crop: ''
+    area: null,
+    notes: ''
   };
+  isEditing = false;
+  currentId: string | null = null;
+
+  modal: any; // Bootstrap modal instance
 
   constructor(private api: ApiService) {}
 
-  ngOnInit(): void { this.loadFields(); }
+  ngOnInit(): void {
+    this.loadFields();
+
+    // Initialize Bootstrap modal
+    const modalEl = document.getElementById('fieldModal');
+    if (modalEl) this.modal = new bootstrap.Modal(modalEl);
+  }
 
   loadFields(): void {
     this.isLoading = true;
     this.errorMessage = '';
     this.api.getFields().subscribe({
-      next: (list) => { this.fields = list || []; this.isLoading = false; },
-      error: (err) => { this.isLoading = false; this.errorMessage = err.message || 'Failed to load fields'; }
+      next: (res: any) => {
+        this.fields = res.fields || [];
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.message || 'Failed to load fields';
+        this.isLoading = false;
+      }
     });
   }
 
-  openCreate(): void {
-    this.formVisible = true;
+  openCreateField(): void {
     this.isEditing = false;
     this.currentId = null;
-    this.form = { name: '', location: '', size: null, crop: '' };
+    this.form = { name: '', crop: '', location: '', area: null, notes: '' };
+    this.modal.show();
   }
 
-  openEdit(item: any): void {
-    this.formVisible = true;
+  openEditField(item: any): void {
     this.isEditing = true;
-    this.currentId = item._id || item.id;
+    this.currentId = item._id || item.id || null;
     this.form = {
       name: item.name || '',
+      crop: item.crop || '',
       location: item.location || '',
-      size: item.size || null,
-      crop: item.crop || ''
+      area: item.area || null,
+      notes: item.notes || ''
     };
+    this.modal.show();
   }
 
-  cancel(): void { this.formVisible = false; this.isEditing = false; this.currentId = null; }
-
-  save(): void {
+  saveField(): void {
     const payload = { ...this.form };
     if (this.isEditing && this.currentId) {
       this.api.updateField(this.currentId, payload).subscribe({
-        next: () => { this.formVisible = false; this.loadFields(); },
+        next: () => {
+          this.modal.hide();
+          this.loadFields();
+        },
         error: (err) => { alert(err.message || 'Update failed'); }
       });
     } else {
       this.api.createField(payload).subscribe({
-        next: () => { this.formVisible = false; this.loadFields(); },
+        next: () => {
+          this.modal.hide();
+          this.loadFields();
+        },
         error: (err) => { alert(err.message || 'Create failed'); }
       });
     }
   }
 
-  remove(item: any): void {
+  removeField(item: any): void {
     const id = item._id || item.id;
     if (!id) return;
     if (!confirm('Delete this field?')) return;
+
     this.api.deleteField(id).subscribe({
       next: () => this.loadFields(),
       error: (err) => { alert(err.message || 'Delete failed'); }
     });
   }
+
+  cancel(): void {
+    this.modal.hide();
+    this.isEditing = false;
+    this.currentId = null;
+    this.form = { name: '', crop: '', location: '', area: null, notes: '' };
+  }
 }
-
-
