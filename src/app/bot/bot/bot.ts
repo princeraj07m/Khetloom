@@ -20,7 +20,7 @@ export class Bot {
 
   async updateBotStatus() {
     try {
-      const response = await fetch('http://13.60.157.181:4000/api/bot/status');
+      const response = await fetch('https://khetloom-bot-backend.vercel.app/api/bot/status');
       this.botStatus = await response.json();
     } catch (error) {
       console.error('Failed to fetch bot status:', error);
