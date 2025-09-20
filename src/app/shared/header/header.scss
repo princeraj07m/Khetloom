@@ -79,3 +79,8 @@ html {
 li a{
   font-size: 0.9rem;
 }
+.btn-outline-success:hover {
+  background-color: #87c9aa !important; /* halka green */
+  color: #198754 !important; /* green text */
+  border-color: #198754 !important;
+}

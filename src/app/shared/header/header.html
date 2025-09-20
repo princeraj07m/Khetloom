@@ -4,7 +4,7 @@
     <div class="logo-circle mx-auto me-2">
       <i class="fa-solid fa-leaf text-success"></i>
     </div>
-    <span class="fw-bold text-success fs-4">FertiFarm</span>
+    <span class="fw-bold text-success fs-4">KhetLoom</span>
   </div>
 
   <!-- Toggler Button for Offcanvas -->
@@ -27,12 +27,12 @@
 
         <li class="nav-item px-2"><a class="nav-link text-success fw-semibold" routerLink="/auth/login">Login</a></li>
         <li class="nav-item px-2">
-          <a class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/auth/register">
+          <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/auth/register">
             Register
-          </a>
+          </button>
         </li>
         <li class="nav-item px-2">
-          <button class="btn btn-warning px-3 ms-2 rounded-pill shadow-sm" (click)="demoLogin()">
+          <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" (click)="demoLogin()">
             <i class="fa-solid fa-play me-1"></i>Demo
           </button>
         </li>
@@ -43,7 +43,7 @@
         <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item"
             routerLink="/main/control-panel">⚙️
             Control Panel</a></li>
-              <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/bot">
+        <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/bot">
             📊 Bot Dashboard</a></li>
         <li class="me-4"><a class="dropdown-item fw-semibold text-dark rounded-2 hover-item" routerLink="/bot-control">
             🤖 Bot Control</a></li>
@@ -120,7 +120,7 @@
 <!-- Offcanvas Left Sidebar -->
 <div class="offcanvas offcanvas-start rounded-end shadow-lg" tabindex="-1" id="mobileMenu"
   aria-labelledby="mobileMenuLabel">
-  
+
   <!-- Header -->
   <div class="offcanvas-header border-bottom d-flex align-items-center btn" routerLink="/">
     <h5 class="offcanvas-title fw-bold text-success d-flex align-items-center" id="mobileMenuLabel">
@@ -136,25 +136,31 @@
     <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/">
       <i class="fa-solid fa-house me-2 text-success"></i> Home
     </a>
-    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/about">
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+      routerLink="/about">
       <i class="fa-solid fa-circle-info me-2 text-success"></i> About
     </a>
-    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/features">
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+      routerLink="/features">
       <i class="fa-solid fa-star me-2 text-success"></i> Features
     </a>
-    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/contact">
+    <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+      routerLink="/contact">
       <i class="fa-solid fa-envelope me-2 text-success"></i> Contact
     </a>
 
     <!-- Logged Out -->
     <ng-container *ngIf="!isLoggedIn">
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/auth/login">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/auth/login">
         <i class="fa-solid fa-right-to-bracket me-2 text-success"></i> Login
       </a>
-      <a class="btn btn-success text-white mt-2 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas" routerLink="/auth/register">
+      <a class="btn btn-success text-white mt-2 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas"
+        routerLink="/auth/register">
         <i class="fa-solid fa-user-plus me-2"></i> Register
       </a>
-      <button class="btn btn-warning text-white mt-2 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas" (click)="demoLogin()">
+      <button class="btn btn-warning text-white mt-2 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas"
+        (click)="demoLogin()">
         <i class="fa-solid fa-play me-2"></i> Demo Mode
       </button>
     </ng-container>
@@ -162,86 +168,110 @@
     <!-- Logged In -->
     <ng-container *ngIf="isLoggedIn">
       <!-- Direct Links -->
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/dashboard">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/dashboard">
         <i class="fa-solid fa-tachometer-alt me-2 text-success"></i> Dashboard
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/main/control-panel">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/main/control-panel">
         <i class="fa-solid fa-cog me-2 text-success"></i> Control Panel
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/bot">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/bot">
         <i class="fa-solid fa-robot me-2 text-success"></i> Bot Dashboard
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/bot-control">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/bot-control">
         <i class="fa-solid fa-robot me-2 text-success"></i> Bot Control
       </a>
 
       <!-- All Dropdown Links Expanded -->
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/field-demo">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/field-demo">
         <i class="fa-solid fa-seedling me-2 text-success"></i> Field Layout
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/financial-overview">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/financial-overview">
         <i class="fa-solid fa-chart-line me-2 text-success"></i> Financials
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/devices">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/devices">
         <i class="fa-solid fa-plug me-2 text-success"></i> Devices
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/crop-cycles">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/crop-cycles">
         <i class="fa-solid fa-seedling me-2 text-success"></i> Crop Cycles
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/weather">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/weather">
         <i class="fa-solid fa-cloud-sun me-2 text-success"></i> Weather
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/history-logs">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/history-logs">
         <i class="fa-solid fa-history me-2 text-success"></i> History & Logs
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/notifications">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/notifications">
         <i class="fa-solid fa-bell me-2 text-success"></i> Notifications
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/fields">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/fields">
         <i class="fa-solid fa-layer-group me-2 text-success"></i> Fields
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/crops">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/crops">
         <i class="fa-solid fa-seedling me-2 text-success"></i> Crops
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/jobs">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/jobs">
         <i class="fa-solid fa-briefcase me-2 text-success"></i> Jobs
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/fieldlayout">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/fieldlayout">
         <i class="fa-solid fa-map me-2 text-success"></i> Field Map
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/health">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/health">
         <i class="fa-solid fa-heart-pulse me-2 text-success"></i> Health
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/sprayer">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/sprayer">
         <i class="fa-solid fa-truck-field me-2 text-success"></i> Sprayer
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/analytics">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/analytics">
         <i class="fa-solid fa-chart-pie me-2 text-success"></i> Analytics
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/setting">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/setting">
         <i class="fa-solid fa-cog me-2 text-success"></i> Settings
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/users">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/users">
         <i class="fa-solid fa-users me-2 text-success"></i> Users
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/health-reports">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/health-reports">
         <i class="fa-solid fa-file-medical me-2 text-success"></i> Health Reports
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/activities">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/activities">
         <i class="fa-solid fa-clipboard-list me-2 text-success"></i> Activities
       </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas" routerLink="/weather-cache">
+      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
+        routerLink="/weather-cache">
         <i class="fa-solid fa-cloud-meatball me-2 text-success"></i> Weather Cache
       </a>
 
       <!-- Profile & Logout -->
-      <button class="btn btn-success text-white mt-3 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas" routerLink="/user-profile">
+      <button class="btn btn-success text-white mt-3 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas"
+        routerLink="/user-profile">
         <i class="fa-solid fa-circle-user me-2"></i> Profile
       </button>
-      <button class="btn btn-danger text-white mt-2 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas" (click)="logout()">
+      <button class="btn btn-danger text-white mt-2 w-100 rounded-pill shadow-sm py-2" data-bs-dismiss="offcanvas"
+        (click)="logout()">
         <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
       </button>
     </ng-container>
   </div>
 </div>
-
