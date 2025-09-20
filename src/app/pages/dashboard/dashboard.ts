@@ -5,6 +5,7 @@ import { DashboardService, KeyMetric, Equipment, FieldStatus, Alert } from '../.
 import { WeatherService, WeatherData, WeatherAlert } from '../../services/weather.service';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -55,7 +56,8 @@ export class Dashboard implements OnInit, OnDestroy {
     private readonly dashboardService: DashboardService,
     private readonly weatherService: WeatherService,
     private readonly apiService: ApiService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -332,5 +334,16 @@ export class Dashboard implements OnInit, OnDestroy {
     this.loadDashboardData();
     // this.loadBackendSummary();
     this.loadWeatherData();
+  }
+
+  // Test method for toast functionality (remove in production)
+  testToast(type: 'success' | 'error' | 'info' | 'warning'): void {
+    const messages = {
+      success: 'This is a success toast message!',
+      error: 'This is an error toast message!',
+      info: 'This is an info toast message!',
+      warning: 'This is a warning toast message!'
+    };
+    this.toastService.show(messages[type], type);
   }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Toast, ToastService } from '../../services/toast.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-toast',
@@ -24,20 +25,36 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ])
   ]
 })
-export class ToastComponent implements OnInit {
+export class ToastComponent implements OnInit, OnDestroy {
   toast: Toast | null = null;
+  private readonly subscription: Subscription = new Subscription();
+  private timeoutId: any;
 
-  constructor(private toastService: ToastService) { }
+  constructor(private readonly toastService: ToastService) { }
 
   ngOnInit(): void {
-    this.toastService.toast$.subscribe(toast => {
-      this.toast = toast;
-      if (toast) {
-        setTimeout(() => {
-          this.toast = null;
-        }, 3000);
-      }
-    });
+    this.subscription.add(
+      this.toastService.toast$.subscribe(toast => {
+        this.toast = toast;
+        if (toast) {
+          // Clear any existing timeout
+          if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+          }
+          // Set new timeout to hide toast
+          this.timeoutId = setTimeout(() => {
+            this.toast = null;
+          }, 3000);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
   }
 
   getToastClass() {
@@ -45,5 +62,12 @@ export class ToastComponent implements OnInit {
       return '';
     }
     return `toast-${this.toast.type}`;
+  }
+
+  closeToast() {
+    this.toast = null;
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
   }
 }

@@ -1,5 +1,8 @@
 <div *ngIf="toast" class="toast-container" [@toastAnimation]>
   <div class="toast" [ngClass]="getToastClass()">
-    {{ toast.message }}
+    <span class="toast-message">{{ toast.message }}</span>
+    <button class="toast-close" (click)="closeToast()" aria-label="Close toast">
+      <span>&times;</span>
+    </button>
   </div>
 </div>

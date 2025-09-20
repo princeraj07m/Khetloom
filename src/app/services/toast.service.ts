@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 export interface Toast {
   message: string;
   type: 'success' | 'error' | 'info' | 'warning';
+  id?: string;
 }
 
 @Injectable({
@@ -14,6 +15,15 @@ export class ToastService {
   toast$ = this.toastSubject.asObservable();
 
   show(message: string, type: 'success' | 'error' | 'info' | 'warning' = 'info') {
-    this.toastSubject.next({ message, type });
+    const toast: Toast = { 
+      message, 
+      type, 
+      id: Math.random().toString(36).substr(2, 9) 
+    };
+    this.toastSubject.next(toast);
+  }
+
+  hide() {
+    this.toastSubject.next(null);
   }
 }
