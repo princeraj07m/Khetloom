@@ -1,30 +1,36 @@
-.app{
-    background: linear-gradient(98deg, #e8ffe8 0%, #f5fdfa 85%, #e1eaea 100%);
+.app {
+  background: linear-gradient(98deg, #e8ffe8 0%, #f5fdfa 85%, #e1eaea 100%);
 
 }
+
 .hero-bg {
   min-height: 85vh;
 }
+
 .stylish-heading {
   font-family: 'Segoe UI', Arial, sans-serif;
   letter-spacing: -2px;
   color: #2e5832;
   text-shadow: 0 3px 14px #b2f7b444;
 }
+
 .stylish-sub {
   font-weight: 600;
   letter-spacing: -1px;
 }
+
 .glass-card {
   background: rgba(245, 255, 240, 0.9);
   border-radius: 1.2rem;
   box-shadow: 0 9px 32px #98e59866;
   transition: transform 0.2s, box-shadow 0.3s;
 }
+
 .glass-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 48px #7cbf7d55;
 }
+
 .step-badge {
   width: 40px;
   height: 40px;
@@ -37,6 +43,7 @@
   justify-content: center;
   box-shadow: 0 2px 10px #4CAF5033;
 }
+
 .feature-card {
   background: #f9fff9;
   border-radius: 1rem;
@@ -45,11 +52,13 @@
   box-shadow: 0 6px 22px #a5e7aa44;
   transition: transform 0.25s, box-shadow 0.25s;
 }
+
 .feature-card i {
   font-size: 2rem;
   color: #4CAF50;
   margin-bottom: 0.8rem;
 }
+
 .feature-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 36px #86d09866;
@@ -67,11 +76,13 @@
   align-items: flex-end;
   justify-content: center;
 }
+
 .hero-img {
   width: 100%;
   border-radius: 1.6rem;
   filter: drop-shadow(0 6px 28px #caf4c0cc);
 }
+
 .app-logo {
   width: 40px;
   height: 40px;
@@ -79,14 +90,16 @@
   border-radius: 50%;
   box-shadow: 0 2px 8px #4CAF5033;
 }
+
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='34' height='34' xmlns='http://www.w3.org/2000/svg'%3E%3Crect y='8' width='32' height='3' rx='1.5' fill='%234CAF50'/%3E%3Crect y='16' width='32' height='3' rx='1.5' fill='%234CAF50'/%3E%3Crect y='24' width='32' height='3' rx='1.5' fill='%234CAF50'/%3E%3C/svg%3E");
 }
 
-.get-s-btn:hover{
+.get-s-btn:hover {
   background-color: #4CAF50;
-  color:white !important;
+  color: white !important;
 }
+
 .testimonial-box {
   background: #fff;
   border: 1px solid #e5e5e5;
@@ -96,27 +109,32 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   text-align: center;
   flex: 0 0 300px;
-  height: 270px; /* thoda adjust kiya */
+  height: 270px;
+  /* thoda adjust kiya */
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .testimonial-img {
-    width: 90px;  /* pehle 80px tha */
+    width: 90px;
+    /* pehle 80px tha */
     height: 90px;
     border-radius: 50%;
-    margin-bottom: 0.8rem; /* kam kiya */
+    margin-bottom: 0.8rem;
+    /* kam kiya */
     object-fit: cover;
     border: 2px solid #28a745;
   }
 
   p {
     font-size: 0.95rem;
-    margin-bottom: 0.5rem; /* gap kam kiya */
+    margin-bottom: 0.5rem;
+    /* gap kam kiya */
   }
 
   h6 {
-    margin-top: 0.2rem; /* name ke upar ka gap kam */
+    margin-top: 0.2rem;
+    /* name ke upar ka gap kam */
   }
 }
 
@@ -133,14 +151,73 @@
 }
 
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Responsive */
 @media (max-width: 992px) {
-  .testimonial-box { flex: 0 0 250px; height: 250px; }
+  .testimonial-box {
+    flex: 0 0 250px;
+    height: 250px;
+  }
 }
+
 @media (max-width: 576px) {
-  .testimonial-box { flex: 0 0 80%; height: auto; }
+  .testimonial-box {
+    flex: 0 0 80%;
+    height: auto;
+  }
+}
+
+.start-steps {
+  background: #f9fdf9;
+  border-radius: 16px;
+  padding: 60px 20px;
+}
+
+.step-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 40px 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.step-icon {
+  width: 90px;              /* circle width */
+  height: 90px;             /* circle height */
+  border-radius: 50%;       /* circle */
+  border: 2px solid #28a745; /* green border */
+  display: flex;            /* flexbox */
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
+  font-size: 36px;          /* icon size */
+  color: #198754;           /* icon green */
+  background: #fff;         /* white background */
+  margin: 0 auto 20px;      /* center + spacing below */
+  transition: all 0.3s ease;
+}
+
+.step-card:hover .step-icon {
+  transform: scale(1.1);
+}
+
+.step-card h5 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.step-card p {
+  font-size: 16px;
+  color: #555;
+  margin-top: 12px;
+  line-height: 1.6;
 }
