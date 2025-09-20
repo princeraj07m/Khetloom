@@ -23,7 +23,6 @@
             Welcome back! Please enter your credentials to continue.
           </p>
         </div>
-
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="login-container d-flex flex-column align-items-center justify-content-center">
             <div class="card login-card">
@@ -37,7 +36,6 @@
                     Valid Email is required.
                   </div>
                 </div>
-
                 <div class="mb-3">
                   <label class="form-label">Password</label>
                   <input type="password" class="form-control" placeholder="Enter your password"
@@ -47,7 +45,6 @@
                     Password is required.
                   </div>
                 </div>
-
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="rememberMe">
@@ -57,11 +54,9 @@
                   </div>
                   <a href="javascript:void(0)" class="text-success small">Forgot Password?</a>
                 </div>
-
                 <div class="d-grid">
                   <button type="submit" class="btn btn-success rounded-pill px-4">Login</button>
                 </div>
-
                 <div class="text-center mt-3">
                   <p class="small">Don't have an account? <a href="/auth/register" class="text-success">Register
                       here</a></p>
@@ -74,11 +69,15 @@
     </div>
 
     <!-- Right Image -->
-    <div class="col-md-6 d-none d-md-block pt-5" style="min-height: 75vh;">
-      <img
-        src="https://img.freepik.com/free-photo/drone-spraying-fertilizer-vegetable-green-plants-agriculture-technology-farm-automation_35913-2318.jpg"
-        alt="Farm Drone" class="img-fluid rounded shadow" style="position: fixed;">
-    </div>
+<div class="col-md-6 d-none d-md-flex justify-content-center align-items-center" style="min-height: 75vh;">
+  <div class="pulse-border-wrapper">
+    <img
+      src="https://img.freepik.com/free-photo/drone-spraying-fertilizer-vegetable-green-plants-agriculture-technology-farm-automation_35913-2318.jpg"
+      alt="Farm Drone"
+      class="img-fluid rounded shadow">
+  </div>
+</div>
+
 
   </div>
 </div>
