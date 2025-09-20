@@ -194,3 +194,63 @@
   }
 }
 
+/* Responsive adjustments for field grid */
+@media (max-width: 1200px) {
+  .field-grid-large .grid-container {
+    max-width: 550px;
+    gap: 12px;
+    padding: 15px;
+  }
+  .field-grid-large .grid-cell {
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 992px) {
+  .field-grid-large .grid-container {
+    max-width: 450px;
+    gap: 10px;
+    padding: 12px;
+  }
+  .field-grid-large .grid-cell {
+    min-height: 70px;
+  }
+  .field-grid-large .plant-icon {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .field-grid-large .grid-container {
+    max-width: 360px;
+    gap: 8px;
+    padding: 10px;
+  }
+  .field-grid-large .grid-cell {
+    min-height: 60px;
+  }
+  .field-grid-large .plant-icon {
+    font-size: 1.6rem;
+  }
+  .field-grid-large .coordinates {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .field-grid-large .grid-container {
+    max-width: 300px;
+    gap: 6px;
+    padding: 8px;
+  }
+  .field-grid-large .grid-cell {
+    min-height: 50px;
+    border-width: 2px;
+  }
+  .field-grid-large .plant-icon {
+    font-size: 1.4rem;
+  }
+  .field-grid-large .coordinates {
+    font-size: 0.6rem;
+  }
+}

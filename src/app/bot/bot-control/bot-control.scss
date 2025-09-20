@@ -151,3 +151,86 @@
 .progress {
   background-color: rgba(255, 255, 255, 0.3);
 }
+/* Responsive for Bot Control Center */
+@media (max-width: 1200px) {
+  .status-item i {
+    font-size: 2.2rem !important;
+  }
+  .position-coords .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .position-display h3 {
+    font-size: 1.2rem;
+  }
+  .status-item i {
+    font-size: 2rem !important;
+  }
+  .grid-selector .grid-container {
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 6px;
+  }
+  .grid-selector .grid-cell {
+    min-height: 55px;
+    font-size: 0.8rem;
+  }
+  .command-item {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .position-coords .badge {
+    font-size: 0.8rem;
+  }
+  .status-item strong {
+    font-size: 0.9rem;
+  }
+  .grid-selector .grid-container {
+    max-width: 260px;
+    gap: 5px;
+  }
+  .grid-selector .grid-cell {
+    min-height: 50px;
+    font-size: 0.75rem;
+  }
+  .command-item {
+    font-size: 0.85rem;
+  }
+  .btn-lg {
+    padding: 0.6rem 0.9rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-header h5 {
+    font-size: 1rem;
+  }
+  .status-item i {
+    font-size: 1.6rem !important;
+  }
+  .position-display h3 {
+    font-size: 1rem;
+  }
+  .grid-selector .grid-container {
+    max-width: 220px;
+    gap: 4px;
+  }
+  .grid-selector .grid-cell {
+    min-height: 45px;
+    font-size: 0.7rem;
+    border-width: 2px;
+  }
+  .command-item {
+    font-size: 0.8rem;
+  }
+  .alert {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.7rem;
+  }
+}

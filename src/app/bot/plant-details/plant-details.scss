@@ -140,17 +140,116 @@ h2, h3, h4, h5 {
   background-color: #1565c0;
   transform: translateY(-2px);
 }
+/* 🌱 Plant Monitoring Responsive Layout */
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
+/* Medium screens (tablets, small laptops) */
+@media (max-width: 1200px) {
+  .plant-cell .plant-icon {
+    font-size: 1.8rem;
+  }
+  .health-text {
+    font-size: 0.9rem;
+  }
+  .card-body h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .plant-grid .grid-container {
+    max-width: 480px;
+    margin: 0 auto;
+    gap: 8px;
+  }
   .plant-cell {
-    width: 70px;
-    height: 95px;
+    min-height: 70px;
+    font-size: 0.9rem;
   }
-  .display-plant-icon {
-    font-size: 55px;
+  .plant-icon-container i {
+    font-size: 1.5rem;
   }
-  h2, h3 {
+  .position-label {
+    font-size: 0.8rem;
+  }
+  .warning-icon {
+    font-size: 1rem;
+  }
+  .card-body h3 {
     font-size: 1.2rem;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.3rem;
+  }
+  .plant-grid .grid-container {
+    max-width: 360px;
+    gap: 6px;
+  }
+  .plant-cell {
+    min-height: 60px;
+    font-size: 0.8rem;
+  }
+  .plant-icon-container i {
+    font-size: 1.3rem;
+  }
+  .health-text {
+    font-size: 0.8rem;
+  }
+  .card-body h3 {
+    font-size: 1.1rem;
+  }
+  .distribution-item span {
+    font-size: 0.85rem;
+  }
+  .recommendations .alert {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.7rem;
+  }
+}
+
+/* Small mobiles */
+@media (max-width: 576px) {
+  h2 {
+    font-size: 1.1rem;
+  }
+  .card-header h5 {
+    font-size: 1rem;
+  }
+  .plant-grid .grid-container {
+    max-width: 280px;
+    gap: 4px;
+  }
+  .plant-cell {
+    min-height: 50px;
+    font-size: 0.7rem;
+    border-width: 2px;
+  }
+  .plant-icon-container i {
+    font-size: 1.1rem;
+  }
+  .health-text {
+    font-size: 0.7rem;
+  }
+  .position-label {
+    font-size: 0.7rem;
+  }
+  .warning-icon {
+    font-size: 0.9rem;
+  }
+  .info-card p,
+  .recommendations p {
+    font-size: 0.8rem;
+  }
+  .alert {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
   }
 }
