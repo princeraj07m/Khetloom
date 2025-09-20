@@ -74,39 +74,27 @@ export class DiseaseDetectionComponent implements OnInit {
   sampleImages: SampleImage[] = [
     {
       id: 1,
-      url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop',
-      name: 'Tomato Leaf 1',
+      url: 'https://tse4.mm.bing.net/th/id/OIP.QJ0LPNOHSj00r1xztLB5twHaEo?pid=Api&P=0&h=180',
+      name: 'Car',
       disease: 'Early Blight'
     },
     {
       id: 2,
       url: 'https://images.unsplash.com/photo-1592921870789-04563d55041c?w=300&h=200&fit=crop',
-      name: 'Potato Leaf',
+      name: 'Earbuds',
       disease: 'Late Blight'
     },
     {
       id: 3,
-      url: 'https://images.unsplash.com/photo-1605527868693-80de8785b4f1?w=300&h=200&fit=crop',
-      name: 'Pepper Leaf',
+      url: 'https://tse4.mm.bing.net/th/id/OIP.nTnBelqc7O2297Ww8hDhgQHaE8?pid=Api&P=0&h=180',
+      name: 'Healthy Leaf',
       disease: 'Bacterial Spot'
     },
     {
       id: 4,
-      url: 'https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?w=300&h=200&fit=crop',
-      name: 'Healthy Tomato',
-      disease: 'Healthy'
-    },
-    {
-      id: 5,
-      url: 'assets/samples/sample1.jpg',
-      name: 'Corn Leaf',
-      disease: 'Common Rust'
-    },
-    {
-      id: 6,
-      url: 'assets/samples/sample2.jpg',
-      name: 'Apple Leaf',
-      disease: 'Apple Scab'
+      url: 'https://storage.googleapis.com/kaggle-datasets-images/4374455/7510772/8b35cc13b3c3f3a1dcb3cccbd92ff731/dataset-card.jpg?t=2024-01-30-06-07-39',
+      name: 'Early Blight',
+      disease: 'Blight'
     }
   ];
 
