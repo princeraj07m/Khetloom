@@ -16,6 +16,8 @@ import { Settings } from './settings/settings';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from "../shared/shared-module";
+import { HelpSupport } from './help-support/help-support';
+import { About } from './about/about';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { SharedModule } from "../shared/shared-module";
     Analytics,
     Logs,
     Settings,
+    HelpSupport,
+    About,
   ],
   imports: [
     CommonModule,

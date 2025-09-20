@@ -1,0 +1,62 @@
+/* About Page */
+.about-page {
+  animation: fadeInScale 1s ease-in-out;
+}
+.about-title {
+  color: #0d6efd;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.about-card {
+  border-radius: 15px;
+  background: linear-gradient(135deg, #eafbea, #ffffff);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease;
+}
+.about-card:hover {
+  transform: scale(1.05);
+}
+
+/* Slide-up animation */
+.slide-up {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.8s forwards;
+}
+.slide-up.delay-1 { animation-delay: 0.3s; }
+.slide-up.delay-2 { animation-delay: 0.6s; }
+@keyframes slideUp {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Timeline styling */
+.timeline {
+  list-style: none;
+  padding: 0;
+  position: relative;
+}
+.timeline li {
+  margin: 20px 0;
+  padding-left: 30px;
+  position: relative;
+}
+.timeline li::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #198754;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+.timeline li span {
+  font-weight: bold;
+  color: #198754;
+  margin-right: 8px;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

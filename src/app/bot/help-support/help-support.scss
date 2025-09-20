@@ -1,0 +1,25 @@
+/* Help Page */
+.help-page {
+  animation: fadeIn 1s ease-in;
+}
+.help-title {
+  color: #198754;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.help-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.help-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.accordion-button {
+  background: #f8fff8;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

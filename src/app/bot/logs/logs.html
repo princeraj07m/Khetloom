@@ -51,45 +51,50 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">
-              <i class="bi bi-journal-text text-success"></i>
-              System Activity History
-            </h5>
-            <div class="d-flex align-items-center">
-              <!-- Filter Controls -->
-              <select class="form-select form-select-sm me-2"
-                      [(ngModel)]="filterType"
-                      (change)="applyFilters()"
-                      style="width: auto;">
-                <option value="">All Actions</option>
-                <option value="movement">Movements Only</option>
-                <option value="fertilization">Fertilizations Only</option>
-              </select>
+       <div class="card-header">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+    <!-- Title -->
+    <h5 class="mb-0">
+      <i class="bi bi-journal-text text-success"></i>
+      System Activity History
+    </h5>
 
-              <select class="form-select form-select-sm me-2"
-                      [(ngModel)]="logLimit"
-                      (change)="loadLogs()"
-                      style="width: auto;">
-                <option value="50">Last 50</option>
-                <option value="100">Last 100</option>
-                <option value="200">Last 200</option>
-                <option value="500">All Logs</option>
-              </select>
+    <!-- Controls -->
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <select class="form-select form-select-sm"
+              [(ngModel)]="filterType"
+              (change)="applyFilters()"
+              style="width: auto;">
+        <option value="">All Actions</option>
+        <option value="movement">Movements Only</option>
+        <option value="fertilization">Fertilizations Only</option>
+      </select>
 
-              <button class="btn btn-outline-primary btn-sm me-2"
-                      (click)="refreshLogs()">
-                <i class="bi bi-arrow-clockwise"></i>
-                Refresh
-              </button>
+      <select class="form-select form-select-sm"
+              [(ngModel)]="logLimit"
+              (change)="loadLogs()"
+              style="width: auto;">
+        <option value="50">Last 50</option>
+        <option value="100">Last 100</option>
+        <option value="200">Last 200</option>
+        <option value="500">All Logs</option>
+      </select>
 
-              <button class="btn btn-outline-success btn-sm"
-                      (click)="exportLogs()">
-                <i class="bi bi-download"></i>
-                Export
-              </button>
-            </div>
-          </div>
+      <button class="btn btn-outline-primary btn-sm"
+              (click)="refreshLogs()">
+        <i class="bi bi-arrow-clockwise"></i>
+        Refresh
+      </button>
+
+      <button class="btn btn-outline-success btn-sm"
+              (click)="exportLogs()">
+        <i class="bi bi-download"></i>
+        Export
+      </button>
+    </div>
+  </div>
+</div>
+
 
           <div class="card-body p-0">
             <!-- Loading Indicator -->

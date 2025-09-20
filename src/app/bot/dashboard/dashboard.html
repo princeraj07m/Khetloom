@@ -1,98 +1,89 @@
-<div class="container">
-<div class="row">
-      <div class="col-12">
-        <h2 class="mb-4">
-          <i class="bi bi-speedometer2 text-success"></i>
-          Smart Farm Dashboard
-        </h2>
-      </div>
+<div class="container dashboard-container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-4 dashboard-title">
+        <i class="bi bi-speedometer2 text-success"></i>
+        Smart Farm Dashboard
+      </h2>
     </div>
+  </div>
 
-    <div class="row mb-4">
-      <!-- Bot Status Card -->
-      <div class="col-md-3">
-        <div class="card bg-primary text-white">
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h6 class="card-title">Bot Position</h6>
-                <h4>{{botStatus.x}}, {{botStatus.y}}</h4>
-                <p class="card-text">
-                  <i class="bi bi-activity"></i>
-                  {{botStatus.is_moving ? 'Moving...' : 'Idle'}}
-                </p>
-              </div>
-              <div class="text-end">
-                <i class="bi bi-robot fs-1 opacity-75"></i>
-              </div>
+  <!-- Status Cards Row -->
+  <div class="row mb-4 g-3">
+    <!-- Bot Status -->
+    <div class="col-6 col-md-3">
+      <div class="card status-card bg-success text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="card-title">Bot Position</h6>
+              <h4>{{botStatus.x}}, {{botStatus.y}}</h4>
+              <p class="card-text">
+                <i class="bi bi-activity"></i>
+                {{botStatus.is_moving ? 'Moving...' : 'Idle'}}
+              </p>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Battery Status Card -->
-      <div class="col-md-3">
-        <div class="card" [ngClass]="getBatteryCardClass(botStatus.battery)">
-          <div class="card-body text-white">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h6 class="card-title">Battery Level</h6>
-                <h4>{{botStatus.battery}}%</h4>
-                <div class="progress mt-2" style="height: 6px;">
-                  <div class="progress-bar bg-light"
-                       [style.width.%]="botStatus.battery"></div>
-                </div>
-              </div>
-              <div class="text-end">
-                <i [class]="getBatteryIcon(botStatus.battery) + ' fs-1 opacity-75'"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fertilizer Status Card -->
-      <div class="col-md-3">
-        <div class="card bg-info text-white">
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h6 class="card-title">Fertilizer Level</h6>
-                <h4>{{botStatus.fertilizer_level}}%</h4>
-                <div class="progress mt-2" style="height: 6px;">
-                  <div class="progress-bar bg-light"
-                       [style.width.%]="botStatus.fertilizer_level"></div>
-                </div>
-              </div>
-              <div class="text-end">
-                <i class="bi bi-droplet fs-1 opacity-75"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Plant Health Card -->
-      <div class="col-md-3">
-        <div class="card bg-success text-white">
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h6 class="card-title">Avg Plant Health</h6>
-                <h4>{{analytics.avgPlantHealth}}%</h4>
-                <p class="card-text">
-                  <i class="bi bi-check-circle"></i>
-                  {{analytics.healthyPlants}} healthy plants
-                </p>
-              </div>
-              <div class="text-end">
-                <i class="bi bi-flower1 fs-1 opacity-75"></i>
-              </div>
-            </div>
+            <i class="bi bi-robot fs-1 opacity-75 float-icon"></i>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Battery -->
+    <div class="col-6 col-md-3">
+      <div class="card status-card battery-card" [ngClass]="getBatteryCardClass(botStatus.battery)">
+        <div class="card-body text-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="card-title">Battery</h6>
+              <h4>{{botStatus.battery}}%</h4>
+              <div class="progress mt-2 battery-progress">
+                <div class="progress-bar bg-light" [style.width.%]="botStatus.battery"></div>
+              </div>
+            </div>
+            <i [class]="getBatteryIcon(botStatus.battery) + ' fs-1 opacity-75 float-icon'"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertilizer -->
+    <div class="col-6 col-md-3">
+      <div class="card status-card bg-info text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="card-title">Fertilizer</h6>
+              <h4>{{botStatus.fertilizer_level}}%</h4>
+              <div class="progress mt-2 fertilizer-progress">
+                <div class="progress-bar bg-light" [style.width.%]="botStatus.fertilizer_level"></div>
+              </div>
+            </div>
+            <i class="bi bi-droplet fs-1 opacity-75 float-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plant Health -->
+    <div class="col-6 col-md-3">
+      <div class="card status-card bg-gradient-success text-white">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="card-title">Plant Health</h6>
+              <h4>{{analytics.avgPlantHealth}}%</h4>
+              <p class="card-text">
+                <i class="bi bi-check-circle"></i>
+                {{analytics.healthyPlants}} healthy
+              </p>
+            </div>
+            <i class="bi bi-flower1 fs-1 opacity-75 float-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- Analytics Row -->
     <div class="row mb-4">

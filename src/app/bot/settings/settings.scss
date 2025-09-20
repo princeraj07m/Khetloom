@@ -111,14 +111,13 @@
   }
 }
 
-// System information styling
 .card-body {
   .row {
     .col-md-3 {
       padding-bottom: 1rem;
 
       h6 {
-        color: #6c757d;
+        color: #8bb0d1;
         font-weight: 600;
         margin-bottom: 0.5rem;
         text-transform: uppercase;
@@ -131,17 +130,16 @@
         font-size: 0.9rem;
         line-height: 1.6;
         margin-bottom: 0;
-        color: #495057;
+        color: #d0d6dc;
       }
     }
   }
 }
 
-// Form section styling
 .mb-3 {
   .form-label {
     font-weight: 600;
-    color: #495057;
+    color: #acb9c7;
     margin-bottom: 0.5rem;
   }
 
@@ -154,7 +152,6 @@
   }
 }
 
-// Range display styling
 .form-text {
   &:contains("range") {
     font-weight: 500;
@@ -162,7 +159,6 @@
   }
 }
 
-// Button groups
 .d-grid .btn {
   text-align: left;
 
@@ -172,7 +168,6 @@
   }
 }
 
-// Status message animations
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -184,7 +179,6 @@
   }
 }
 
-// Responsive design
 @media (max-width: 768px) {
   .card {
     margin-bottom: 1rem;
@@ -204,7 +198,7 @@
   }
 
   .form-control, .form-select {
-    font-size: 1rem; // Prevent iOS zoom
+    font-size: 1rem; 
   }
 
   .col-md-3 {

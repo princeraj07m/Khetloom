@@ -8,6 +8,9 @@ import { PlantDetails } from './plant-details/plant-details';
 import { Analytics } from './analytics/analytics';
 import { Logs } from './logs/logs';
 import { Settings } from './settings/settings';
+import { HelpSupport
+ } from './help-support/help-support';
+ import { About } from './about/about';
 
 const routes: Routes = [
   {
@@ -21,6 +24,8 @@ const routes: Routes = [
       { path: 'analytics', component: Analytics },
       { path: 'logs', component: Logs },
       { path: 'settings', component: Settings },
+      {path: 'help-support', component: HelpSupport },
+      {path: 'about', component: About},
       { path: '**', redirectTo: '' }
     ]
   }
