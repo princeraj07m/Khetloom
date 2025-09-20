@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class Login implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class Login implements OnInit {
   onSubmit() {
     console.log('🚀 Login form submitted');
     console.log('📝 Form valid:', this.loginForm.valid);
-    console.log('📋 Form value:', this.loginForm.value);
+    // console.log('📋 Form value:', this.loginForm.value);
     
     if (this.loginForm.valid) {
       this.isLoading = true;
@@ -43,7 +45,7 @@ export class Login implements OnInit {
           this.isLoading = false;
           console.log('✅ Login successful:', response);
           console.log('🎉 Full response object:', JSON.stringify(response, null, 2));
-          alert('Login Successful! Redirecting to dashboard...');
+          this.toast.show('Login Successful! Redirecting to dashboard...', 'success');
           this.authService.navigateToDashboard();
         },
         error: (error) => {
@@ -52,14 +54,14 @@ export class Login implements OnInit {
           console.error('❌ Login error:', error);
           console.error('❌ Error message:', error.message);
           console.error('❌ Full error object:', JSON.stringify(error, null, 2));
-          alert(`Login failed: ${this.errorMessage}`);
+          this.toast.show(`Login failed: ${this.errorMessage}`, 'error');
         }
       });
     } else {
       this.markFormGroupTouched();
       console.log('❌ Form is invalid');
       console.log('❌ Form errors:', this.getFormErrors());
-      alert('Please enter valid credentials.');
+      this.toast.show('Please enter valid credentials.', 'error');
     }
   }
 

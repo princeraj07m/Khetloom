@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-weather-cache',
@@ -15,7 +16,7 @@ export class WeatherCache {
 
   payload: any = { location: '', data: {}, ttlMinutes: 60 };
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toast: ToastService) {}
 
   get(): void {
     if (!this.location) return;
@@ -32,7 +33,7 @@ export class WeatherCache {
     if (!body.location) return;
     this.api.setCachedWeather(body).subscribe({
       next: () => { this.get(); },
-      error: (err) => { alert(err.message || 'Failed to set cache'); }
+      error: (err) => { this.toast.show(err.message || 'Failed to set cache', 'error'); }
     });
   }
 }

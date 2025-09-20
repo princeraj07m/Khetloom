@@ -1,5 +1,5 @@
 import { Component,  AfterViewInit } from '@angular/core';
-
+import { ToastService } from '../../services/toast.service';
 
 declare const google: any;
 @Component({
@@ -9,7 +9,9 @@ declare const google: any;
   styleUrl: './google-map.scss'
 })
 export class GoogleMap implements AfterViewInit{
-ngAfterViewInit(): void {
+  constructor(private toast: ToastService) {}
+
+  ngAfterViewInit(): void {
     this.loadGoogleMaps(() => {
       this.initMap();
     });
@@ -63,10 +65,10 @@ ngAfterViewInit(): void {
           map.setCenter(userPos);
           marker.setPosition(userPos);
         },
-        () => alert("Location permission denied!")
+        () => this.toast.show("Location permission denied!", 'error')
       );
     } else {
-      alert("Geolocation not supported by your browser.");
+      this.toast.show("Geolocation not supported by your browser.", 'error');
     }
   }
 }

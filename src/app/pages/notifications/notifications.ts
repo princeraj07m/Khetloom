@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../../services/toast.service';
 
 export interface Notification {
   id: string;
@@ -306,7 +307,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   selectedNotifications: string[] = [];
   showBulkActions: boolean = false;
   
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toast: ToastService) {}
 
   ngOnInit() {
     this.loadPreferences();
@@ -670,7 +671,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   showSuccessMessage(message: string) {
     // Simple alert for now, could be enhanced with toast notifications
-    alert(message);
+    this.toast.show(message, 'success');
   }
 
   toggleNotificationSelection(id: string) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 declare var bootstrap: any;
 
 @Component({
@@ -25,7 +26,7 @@ export class Fields implements OnInit {
 
   modal: any; // Bootstrap modal instance
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.loadFields();
@@ -78,7 +79,7 @@ export class Fields implements OnInit {
           this.modal.hide();
           this.loadFields();
         },
-        error: (err) => { alert(err.message || 'Update failed'); }
+        error: (err) => { this.toast.show(err.message || 'Update failed', 'error'); }
       });
     } else {
       this.api.createField(payload).subscribe({
@@ -86,7 +87,7 @@ export class Fields implements OnInit {
           this.modal.hide();
           this.loadFields();
         },
-        error: (err) => { alert(err.message || 'Create failed'); }
+        error: (err) => { this.toast.show(err.message || 'Create failed', 'error'); }
       });
     }
   }
@@ -98,7 +99,7 @@ export class Fields implements OnInit {
 
     this.api.deleteField(id).subscribe({
       next: () => this.loadFields(),
-      error: (err) => { alert(err.message || 'Delete failed'); }
+      error: (err) => { this.toast.show(err.message || 'Delete failed', 'error'); }
     });
   }
 

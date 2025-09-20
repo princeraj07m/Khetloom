@@ -8,6 +8,7 @@ import { AISettingsService, AISettings, CalibrationResult, DiagnosticResult } fr
 import { AIModelService, AIModel, ModelUploadResult } from '../../services/ai-model.service';
 import { AuthService } from '../../services/auth.service';
 import { SharedModule } from '../../shared/shared-module';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-control-panel',
@@ -54,7 +55,8 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
     private readonly logsService: LogsService,
     private readonly aiSettingsService: AISettingsService,
     private readonly aiModelService: AIModelService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly toast: ToastService
   ) {
     this.initializeForms();
   }
@@ -258,7 +260,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
       .subscribe(schedule => {
         console.log('Device schedule:', schedule);
         // TODO: Implement schedule modal or navigation
-        alert(`Schedule for device ${deviceId}: ${schedule.length} entries`);
+        this.toast.show(`Schedule for device ${deviceId}: ${schedule.length} entries`, 'info');
       });
   }
 
@@ -367,7 +369,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
 
   uploadNewModel(): void {
     if (!this.selectedFile) {
-      alert('Please select a file to upload');
+      this.toast.show('Please select a file to upload', 'error');
       return;
     }
 

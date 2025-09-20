@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 declare var bootstrap: any;
 
 @Component({
@@ -26,7 +27,7 @@ export class Crops implements OnInit {
 
   modal: any; // Bootstrap modal instance
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.loadFieldsAndCrops();
@@ -102,7 +103,7 @@ export class Crops implements OnInit {
           this.modal.hide();
           this.loadFieldsAndCrops(); // reload crops with mapped field names
         },
-        error: (err) => { alert(err.message || 'Update failed'); }
+        error: (err) => { this.toast.show(err.message || 'Update failed', 'error'); }
       });
     } else {
       this.api.createCrop(payload).subscribe({
@@ -110,7 +111,7 @@ export class Crops implements OnInit {
           this.modal.hide();
           this.loadFieldsAndCrops(); // reload crops with mapped field names
         },
-        error: (err) => { alert(err.message || 'Create failed'); }
+        error: (err) => { this.toast.show(err.message || 'Create failed', 'error'); }
       });
     }
   }
@@ -122,7 +123,7 @@ export class Crops implements OnInit {
 
     this.api.deleteCrop(id).subscribe({
       next: () => this.loadFieldsAndCrops(),
-      error: (err) => { alert(err.message || 'Delete failed'); }
+      error: (err) => { this.toast.show(err.message || 'Delete failed', 'error'); }
     });
   }
 

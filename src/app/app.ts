@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LoaderService } from './services/loader.service';
 import { Observable } from 'rxjs';
+import { ToastComponent } from './components/toast/toast';
 
 @Component({
   selector: 'app-root',

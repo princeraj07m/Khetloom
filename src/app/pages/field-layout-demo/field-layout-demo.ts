@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plant } from '../field-layout.component/field-layout.component';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-field-layout-demo',
@@ -9,6 +10,8 @@ import { Plant } from '../field-layout.component/field-layout.component';
 })
 export class FieldLayoutDemoComponent implements OnInit {
   plants: Plant[] = [];
+
+  constructor(private toast: ToastService) {}
 
   ngOnInit(): void {
     // Load sample data by default
@@ -47,7 +50,7 @@ export class FieldLayoutDemoComponent implements OnInit {
       this.plants = JSON.parse(jsonString);
     } catch (error) {
       console.error('Invalid JSON:', error);
-      alert('Invalid JSON format');
+      this.toast.show('Invalid JSON format', 'error');
     }
   }
 }

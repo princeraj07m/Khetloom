@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-activities',
@@ -15,7 +16,7 @@ export class Activities implements OnInit {
   formVisible = false;
   form: any = { type: '', description: '' };
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toast: ToastService) {}
 
   ngOnInit(): void { this.loadActivities(); }
 
@@ -35,7 +36,7 @@ export class Activities implements OnInit {
     const payload = { ...this.form };
     this.api.createActivity(payload).subscribe({
       next: () => { this.formVisible = false; this.loadActivities(); },
-      error: (err) => { alert(err.message || 'Create failed'); }
+      error: (err) => { this.toast.show(err.message || 'Create failed', 'error'); }
     });
   }
 }

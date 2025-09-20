@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 declare var bootstrap: any;
 
 @Component({
@@ -26,7 +27,7 @@ export class Jobs implements OnInit {
 
   modal: any;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.loadJobs();
@@ -93,12 +94,12 @@ loadJobs(): void {
     if (this.isEditing && this.currentId) {
       this.api.updateJob(this.currentId, payload).subscribe({
         next: () => { this.modal.hide(); this.loadJobs(); },
-        error: (err) => { alert(err.message || 'Update failed'); }
+        error: (err) => { this.toast.show(err.message || 'Update failed', 'error'); }
       });
     } else {
       this.api.createJob(payload).subscribe({
         next: () => { this.modal.hide(); this.loadJobs(); },
-        error: (err) => { alert(err.message || 'Create failed'); }
+        error: (err) => { this.toast.show(err.message || 'Create failed', 'error'); }
       });
     }
   }
@@ -110,7 +111,7 @@ loadJobs(): void {
 
     this.api.deleteJob(id).subscribe({
       next: () => this.loadJobs(),
-      error: (err) => { alert(err.message || 'Delete failed'); }
+      error: (err) => { this.toast.show(err.message || 'Delete failed', 'error'); }
     });
   }
 

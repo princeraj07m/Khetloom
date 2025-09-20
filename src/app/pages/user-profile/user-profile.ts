@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { ApiService, User } from '../../services/api.service';
 import { Subscription } from 'rxjs';
 import { Collapse } from 'bootstrap';
+import { ToastService } from '../../services/toast.service';
 
 
 @Component({
@@ -100,7 +101,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private toast: ToastService
   ) {
     this.initializeForms();
   }
@@ -298,7 +300,7 @@ toggleSidebar(): void {
 
   saveChanges(): void {
     if (!this.currentUser) {
-      alert('Please login first to edit your profile');
+      this.toast.show('Please login first to edit your profile', 'error');
       return;
     }
 
@@ -340,15 +342,15 @@ toggleSidebar(): void {
       next: (response) => {
         if (response.success) {
           console.log('Profile updated successfully');
-          alert('Profile updated successfully!');
+          this.toast.show('Profile updated successfully!', 'success');
         } else {
           console.error('Profile update failed:', response.message);
-          alert('Failed to update profile: ' + response.message);
+          this.toast.show('Failed to update profile: ' + response.message, 'error');
         }
       },
       error: (error) => {
         console.error('Error updating profile:', error);
-        alert('Error updating profile. Please make sure you are logged in and try again.');
+        this.toast.show('Error updating profile. Please make sure you are logged in and try again.', 'error');
       }
     });
   }

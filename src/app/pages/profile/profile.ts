@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl  } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,8 @@ export class Profile implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: ToastService
   ) {
     this.profileForm = this.fb.group({
       userDetails: this.fb.group({
@@ -183,12 +185,12 @@ export class Profile implements OnInit {
     }
 
     if (isFormInvalid) {
-      alert('Please fill all required fields in the edited sections.');
+      this.toast.show('Please fill all required fields in the edited sections.', 'error');
       return;
     }
 
     if (!hasChanges) {
-      alert('No changes to save.');
+      this.toast.show('No changes to save.', 'info');
       return;
     }
 
@@ -198,7 +200,7 @@ export class Profile implements OnInit {
     this.authService.updateProfile(updatedData).subscribe({
       next: (response) => {
         this.isLoading = false;
-        alert('Profile updated successfully!');
+        this.toast.show('Profile updated successfully!', 'success');
         this.profileForm.markAsPristine(); // Mark form as pristine after successful save
         // Reset editing states
         this.isUserDetailsEditing = false;
@@ -238,7 +240,7 @@ export class Profile implements OnInit {
       this.updateProfilePartial(userDetailsGroup.value, () => this.isUserDetailsEditing = false);
     } else {
       this.markFormGroupTouched(userDetailsGroup);
-      alert('Please fill all required fields in User Details section.');
+      this.toast.show('Please fill all required fields in User Details section.', 'error');
     }
   }
 
@@ -248,7 +250,7 @@ export class Profile implements OnInit {
       this.updateProfilePartial(farmInfoGroup.value, () => this.isFarmInfoEditing = false);
     } else {
       this.markFormGroupTouched(farmInfoGroup);
-      alert('Please fill all required fields in Farm Details section.');
+      this.toast.show('Please fill all required fields in Farm Details section.', 'error');
     }
   }
 
@@ -262,7 +264,7 @@ export class Profile implements OnInit {
       this.updateProfilePartial(sectionData, () => this.isCropInfoEditing = false);
     } else {
       this.markFormGroupTouched(cropInfoGroup);
-      alert('Please fill all required fields in Crop Information section.');
+      this.toast.show('Please fill all required fields in Crop Information section.', 'error');
     }
   }
 
@@ -277,7 +279,7 @@ export class Profile implements OnInit {
       this.updateProfilePartial(sectionData, () => this.isEquipmentInfoEditing = false);
     } else {
       this.markFormGroupTouched(equipmentInfoGroup);
-      alert('Please fill all required fields in Equipment Information section.');
+      this.toast.show('Please fill all required fields in Equipment Information section.', 'error');
     }
   }
 
@@ -292,7 +294,7 @@ export class Profile implements OnInit {
       this.updateProfilePartial(sectionData, () => this.isPesticideFertilizerEditing = false);
     } else {
       this.markFormGroupTouched(pesticideFertilizerGroup);
-      alert('Please fill all required fields in Pesticide & Fertilizer section.');
+      this.toast.show('Please fill all required fields in Pesticide & Fertilizer section.', 'error');
     }
   }
 
@@ -320,7 +322,7 @@ export class Profile implements OnInit {
 
   private updateProfilePartial(sectionData: any, onSuccess: () => void) {
     if (!this.profileForm.dirty) {
-      alert('No changes to save.');
+      this.toast.show('No changes to save.', 'info');
       return;
     }
 
@@ -340,7 +342,7 @@ export class Profile implements OnInit {
     this.authService.updateProfile(updatedUserData).subscribe({
       next: (response) => {
         this.isLoading = false;
-        alert('Section updated successfully!');
+        this.toast.show('Section updated successfully!', 'success');
         this.profileForm.markAsPristine(); // Mark form as pristine after successful save
         onSuccess();
       },

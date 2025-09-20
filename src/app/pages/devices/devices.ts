@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-devices',
@@ -23,7 +24,7 @@ export class Devices implements OnInit {
     status: 'active'
   };
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.loadDevices();
@@ -68,12 +69,12 @@ export class Devices implements OnInit {
     if (this.isEditing && this.currentId) {
       this.api.updateDevice(this.currentId, payload).subscribe({
         next: () => { this.formVisible = false; this.loadDevices(); },
-        error: (err) => { alert(err.message || 'Update failed'); }
+        error: (err) => { this.toast.show(err.message || 'Update failed', 'error'); }
       });
     } else {
       this.api.createDevice(payload).subscribe({
         next: () => { this.formVisible = false; this.loadDevices(); },
-        error: (err) => { alert(err.message || 'Create failed'); }
+        error: (err) => { this.toast.show(err.message || 'Create failed', 'error'); }
       });
     }
   }
@@ -84,7 +85,7 @@ export class Devices implements OnInit {
     if (!confirm('Delete this device?')) return;
     this.api.deleteDevice(id).subscribe({
       next: () => this.loadDevices(),
-      error: (err) => { alert(err.message || 'Delete failed'); }
+      error: (err) => { this.toast.show(err.message || 'Delete failed', 'error'); }
     });
   }
 }

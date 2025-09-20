@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class Register{
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: ToastService
   ) {
     this.registerForm = this.fb.group({
     // Step 1: User Info
@@ -56,7 +58,7 @@ export class Register{
       }
     } else {
       this.markFormGroupTouched(this.getFormGroupForStep(this.currentStep));
-      alert('Please fill all required fields in the current step.');
+      this.toast.show('Please fill all required fields in the current step.', 'error');
     }
   }
 
@@ -178,7 +180,7 @@ export class Register{
         next: (response) => {
           this.isLoading = false;
           // console.log('Registration successful:', response);
-          alert('Registration Successful! Welcome to the platform.');
+          this.toast.show('Registration Successful! Welcome to the platform.', 'success');
           this.authService.navigateToDashboard();
         },
         error: (error) => {
@@ -189,7 +191,7 @@ export class Register{
       });
     } else {
       this.markFormGroupTouched(this.registerForm);
-      alert('Please fill all required fields.');
+      this.toast.show('Please fill all required fields.', 'error');
     }
   }
 

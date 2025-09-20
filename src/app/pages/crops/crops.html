@@ -34,12 +34,43 @@
           <p class="para mb-2"><strong>Created At:</strong> {{ c.createdAt | date:'d MMM yyyy' }}</p>
 
           <!-- Action Buttons -->
-          <div class="mt-auto d-flex gap-2 flex-wrap">
-            <button class="btn btn-sm btn-outline-primary flex-grow-1" (click)="openEdit(c)">
+          <div class="mt-auto d-flex gap-1 flex-wrap">
+            <!-- <button class="btn btn-sm btn-outline-primary flex-grow-1" (click)="openEdit(c)">
               <i class="bi bi-pencil-square"></i> Edit
+            </button> -->
+            
+            <button class="animated-button edit-crop" (click)="openEdit(c)">
+              <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+              <span class="text">Edit</span>
+              <span class="circle"></span>
+              <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
             </button>
-            <button class="btn btn-sm btn-outline-danger flex-grow-1" (click)="remove(c)">
+
+            <!-- <button class="btn btn-sm btn-outline-danger flex-grow-1" (click)="remove(c)">
               <i class="bi bi-trash"></i> Delete
+            </button> -->
+            
+            <button class="animated-button delete-crop" (click)="remove(c)">
+              <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
+              <span class="text">Delete</span>
+              <span class="circle"></span>
+              <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                </path>
+              </svg>
             </button>
           </div>
         </div>
@@ -72,14 +103,17 @@
             <form class="form">
 
               <input required class="input" type="text" [(ngModel)]="form.name" name="name" placeholder="Crop name">
-              <input required class="input" type="text" [(ngModel)]="form.season" name="season" placeholder="Season e.g. Kharif">
+              <input required class="input" type="text" [(ngModel)]="form.season" name="season"
+                placeholder="Season e.g. Kharif">
               <select required class="input" [(ngModel)]="form.field" name="field">
                 <option value="" disabled selected>Select Field</option>
                 <option *ngFor="let f of fields" [value]="f._id">{{ f.name }}</option>
               </select>
-              <input required class="input" type="number" [(ngModel)]="form.area" name="area" placeholder="Area in acres">
-              <input required class="input" type="number" [(ngModel)]="form.expectedYield" name="expectedYield" placeholder="Expected Yield">
-              
+              <input required class="input" type="number" [(ngModel)]="form.area" name="area"
+                placeholder="Area in acres">
+              <input required class="input" type="number" [(ngModel)]="form.expectedYield" name="expectedYield"
+                placeholder="Expected Yield">
+
               <!-- Save Button -->
               <input class="login-button" type="button" value="Save" (click)="save()" data-bs-dismiss="modal">
 
