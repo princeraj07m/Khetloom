@@ -70,7 +70,7 @@ export class Settings implements OnInit{
     this.updateSystemStats();
 
     // Update stats every 30 seconds
-    setInterval(() => this.updateSystemStats(), 30000);
+    // setInterval(() => this.updateSystemStats(), 30000);
   }
 
   loadSettings() {

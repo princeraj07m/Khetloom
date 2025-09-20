@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BotService, Analytic, Plant, LogEntry } from '../../services/bot.services';
+import { BotStatus } from '../../services/bot.services';
 
 @Component({
   selector: 'app-bot',
@@ -12,13 +14,13 @@ export class Bot {
 
   constructor() {
     this.updateBotStatus();
-    setInterval(() => this.updateBotStatus(), 3000);
-    setInterval(() => this.currentTime = new Date(), 1000);
+    // setInterval(() => this.updateBotStatus(), 3000);
+    // setInterval(() => this.currentTime = new Date(), 1000);
   }
 
   async updateBotStatus() {
     try {
-      const response = await fetch('http://localhost:3001/api/bot/status');
+      const response = await fetch('http://13.60.157.181:4000/api/bot/status');
       this.botStatus = await response.json();
     } catch (error) {
       console.error('Failed to fetch bot status:', error);

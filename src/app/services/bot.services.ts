@@ -50,7 +50,7 @@ export interface Analytic {
   providedIn: 'root'
 })
 export class BotService {
- private baseUrl = 'http://localhost:3001/api';
+ private baseUrl = 'http://13.60.157.181:4000/api';
 
   // Real-time data subjects
   private botStatusSubject = new BehaviorSubject<BotStatus>({
@@ -76,11 +76,11 @@ export class BotService {
 
   private startRealTimeUpdates() {
     // Update data every 3 seconds
-    setInterval(() => {
-      this.refreshBotStatus();
-      this.refreshPlants();
-      this.refreshLogs();
-    }, 3000);
+    // setInterval(() => {
+    //   this.refreshBotStatus();
+    //   this.refreshPlants();
+    //   this.refreshLogs();
+    // }, 3000);
 
     // Initial load
     this.refreshBotStatus();

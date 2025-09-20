@@ -48,7 +48,7 @@ export class BotControl implements OnInit{
 
     // Load commands periodically
     this.loadCommands();
-    setInterval(() => this.loadCommands(), 3000);
+    // setInterval(() => this.loadCommands(), 3000);
   }
 
   loadCommands() {

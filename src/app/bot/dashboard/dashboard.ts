@@ -43,7 +43,7 @@ export class Dashboard implements OnInit {
     this.loadAnalytics();
 
     // Refresh analytics every 10 seconds
-    setInterval(() => this.loadAnalytics(), 10000);
+    // setInterval(() => this.loadAnalytics(), 10000);
   }
 
   loadAnalytics() {

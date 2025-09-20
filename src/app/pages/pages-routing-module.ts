@@ -20,7 +20,6 @@ import { CropCycleComponent } from '../pages/crop-cycle/crop-cycle';
 import { Weather } from '../pages/weather/weather';
 import { HistoryLogsComponent } from '../pages/history-logs/history-logs';
 import { FinancialOverviewComponent } from '../pages/financial-overview/financial-overview';
-import { Botcontrol } from './bot-control/bot-control';
 import { Devices } from './devices/devices';
 import { Fields } from './fields/fields';
 import { Crops } from './crops/crops';
@@ -51,11 +50,11 @@ const routes: Routes = [
     component: FieldLayoutComponent,
     canActivate: [AuthGuard]
   },
-   {
-    path: 'bot-control',
-    component: Botcontrol,
-     canActivate: [AuthGuard]
-  },
+  //  {
+  //   path: 'bot-control',
+  //   component: Botcontrol,
+  //    canActivate: [AuthGuard]
+  // },
   {
     path: 'field-demo',
     component: FieldLayoutDemoComponent,

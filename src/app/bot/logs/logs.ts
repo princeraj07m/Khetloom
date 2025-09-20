@@ -28,9 +28,9 @@ export class Logs implements OnInit {
     this.loadLogs();
 
     // Auto-refresh every 5 seconds
-    setInterval(() => {
-      this.loadLogs(false);
-    }, 5000);
+    // setInterval(() => {
+    //   this.loadLogs(false);
+    // }, 5000);
   }
 
   loadLogs(showLoading: boolean = true) {

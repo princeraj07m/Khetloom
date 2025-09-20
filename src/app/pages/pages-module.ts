@@ -22,7 +22,6 @@ import { NotificationsComponent } from './notifications/notifications';
 import { CropCycleComponent } from './crop-cycle/crop-cycle';
 import { Weather } from './weather/weather';
 import { GoogleMap } from './google-map/google-map';
-import { Botcontrol } from './bot-control/bot-control';
 import { Devices } from './devices/devices';
 import { Fields } from './fields/fields';
 import { Crops } from './crops/crops';
@@ -51,7 +50,6 @@ import { WeatherCache } from './weather-cache/weather-cache';
     CropCycleComponent,
     Weather,
     GoogleMap,
-    Botcontrol,
     Devices,
     Fields,
     Crops,

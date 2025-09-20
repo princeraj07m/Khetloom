@@ -23,7 +23,7 @@ export class Analytics implements OnInit{
     this.farmingApi.logs$.subscribe(logs => this.recentLogs = logs);
 
     // Refresh analytics every 10 seconds
-    setInterval(() => this.loadAnalytics(), 10000);
+    // setInterval(() => this.loadAnalytics(), 10000);
   }
 
   loadAnalytics() {
