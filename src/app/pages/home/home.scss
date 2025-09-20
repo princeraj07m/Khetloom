@@ -45,23 +45,58 @@
 }
 
 .feature-card {
-  background: #f9fff9;
-  border-radius: 1rem;
-  padding: 2rem;
+  background: linear-gradient(135deg, #e0f7e8 0%, #c6f3d6 100%);
+  transition: box-shadow 0.35s, filter 0.35s;
   text-align: center;
-  box-shadow: 0 6px 22px #a5e7aa44;
-  transition: transform 0.25s, box-shadow 0.25s;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 6px 22px rgba(130, 210, 150, 0.25);
+  overflow: hidden; /* content overflow prevent */
+}
+/* Container hover triggers inner content zoom */
+.feature-card:hover {
+  box-shadow: 0 20px 50px rgba(72, 180, 97, 0.45);
+  filter: brightness(1.05);
+}
+.feature-card:hover .feature-icon {
+  transform: scale(1.15);
 }
 
-.feature-card i {
-  font-size: 2rem;
-  color: #4CAF50;
+.feature-card:hover h5 {
+  transform: scale(1.08);
+}
+
+.feature-card:hover p {
+  transform: scale(1.05);
+}
+
+/* Inner content wrapper */
+.feature-card > * {
+  transition: transform 0.35s;
+}
+
+.feature-card:hover > * {
+  transform: scale(1.08);
+}
+
+.feature-icon {
+  font-size: 2.8rem;
+  color: #28a745;
   margin-bottom: 0.8rem;
 }
 
-.feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 36px #86d09866;
+.feature-card h5 {
+  margin-top: 12px;
+  font-weight: 600;
+  color: #2e5832;
+  font-size: 1.2rem;
+}
+
+.feature-card p {
+  margin-top: 10px;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .hero-img-wrapper {
@@ -98,6 +133,27 @@
 .get-s-btn:hover {
   background-color: #4CAF50;
   color: white !important;
+}
+
+
+.impact-card {
+  background: rgba(245, 255, 240, 0.85);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.impact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(72, 180, 97, 0.3);
+}
+
+.impact-icon {
+  font-size: 2.5rem;
+  color: #28a745;
+  transition: transform 0.3s;
+}
+
+.impact-card:hover .impact-icon {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .testimonial-box {
