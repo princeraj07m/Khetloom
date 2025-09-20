@@ -1,0 +1,973 @@
+/* Plant Disease Detection - Advanced CSS with Animations */
+
+/* Root Variables - Light Green Theme */
+:root {
+  --primary-green: #28a745;
+  --light-green: #90EE90;
+  --pale-green: #98FB98;
+  --spring-green: #00FF7F;
+  --lime-green: #32CD32;
+  --forest-green: #228B22;
+  --dark-green: #006400;
+  --bg-light: #F0FFF0;
+  --bg-gradient-start: #F0FFF0;
+  --bg-gradient-mid: #E8F5E8;
+  --bg-gradient-end: #F5FFFA;
+  --shadow-color: rgba(40, 167, 69, 0.15);
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --animation-duration: 0.8s;
+  --bounce-duration: 1.2s;
+}
+
+/* Global Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--primary-green);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--primary-green), 0 0 30px var(--primary-green);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes flowing {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+/* Floating Particles Background */
+.floating-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.floating-particles .particle {
+  position: absolute;
+  background: radial-gradient(circle, var(--light-green) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-particles .particle:nth-child(1) {
+  width: 20px;
+  height: 20px;
+  left: 10%;
+  top: 20%;
+  animation-delay: 0s;
+  animation-duration: 8s;
+}
+
+.floating-particles .particle:nth-child(2) {
+  width: 15px;
+  height: 15px;
+  left: 70%;
+  top: 60%;
+  animation-delay: 2s;
+  animation-duration: 6s;
+}
+
+.floating-particles .particle:nth-child(3) {
+  width: 25px;
+  height: 25px;
+  left: 20%;
+  top: 80%;
+  animation-delay: 4s;
+  animation-duration: 10s;
+}
+
+.floating-particles .particle:nth-child(4) {
+  width: 18px;
+  height: 18px;
+  left: 90%;
+  top: 30%;
+  animation-delay: 1s;
+  animation-duration: 7s;
+}
+
+.floating-particles .particle:nth-child(5) {
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  top: 10%;
+  animation-delay: 3s;
+  animation-duration: 9s;
+}
+
+/* Container Animations */
+.animated-container {
+  animation: fadeInUp var(--animation-duration) ease-out;
+}
+
+/* Header Section */
+.animated-header {
+  animation: fadeInUp var(--animation-duration) ease-out;
+}
+
+.animated-title {
+  background: linear-gradient(45deg, var(--primary-green), var(--lime-green), var(--spring-green));
+  background-size: 200% 200%;
+  animation: flowing 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.plant-icon {
+  display: inline-block;
+  animation: bounce var(--bounce-duration) infinite;
+}
+
+.plant-icon:first-child {
+  animation-delay: 0s;
+}
+
+.plant-icon:last-child {
+  animation-delay: 0.6s;
+}
+
+.subtitle-text {
+  animation: fadeInUp var(--animation-duration) ease-out 0.3s both;
+}
+
+/* Statistics Cards */
+.stat-card {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(45deg, var(--light-green), var(--pale-green)) border-box;
+  animation: slideInLeft var(--animation-duration) ease-out;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px var(--shadow-color);
+  border-color: var(--primary-green);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  animation: pulse 2s infinite;
+}
+
+/* Workflow Section */
+.workflow-section {
+  padding: 2rem 0;
+  animation: fadeInUp var(--animation-duration) ease-out 0.5s both;
+}
+
+.workflow-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.workflow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.5;
+  transition: all 0.5s ease;
+  animation: fadeInUp var(--animation-duration) ease-out;
+}
+
+.workflow-step.active {
+  opacity: 1;
+}
+
+.workflow-step.completed {
+  opacity: 1;
+}
+
+.workflow-step.completed .step-circle {
+  background: linear-gradient(135deg, var(--primary-green), var(--lime-green));
+  box-shadow: 0 0 20px var(--primary-green);
+}
+
+.step-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+  border: 3px solid var(--light-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 1rem;
+  transition: all 0.5s ease;
+}
+
+.workflow-step.active .step-circle {
+  animation: glow 2s infinite;
+}
+
+.step-icon {
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+}
+
+.step-icon.spinning {
+  animation: spin 1s linear infinite;
+}
+
+.step-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--primary-green);
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+.workflow-step.active .step-pulse {
+  animation: pulse 2s infinite;
+}
+
+.step-content {
+  text-align: center;
+  max-width: 120px;
+}
+
+.step-content h5 {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.step-content p {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+/* Workflow Connectors */
+.workflow-connector {
+  position: relative;
+  height: 4px;
+  min-width: 80px;
+  margin: 0 1rem;
+  margin-top: 40px;
+}
+
+.flow-line {
+  height: 100%;
+  background: linear-gradient(90deg, #e9ecef 0%, #e9ecef 100%);
+  border-radius: 2px;
+  transition: all 0.5s ease;
+}
+
+.flow-line.flowing {
+  background: linear-gradient(90deg, 
+    var(--primary-green) 0%, 
+    var(--lime-green) 50%, 
+    var(--primary-green) 100%);
+  background-size: 200% 100%;
+  animation: flowing 2s linear infinite;
+}
+
+.flow-particles {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+}
+
+.flow-particles .particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--spring-green);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: float 2s ease-in-out infinite;
+}
+
+.flow-particles .particle:nth-child(1) {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.flow-particles .particle:nth-child(2) {
+  left: 50%;
+  animation-delay: 0.5s;
+}
+
+.flow-particles .particle:nth-child(3) {
+  left: 80%;
+  animation-delay: 1s;
+}
+
+/* Upload Section */
+.upload-card {
+  transition: all 0.3s ease;
+  animation: slideInLeft var(--animation-duration) ease-out 0.7s both;
+}
+
+.upload-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px var(--shadow-color);
+}
+
+.upload-zone {
+  border: 3px dashed var(--light-green);
+  border-radius: 15px;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, rgba(240, 255, 240, 0.3), rgba(245, 255, 250, 0.5));
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-zone::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--light-green), var(--pale-green), var(--spring-green));
+  border-radius: 15px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.upload-zone:hover::before {
+  opacity: 1;
+}
+
+.upload-zone:hover {
+  border-color: var(--primary-green);
+  background: linear-gradient(135deg, rgba(240, 255, 240, 0.6), rgba(245, 255, 250, 0.8));
+  transform: scale(1.02);
+}
+
+.upload-zone.dragover {
+  border-color: var(--spring-green);
+  background: linear-gradient(135deg, rgba(0, 255, 127, 0.2), rgba(50, 205, 50, 0.3));
+  transform: scale(1.05);
+}
+
+.upload-icon i {
+  animation: bounce var(--bounce-duration) infinite;
+}
+
+.upload-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sample Images */
+.sample-images-section {
+  animation: fadeInUp var(--animation-duration) ease-out 1s both;
+}
+
+.sample-card {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: white;
+}
+
+.sample-card:hover {
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 15px 30px var(--shadow-color);
+  border-color: var(--primary-green);
+}
+
+.sample-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 120px;
+}
+
+.sample-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.sample-card:hover .sample-image {
+  transform: scale(1.1);
+}
+
+.sample-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 0.5rem;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+.sample-card:hover .sample-overlay {
+  transform: translateY(0);
+}
+
+/* Analysis Section */
+.analysis-card {
+  animation: slideInRight var(--animation-duration) ease-out 0.7s both;
+}
+
+.preview-wrapper {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(40, 167, 69, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanning-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--spring-green), transparent);
+  animation: scanLine 2s linear infinite;
+}
+
+.scanning-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(40, 167, 69, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40, 167, 69, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: pulse 2s infinite;
+}
+
+.analyze-btn {
+  background: linear-gradient(135deg, var(--primary-green), var(--lime-green));
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.analyze-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.analyze-btn:hover::before {
+  left: 100%;
+}
+
+.analyze-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+.no-image-state {
+  animation: fadeInUp var(--animation-duration) ease-out;
+}
+
+.empty-state-icon i {
+  animation: pulse 2s infinite;
+}
+
+/* Results Section */
+.results-section {
+  animation: fadeInUp var(--animation-duration) ease-out;
+}
+
+.results-title {
+  animation: slideInLeft var(--animation-duration) ease-out;
+}
+
+.result-card {
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  animation: slideInRight var(--animation-duration) ease-out;
+  transform: translateX(50px);
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.result-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px var(--shadow-color);
+}
+
+/* Confidence Meter */
+.confidence-meter {
+  height: 12px;
+  background: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.confidence-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1s ease-out;
+  position: relative;
+  animation: progressFill 1.5s ease-out;
+}
+
+.confidence-fill.high-confidence {
+  background: linear-gradient(90deg, var(--primary-green), var(--lime-green));
+}
+
+.confidence-fill.medium-confidence {
+  background: linear-gradient(90deg, var(--warning-color), #ffd54f);
+}
+
+.confidence-fill.low-confidence {
+  background: linear-gradient(90deg, var(--danger-color), #ff7043);
+}
+
+.confidence-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: flowing 2s ease-in-out infinite;
+}
+
+/* Disease Information */
+.disease-info {
+  animation: fadeInUp var(--animation-duration) ease-out 0.5s both;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.info-item:hover {
+  background: rgba(40, 167, 69, 0.1);
+  transform: translateX(5px);
+}
+
+.info-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.severity-badge {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.severity-badge.high-severity {
+  background: linear-gradient(135deg, var(--danger-color), #ff7043);
+  color: white;
+}
+
+.severity-badge.medium-severity {
+  background: linear-gradient(135deg, var(--warning-color), #ffd54f);
+  color: #333;
+}
+
+.severity-badge.low-severity {
+  background: linear-gradient(135deg, var(--primary-green), var(--lime-green));
+  color: white;
+}
+
+/* Action Buttons */
+.action-buttons .btn {
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Summary Section */
+.summary-item {
+  transition: all 0.3s ease;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.summary-item:hover {
+  background: rgba(40, 167, 69, 0.1);
+  transform: translateY(-5px);
+}
+
+.summary-icon {
+  font-size: 2rem;
+  animation: bounce var(--bounce-duration) infinite;
+}
+
+/* No Results Section */
+.no-results-section {
+  animation: fadeInUp var(--animation-duration) ease-out;
+}
+
+.no-results-icon i {
+  animation: pulse 2s infinite;
+}
+
+.healthy-tips {
+  background: rgba(40, 167, 69, 0.05);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.healthy-tips ul li {
+  margin: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.healthy-tips ul li:hover {
+  transform: translateX(5px);
+  color: var(--primary-green);
+}
+
+/* Info Cards */
+.info-card {
+  transition: all 0.3s ease;
+  animation: fadeInUp var(--animation-duration) ease-out;
+}
+
+.info-card:nth-child(1) { animation-delay: 0.2s; }
+.info-card:nth-child(2) { animation-delay: 0.4s; }
+.info-card:nth-child(3) { animation-delay: 0.6s; }
+
+.info-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Step List */
+.step-list .step-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.step-list .step-item:hover {
+  background: rgba(40, 167, 69, 0.05);
+  transform: translateX(5px);
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-green), var(--lime-green));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.step-text {
+  flex: 1;
+}
+
+/* Tips List */
+.tips-list li {
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.tips-list li:hover {
+  background: rgba(255, 193, 7, 0.1);
+  transform: translateX(5px);
+}
+
+/* Disease List */
+.disease-list .disease-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.disease-list .disease-item:hover {
+  background: rgba(23, 162, 184, 0.1);
+  transform: translateX(5px);
+}
+
+.disease-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.disease-name {
+  font-weight: 500;
+}
+
+/* Modal Enhancements */
+.modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+  animation: slideInRight 0.5s ease-out;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--primary-green), var(--lime-green)) !important;
+}
+
+.detail-content {
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+/* Progress Bar Enhancements */
+.progress {
+  height: 8px;
+  border-radius: 10px;
+  background: #e9ecef;
+  overflow: hidden;
+}
+
+.progress-bar {
+  border-radius: 10px;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: flowing 2s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .workflow-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .workflow-connector {
+    width: 4px;
+    height: 50px;
+    min-width: auto;
+    margin: 1rem 0;
+  }
+
+  .flow-line.flowing {
+    background: linear-gradient(180deg, 
+      var(--primary-green) 0%, 
+      var(--lime-green) 50%, 
+      var(--primary-green) 100%);
+  }
+
+  .animated-title {
+    font-size: 2rem;
+  }
+
+  .step-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .step-icon {
+    font-size: 1.4rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .floating-particles,
+  .workflow-connector .flow-particles,
+  .preview-overlay {
+    display: none !important;
+  }
+
+  .card {
+    border: 1px solid #dee2e6 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-green: #0d7a00;
+    --light-green: #4CAF50;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .floating-particles,
+  .flow-particles,
+  .scanning-line,
+  .scanning-grid {
+    display: none !important;
+  }
+}

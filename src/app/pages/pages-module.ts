@@ -29,6 +29,8 @@ import { Jobs } from './jobs/jobs';
 import { HealthReports } from './health-reports/health-reports';
 import { Activities } from './activities/activities';
 import { WeatherCache } from './weather-cache/weather-cache';
+import { DiseaseDetectionComponent } from './disease-detection/disease-detection';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { WeatherCache } from './weather-cache/weather-cache';
     HealthReports,
     Activities,
     WeatherCache,
+    DiseaseDetectionComponent
   ],
   imports: [
     CommonModule,

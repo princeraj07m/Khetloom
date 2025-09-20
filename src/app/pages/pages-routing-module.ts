@@ -27,6 +27,7 @@ import { Jobs } from './jobs/jobs';
 import { HealthReports } from './health-reports/health-reports';
 import { Activities } from './activities/activities';
 import { WeatherCache } from './weather-cache/weather-cache';
+import { DiseaseDetectionComponent } from './disease-detection/disease-detection';
 const routes: Routes = [
   {
     path: '',
@@ -157,6 +158,11 @@ const routes: Routes = [
   {
     path: 'weather-cache',
     component: WeatherCache,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'disease-detection',
+    component: DiseaseDetectionComponent,
     canActivate: [AuthGuard]
   }
 ];
