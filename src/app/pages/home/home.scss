@@ -278,6 +278,60 @@
   line-height: 1.6;
 }
 
+.faq-section {
+  max-width: 900px;
+  margin: auto;
+
+  h2 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+  }
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.accordion-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 25px;
+  font-weight: 600;
+  background: #e6f8e6;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #2e5832;
+  transition: background 0.3s ease;
+}
+
+.accordion-content {
+  max-height: 0;
+  padding: 0 25px;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  background: #f0fff0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+input[type="checkbox"]:checked + .accordion-label + .accordion-content {
+  max-height: 250px;
+  padding: 15px 25px;
+}
+
+.accordion-icon {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + .accordion-label .accordion-icon {
+  transform: rotate(45deg);
+}
+
 .about-us .about-img {
   width: 100%;
   border-radius: 1.5rem;
@@ -302,7 +356,6 @@
   font-weight: 500;
   padding: 0.6rem 1.5rem;
 }
-
 
 .download-app {
   background: linear-gradient(135deg, #e8ffe8 0%, #c6f3d6 100%);
