@@ -10,6 +10,10 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
+  get currentUser(): User | null {
+    return this.currentUserSubject.value;
+  }
+
   constructor(
     private apiService: ApiService,
     private router: Router
@@ -85,6 +89,20 @@ export class AuthService {
   }
 
   getProfile(): Observable<AuthResponse> {
+    // Check if user is using demo login
+    const token = this.apiService.getToken();
+    if (token === 'demo-token-12345') {
+      // For demo users, return the current user data
+      return new Observable(observer => {
+        observer.next({
+          success: true,
+          message: 'Profile retrieved successfully (Demo Mode)',
+          user: this.currentUser || undefined
+        });
+        observer.complete();
+      });
+    }
+    
     return this.apiService.getProfile();
   }
 
@@ -121,6 +139,21 @@ export class AuthService {
 
   updateProfile(userData: User): Observable<AuthResponse> {
     return new Observable(observer => {
+      // Check if user is using demo login
+      const token = this.apiService.getToken();
+      if (token === 'demo-token-12345') {
+        // For demo users, just update the local user data
+        const updatedUser = { ...this.currentUser, ...userData };
+        this.currentUserSubject.next(updatedUser);
+        observer.next({
+          success: true,
+          message: 'Profile updated successfully (Demo Mode)',
+          user: updatedUser
+        });
+        observer.complete();
+        return;
+      }
+
       this.apiService.updateProfile(userData).subscribe({
         next: (response: AuthResponse) => {
           if (response.success && response.user) {

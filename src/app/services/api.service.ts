@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
 
 export interface User {
   _id?: string;
@@ -27,7 +26,96 @@ export interface User {
   fertilizerPreference?: string;
   monthlyExpenditure?: number;
   createdAt?: Date;
+  updatedAt?: Date;
   farmingExperience: string;
+
+  // Additional Profile Fields
+  profileImage?: string;
+
+  // Farm Details
+  soilType?: string;
+  irrigationType?: string;
+  lastHarvest?: Date | string;
+  nextPlanting?: Date | string;
+
+  // Equipment Details
+  maintenanceSchedule?: string;
+  lastService?: Date | string;
+  nextService?: Date | string;
+
+  // Pesticide Details
+  lastApplication?: Date | string;
+  nextApplication?: Date | string;
+  applicationMethod?: string;
+
+  // Subscription Info
+  subscription?: {
+    plan: string;
+    status: string;
+    price: number;
+    billingCycle: string;
+    renewsOn?: Date | string;
+    features: string[];
+  };
+
+  // Payment Details
+  paymentDetails?: {
+    cardType?: string;
+    lastFour?: string;
+    expires?: string;
+    billingAddress?: string;
+    paymentMethod?: string;
+  };
+
+  // Preferences
+  preferences?: {
+    language: string;
+    theme: string;
+    notifications: {
+      email: boolean;
+      sms: boolean;
+      inApp: boolean;
+      weather: boolean;
+      crop: boolean;
+      system: boolean;
+    };
+    measurementUnits: string;
+    timezone: string;
+    dateFormat: string;
+  };
+
+  // Security Settings
+  security?: {
+    twoFactorEnabled: boolean;
+    loginAlerts: boolean;
+    sessionTimeout: number;
+    passwordLastChanged?: Date | string;
+    lastLogin?: Date | string;
+    failedAttempts: number;
+    securityQuestions: Array<{
+      question: string;
+      answer: string;
+    }>;
+  };
+
+  // System Settings
+  systemSettings?: {
+    dataRetention: number;
+    backupFrequency: string;
+    lastBackup?: Date | string;
+    systemVersion: string;
+    storageUsed: string;
+    apiCallsToday: number;
+  };
+
+  // Integrations
+  integrations?: Array<{
+    id: string;
+    name: string;
+    status: string;
+    lastSync?: Date | string;
+    config?: any;
+  }>;
 }
 
 export interface LoginRequest {
@@ -79,14 +167,9 @@ export interface UsersResponse {
   providedIn: 'root'
 })
 export class ApiService {
-  // private readonly apiUrl = 'https://khetloom-backend.vercel.app/api';
   private readonly apiUrl = 'https://khetloom-backend.vercel.app/api';
 
-
-
-  constructor(private readonly http: HttpClient) {
-    // console.log('🔧 API Service initialized with URL:', this.apiUrl);
-  }
+  constructor(private readonly http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
@@ -99,39 +182,29 @@ export class ApiService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
 
-    // console.error('🚨 API Error Details:', {
-    //   status: error.status,
-    //   statusText: error.statusText,
-    //   url: error.url,
-    //   error: error.error,
-    //   message: error.message
-    // });
-
     if (error.error instanceof ErrorEvent) {
       // Client-side error
       errorMessage = `Client Error: ${error.error.message}`;
-    } else {
-      // Server-side error
-      if (error.error?.message) {
-        errorMessage = error.error.message;
-        // Add detailed validation errors if available
-        if (Array.isArray(error.error?.errors)) {
-          errorMessage += ': ' + error.error.errors.join(', ');
-        }
-      } else if (error.status === 0) {
-        errorMessage = 'Unable to connect to server. Please check your internet connection and try again.';
-      } else if (error.status === 400) {
-        errorMessage = 'Bad Request: Please check your input data.';
-        if (error.error?.errors) {
-          errorMessage += ' Errors: ' + JSON.stringify(error.error.errors);
-        }
-      } else if (error.status === 401) {
-        errorMessage = 'Invalid email or password. Please try again.';
-      } else if (error.status === 500) {
-        errorMessage = 'Server error. Please try again later.';
-      } else {
-        errorMessage = `Error Code: ${error.status} - ${error.statusText}`;
+    } else if (error.error?.message) {
+      // Server-side error with message
+      errorMessage = error.error.message;
+      // Add detailed validation errors if available
+      if (Array.isArray(error.error?.errors)) {
+        errorMessage += ': ' + error.error.errors.join(', ');
       }
+    } else if (error.status === 0) {
+      errorMessage = 'Unable to connect to server. Please check your internet connection and try again.';
+    } else if (error.status === 400) {
+      errorMessage = 'Bad Request: Please check your input data.';
+      if (error.error?.errors) {
+        errorMessage += ' Errors: ' + JSON.stringify(error.error.errors);
+      }
+    } else if (error.status === 401) {
+      errorMessage = 'Invalid email or password. Please try again.';
+    } else if (error.status === 500) {
+      errorMessage = 'Server error. Please try again later.';
+    } else {
+      errorMessage = `Error Code: ${error.status} - ${error.statusText}`;
     }
 
     return throwError(() => new Error(errorMessage));
@@ -139,15 +212,10 @@ export class ApiService {
 
   // Authentication methods
   login(credentials: LoginRequest): Observable<AuthResponse> {
-    // console.log('🔐 API Service: Attempting login with API URL:', `${this.apiUrl}/login`);
-    // console.log('📧 API Service: Login credentials:', credentials);
-
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
       .pipe(
         tap(response => {
-          // console.log('📨 API Service: Raw response received:', response);
-          // console.log('📊 API Service: Response type:', typeof response);
-          // console.log('📊 API Service: Response keys:', Object.keys(response || {}));
+          // Response handling can be added here if needed
         }),
         catchError(this.handleError)
       );
@@ -165,6 +233,109 @@ export class ApiService {
 
   updateProfile(userData: User): Observable<AuthResponse> {
     return this.http.put<AuthResponse>(`${this.apiUrl}/profile`, userData, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Profile section-specific updates
+  updateSubscription(subscriptionData: any): Observable<AuthResponse> {
+    const token = this.getToken();
+    if (token === 'demo-token-12345') {
+      return new Observable(observer => {
+        observer.next({
+          success: true,
+          message: 'Subscription updated successfully (Demo Mode)',
+          user: undefined
+        });
+        observer.complete();
+      });
+    }
+    
+    return this.http.put<AuthResponse>(`${this.apiUrl}/profile/subscription`, subscriptionData, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  updatePreferences(preferencesData: any): Observable<AuthResponse> {
+    const token = this.getToken();
+    if (token === 'demo-token-12345') {
+      return new Observable(observer => {
+        observer.next({
+          success: true,
+          message: 'Preferences updated successfully (Demo Mode)',
+          user: undefined
+        });
+        observer.complete();
+      });
+    }
+    
+    return this.http.put<AuthResponse>(`${this.apiUrl}/profile/preferences`, preferencesData, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  updateSecurity(securityData: any): Observable<AuthResponse> {
+    const token = this.getToken();
+    if (token === 'demo-token-12345') {
+      return new Observable(observer => {
+        observer.next({
+          success: true,
+          message: 'Security settings updated successfully (Demo Mode)',
+          user: undefined
+        });
+        observer.complete();
+      });
+    }
+    
+    return this.http.put<AuthResponse>(`${this.apiUrl}/profile/security`, securityData, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  updatePayment(paymentData: any): Observable<AuthResponse> {
+    const token = this.getToken();
+    if (token === 'demo-token-12345') {
+      return new Observable(observer => {
+        observer.next({
+          success: true,
+          message: 'Payment details updated successfully (Demo Mode)',
+          user: undefined
+        });
+        observer.complete();
+      });
+    }
+    
+    return this.http.put<AuthResponse>(`${this.apiUrl}/profile/payment`, paymentData, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  updateIntegrations(integrationsData: any): Observable<AuthResponse> {
+    const token = this.getToken();
+    if (token === 'demo-token-12345') {
+      return new Observable(observer => {
+        observer.next({
+          success: true,
+          message: 'Integrations updated successfully (Demo Mode)',
+          user: undefined
+        });
+        observer.complete();
+      });
+    }
+    
+    return this.http.put<AuthResponse>(`${this.apiUrl}/profile/integrations`, integrationsData, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  updateProfileImage(imageUrl: string): Observable<AuthResponse> {
+    const token = this.getToken();
+    if (token === 'demo-token-12345') {
+      return new Observable(observer => {
+        observer.next({
+          success: true,
+          message: 'Profile image updated successfully (Demo Mode)',
+          user: undefined
+        });
+        observer.complete();
+      });
+    }
+    
+    return this.http.post<AuthResponse>(`${this.apiUrl}/profile/image`, { imageUrl }, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
