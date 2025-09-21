@@ -61,9 +61,9 @@
 
               <div class="col-12">
                 <div class="alert"
-                     [ngClass]="botStatus.is_moving ? 'alert-warning' : 'alert-success'">
-                  <i [class]="botStatus.is_moving ? 'bi bi-arrow-right' : 'bi bi-stop-circle'"></i>
-                  {{botStatus.is_moving ? 'Moving...' : 'Idle'}}
+                     [ngClass]="botStatus.isMoving ? 'alert-warning' : 'alert-success'">
+                  <i [class]="botStatus.isMoving ? 'bi bi-arrow-right' : 'bi bi-stop-circle'"></i>
+                  {{botStatus.isMoving ? 'Moving...' : 'Idle'}}
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@
 
               <button class="btn btn-danger"
                       (click)="emergencyStop()"
-                      [disabled]="!botStatus.is_moving">
+                      [disabled]="!botStatus.isMoving">
                 <i class="bi bi-stop-circle"></i>
                 Emergency Stop
               </button>

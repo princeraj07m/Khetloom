@@ -13,8 +13,7 @@ export class Dashboard implements OnInit {
    y: 0, 
    battery: 100, 
    fertilizer_level: 100, 
-   is_moving: false, 
-   last_updated: '',
+   status: 'idle',
    isMoving: false,
    lastUpdate: new Date().toISOString()
  };

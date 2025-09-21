@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BotService, Analytic, Plant, LogEntry } from '../../services/bot.services';
-import { BotStatus } from '../../services/bot.services';
+import { BotStatus } from '../../models/bot.models';
 @Component({
   selector: 'app-settings',
   standalone: false,
@@ -14,8 +14,7 @@ export class Settings implements OnInit{
    y: 0, 
    battery: 100, 
    fertilizer_level: 100, 
-   is_moving: false, 
-   last_updated: '',
+   status: 'idle',
    isMoving: false,
    lastUpdate: new Date().toISOString()
  };

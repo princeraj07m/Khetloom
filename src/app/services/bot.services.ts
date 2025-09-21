@@ -5,12 +5,12 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface BotStatus {
+  _id?: string;
   x: number;
   y: number;
   battery: number;
   fertilizer_level: number;
-  is_moving: boolean;
-  last_updated: string;
+  status: 'idle' | 'moving' | 'watering' | 'fertilizing' | 'scanning' | 'charging' | 'error';
   isMoving: boolean;
   lastUpdate: string;
 }
@@ -58,8 +58,7 @@ export class BotService {
     y: 0, 
     battery: 100, 
     fertilizer_level: 100, 
-    is_moving: false, 
-    last_updated: '',
+    status: 'idle', 
     isMoving: false,
     lastUpdate: new Date().toISOString()
   });
@@ -130,14 +129,14 @@ export class BotService {
   getBotStatus(): Observable<BotStatus> {
     return this.http.get<any>(`${this.baseUrl}/bot/status`).pipe(
       map((data: any) => ({
+        _id: data._id,
         x: data.x || 0,
         y: data.y || 0,
         battery: data.battery || 100,
         fertilizer_level: data.fertilizer_level || 100,
-        is_moving: data.is_moving || false,
-        last_updated: data.last_updated || new Date().toISOString(),
-        isMoving: data.is_moving || false,
-        lastUpdate: data.last_updated || new Date().toISOString()
+        status: data.status || 'idle',
+        isMoving: data.isMoving || false,
+        lastUpdate: data.lastUpdate || new Date().toISOString()
       }))
     );
   }
