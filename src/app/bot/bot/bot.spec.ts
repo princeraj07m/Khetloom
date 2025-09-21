@@ -8,7 +8,7 @@ describe('Bot', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Bot]
+      imports: [Bot]
     })
     .compileComponents();
 

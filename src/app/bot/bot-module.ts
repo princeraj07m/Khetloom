@@ -1,28 +1,22 @@
 import { NgModule } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { BotRoutingModule } from './bot-routing-module';
 import { Dashboard } from './dashboard/dashboard';
-import { Bot } from './bot/bot';
 import { FieldOverview } from './field-overview/field-overview';
 import { BotControl } from './bot-control/bot-control';
 import { PlantDetails } from './plant-details/plant-details';
 import { Analytics } from './analytics/analytics';
 import { Logs } from './logs/logs';
 import { Settings } from './settings/settings';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { SharedModule } from "../shared/shared-module";
 import { HelpSupport } from './help-support/help-support';
 import { About } from './about/about';
+import { SharedModule } from "../shared/shared-module";
 
 @NgModule({
   declarations: [
     Dashboard,
-    Bot,
     FieldOverview,
     BotControl,
     PlantDetails,
@@ -36,7 +30,7 @@ import { About } from './about/about';
     CommonModule,
     BotRoutingModule,
     FormsModule,
-    SharedModule
-]
+    SharedModule,
+  ]
 })
 export class BotModule { }

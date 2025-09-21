@@ -20,7 +20,7 @@
               <h4>{{botStatus.x}}, {{botStatus.y}}</h4>
               <p class="card-text">
                 <i class="bi bi-activity"></i>
-                {{botStatus.is_moving ? 'Moving...' : 'Idle'}}
+                 {{botStatus.isMoving ? 'Moving...' : 'Idle'}}
               </p>
             </div>
             <i class="bi bi-robot fs-1 opacity-75 float-icon"></i>
@@ -137,7 +137,7 @@
             <div class="d-grid gap-2">
               <button class="btn btn-primary btn-sm"
                       (click)="emergencyStop()"
-                      [disabled]="!botStatus.is_moving">
+                       [disabled]="!botStatus.isMoving">
                 <i class="bi bi-stop-circle"></i>
                 Emergency Stop
               </button>

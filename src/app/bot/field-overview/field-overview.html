@@ -24,8 +24,8 @@
                 Bot: ({{botStatus.x}}, {{botStatus.y}})
               </span>
               <span class="badge"
-                    [ngClass]="botStatus.is_moving ? 'bg-warning' : 'bg-success'">
-                {{botStatus.is_moving ? 'Moving' : 'Idle'}}
+                    [ngClass]="botStatus.isMoving ? 'bg-warning' : 'bg-success'">
+                {{botStatus.isMoving ? 'Moving' : 'Idle'}}
               </span>
             </div>
           </div>

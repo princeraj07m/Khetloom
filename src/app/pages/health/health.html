@@ -1,41 +1,106 @@
+<!-- Plant Health -->
+<section>
+  <div class="container-fluid d-flex justify-content-center align-items-center my-5" style="min-height: 100vh;">
+    <div class="plant-screen p-4 container">
+      <h5 class="fw-bold mb-4 text-success">← Plant Health</h5>
 
-
-  <!-- Plant Health -->
-  <section>
-    <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-      <div class="plant-screen p-3 container">
-        <h5 class="fw-bold mb-3">← Plant Health</h5>
-
-        <div class="plant-card d-flex align-items-center">
-          <img src="https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/english/wall-2018-whatareplantsmp4.transform/content-tile-large/image.png" class="plant-img">
-          <div class="flex-grow-1 ms-3">
-            <h6>Plant ID: 001 <span class="badge bg-success">Healthy</span></h6>
-            <small>Location: Field A | Last Spray: 2024-05-20</small><br>
-            <span class="text-muted small">Low Infection</span>
-          </div>
-          <button class="btn spray-btn">Spray Now</button>
+      <!-- Plant Cards -->
+      <div class="plant-card d-flex align-items-center">
+        <img src="https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/english/wall-2018-whatareplantsmp4.transform/content-tile-large/image.png" class="plant-img">
+        <div class="flex-grow-1 ms-3">
+          <h6 class="fw-bold">Plant ID: 001 <span class="badge bg-success">Healthy</span></h6>
+          <small class="text-muted">📍 Field A | Last Spray: 2024-05-20</small><br>
+          <span class="small text-success">✔ Low Infection</span>
         </div>
+        <button class="btn spray-btn">Spray Now</button>
+      </div>
 
-        <div class="plant-card d-flex align-items-center">
-          <img src="https://m.media-amazon.com/images/I/51tnH63nnhL._UF1000,1000_QL80_.jpg" class="plant-img">
-          <div class="flex-grow-1 ms-3">
-            <h6>Plant ID: 002 <span class="badge bg-warning text-dark">At Risk</span></h6>
-            <small>Location: Field B | Last Spray: 2024-05-18</small><br>
-            <span class="text-muted small">Medium Infection</span>
-          </div>
-          <button class="btn spray-btn">Spray Now</button>
+      <div class="plant-card d-flex align-items-center">
+        <img src="https://m.media-amazon.com/images/I/51tnH63nnhL._UF1000,1000_QL80_.jpg" class="plant-img">
+        <div class="flex-grow-1 ms-3">
+          <h6 class="fw-bold">Plant ID: 002 <span class="badge bg-warning text-dark">At Risk</span></h6>
+          <small class="text-muted">📍 Field B | Last Spray: 2024-05-18</small><br>
+          <span class="small text-warning">⚠ Medium Infection</span>
         </div>
+        <button class="btn spray-btn">Spray Now</button>
+      </div>
 
-        <div class="plant-card d-flex align-items-center">
-          <img src="https://t4.ftcdn.net/jpg/11/25/96/23/360_F_1125962371_D8BU9ZpTBMTihboBGctD9Y6ChtWUNXy1.jpg" class="plant-img">
-          <div class="flex-grow-1 ms-3">
-            <h6>Plant ID: 003 <span class="badge bg-danger">Infected</span></h6>
-            <small>Location: Field C | Last Spray: 2024-05-15</small><br>
-            <span class="text-muted small">High Infection</span>
+      <div class="plant-card d-flex align-items-center">
+        <img src="https://t4.ftcdn.net/jpg/11/25/96/23/360_F_1125962371_D8BU9ZpTBMTihboBGctD9Y6ChtWUNXy1.jpg" class="plant-img">
+        <div class="flex-grow-1 ms-3">
+          <h6 class="fw-bold">Plant ID: 003 <span class="badge bg-danger">Infected</span></h6>
+          <small class="text-muted">📍 Field C | Last Spray: 2024-05-15</small><br>
+          <span class="small text-danger">❌ High Infection</span>
+        </div>
+        <button class="btn spray-btn">Spray Now</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="row text-center mt-5">
+        <div class="col-md-4">
+          <div class="status-card">
+            <h6 class="status-title">Total Plants</h6>
+            <h3 class="fw-bold">120</h3>
           </div>
-          <button class="btn spray-btn">Spray Now</button>
+        </div>
+        <div class="col-md-4">
+          <div class="status-card">
+            <h6 class="status-title">Healthy</h6>
+            <h3 class="fw-bold text-success">95</h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="status-card">
+            <h6 class="status-title">Infected</h6>
+            <h3 class="fw-bold text-danger">25</h3>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
+      <!-- Alerts -->
+      <div class="mt-4">
+        <div class="alert alert-warning rounded-3 shadow-sm">
+          <strong>⚠ Alert:</strong> Plant ID 002 shows medium infection. Recommended spray within 24 hours.
+        </div>
+        <div class="alert alert-info rounded-3 shadow-sm">
+          <strong>💡 Tip:</strong> Weather forecast indicates rain. Delay spraying for 2 days.
+        </div>
+      </div>
+
+      <!-- Spray History -->
+      <div class="mt-5">
+        <h6 class="fw-bold mb-3">🧾 Recent Spray History</h6>
+        <table class="table table-bordered table-hover small shadow-sm">
+          <thead class="table-success">
+            <tr>
+              <th>Plant ID</th>
+              <th>Date</th>
+              <th>Spray Type</th>
+              <th>Applied By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>2025-09-20</td>
+              <td>Fungicide</td>
+              <td>Drone #2</td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>2025-09-18</td>
+              <td>Pesticide</td>
+              <td>Drone #1</td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>2025-09-15</td>
+              <td>Fungicide</td>
+              <td>Drone #3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
