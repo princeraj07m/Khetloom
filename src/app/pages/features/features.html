@@ -4,7 +4,8 @@
     <div class="col-12 col-lg-10">
       <div class="card p-4 shadow-sm">
         <h2 class="text-center mb-4">{{ pageTitle }}</h2>
-        <div class="row g-4">
+        <hr className="text-gray-400 my-5" />
+        <div class="row g-4 py-2">
           <div class="col-md-6 col-lg-4" *ngFor="let feature of featuresList">
             <div class="feature-card">
               <i [class]="feature.icon + ' feature-icon'"></i>

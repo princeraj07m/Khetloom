@@ -1,60 +1,77 @@
-.feature-card {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 15px;
-  padding: 25px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* Animation ke liye base setup */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+.feature-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  padding: 30px 25px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  height: 100%;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(40, 167, 69, 0.15);
+  position: relative;
+  overflow: hidden;
+
+  /* Animation entry */
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Staggered delay (1st card 0s, 2nd 0.2s, etc.) */
+.feature-card:nth-child(1) { animation-delay: 0s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.4s; }
+.feature-card:nth-child(4) { animation-delay: 0.6s; }
+
+/* Hover effect */
 .feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(40, 167, 69, 0.25);
+}
+//
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(40,167,69,0.12), transparent 70%);
+  transform: rotate(25deg);
 }
 
 .feature-icon {
   font-size: 3rem;
-  color: #28a745; /* Green color from profile.scss */
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  color: #28a745;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  color: #28a700;
+  transform: scale(1.15);
 }
 
 .feature-card h3 {
-  color: #333;
-  margin-bottom: 10px;
-  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  color: #222;
 }
 
 .feature-card p {
-  color: #666;
+  color: #555;
   font-size: 1rem;
   line-height: 1.6;
-}
-
-/* Inherit body styles from profile.scss for consistent theme */
-body {
-  background: linear-gradient(45deg, #f3ec78, #af4261); /* Example gradient */
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-}
-
-.container {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.card {
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border: 1px solid #fff;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-h2 {
-  color: #28a745;
-  font-weight: bold;
 }
