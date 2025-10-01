@@ -54,6 +54,7 @@ export class Setting implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadUserData();
     this.loadSettings();
+    this.applyTheme();
   }
 
   ngOnDestroy(): void {
@@ -163,7 +164,7 @@ export class Setting implements OnInit, OnDestroy {
       this.toastService.show('Password must be at least 6 characters!', 'error');
       return;
     }
-    
+
     this.loaderService.show();
     // Simulate API call
     setTimeout(() => {
@@ -180,7 +181,7 @@ export class Setting implements OnInit, OnDestroy {
       this.toastService.show('Please enter a valid email address!', 'error');
       return;
     }
-    
+
     this.loaderService.show();
     // Simulate API call
     setTimeout(() => {
@@ -200,8 +201,8 @@ export class Setting implements OnInit, OnDestroy {
 
   calculateCoverage(): void {
     // Coverage = (Flow Rate * Speed * 60) / (Pressure * Nozzle Size)
-    this.sprayerData.calculatedCoverage = 
-      (this.sprayerData.flowRate * this.sprayerData.speed * 60) / 
+    this.sprayerData.calculatedCoverage =
+      (this.sprayerData.flowRate * this.sprayerData.speed * 60) /
       (this.sprayerData.pressure * this.sprayerData.nozzleSize);
   }
 
@@ -243,16 +244,16 @@ export class Setting implements OnInit, OnDestroy {
       timestamp: new Date().toISOString(),
       version: '1.0.0'
     };
-    
+
     const dataStr = JSON.stringify(exportData, null, 2);
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(dataBlob);
-    
+
     const link = document.createElement('a');
     link.href = url;
     link.download = `khetloom-settings-${new Date().toISOString().split('T')[0]}.json`;
     link.click();
-    
+
     URL.revokeObjectURL(url);
     this.toastService.show('Settings exported successfully!', 'success');
   }
@@ -269,7 +270,7 @@ export class Setting implements OnInit, OnDestroy {
 
   // App preferences
   toggleNotification(type: string): void {
-    this.settings.notifications[type as keyof typeof this.settings.notifications] = 
+    this.settings.notifications[type as keyof typeof this.settings.notifications] =
       !this.settings.notifications[type as keyof typeof this.settings.notifications];
     this.saveSettings();
     this.toastService.show(`${type} notifications ${this.settings.notifications[type as keyof typeof this.settings.notifications] ? 'enabled' : 'disabled'}`, 'success');
@@ -288,6 +289,15 @@ export class Setting implements OnInit, OnDestroy {
   toggleTheme(): void {
     this.settings.theme = this.settings.theme === 'light' ? 'dark' : 'light';
     this.saveSettings();
+    this.applyTheme();
     this.toastService.show(`Theme changed to ${this.settings.theme}`, 'success');
+  }
+
+  private applyTheme(): void {
+    if (this.settings.theme === 'dark') {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
   }
 }
