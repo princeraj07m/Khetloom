@@ -30,6 +30,9 @@ import { HealthReports } from './health-reports/health-reports';
 import { Activities } from './activities/activities';
 import { WeatherCache } from './weather-cache/weather-cache';
 import { DiseaseDetectionComponent } from './disease-detection/disease-detection';
+import { CropDetail } from './crop-detail/crop-detail';
+import { FieldDetail } from './field-detail/field-detail';
+import { JobDetail } from './job-detail/job-detail';
 
 
 @NgModule({
@@ -59,7 +62,10 @@ import { DiseaseDetectionComponent } from './disease-detection/disease-detection
     HealthReports,
     Activities,
     WeatherCache,
-    DiseaseDetectionComponent
+    DiseaseDetectionComponent,
+    CropDetail,
+    FieldDetail,
+    JobDetail
   ],
   imports: [
     CommonModule,

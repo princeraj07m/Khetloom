@@ -21,7 +21,7 @@
   <!-- Field Cards -->
   <div class="row g-5" *ngIf="!isLoading && fields.length > 0">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" *ngFor="let f of fields">
-      <div class="card themed-card">
+      <div class="card themed-card cursor-pointer" (click)="viewFieldDetail(f)">
         <div class="content d-flex flex-column h-100">
           <!-- Field Name -->
           <p class="heading">{{ f.name }}</p>
@@ -38,7 +38,7 @@
             <!-- <button class="btn btn-sm btn-outline-primary flex-grow-1" (click)="openEditField(f)">
               <i class="bi bi-pencil-square"></i> Edit
             </button>                                          -->
-            <button class="animated-button edit-crop" (click)="openEditField(f)">
+            <button class="animated-button edit-crop" (click)="openEditField(f); $event.stopPropagation()">
               <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
@@ -59,7 +59,7 @@
             </button> -->
 
 
-            <button class="animated-button edit-crop" (click)="removeField(f)">
+            <button class="animated-button edit-crop" (click)="removeField(f); $event.stopPropagation()">
               <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">

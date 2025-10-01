@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { ToastService } from '../../services/toast.service';
 declare var bootstrap: any;
@@ -27,7 +28,7 @@ export class Jobs implements OnInit {
 
   modal: any;
 
-  constructor(private api: ApiService, private toast: ToastService) {}
+  constructor(private api: ApiService, private toast: ToastService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadJobs();
@@ -120,5 +121,12 @@ loadJobs(): void {
     this.isEditing = false;
     this.currentId = null;
     this.form = { type: '', status: 'scheduled', scheduledAt: '', fieldId: '', notes: '' };
+  }
+
+  viewJobDetail(job: any): void {
+    const jobId = job._id || job.id;
+    if (jobId) {
+      this.router.navigate(['/job-detail', jobId]);
+    }
   }
 }

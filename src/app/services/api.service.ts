@@ -424,6 +424,11 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
+  getField(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/fields/${id}`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
   deleteField(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/fields/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
@@ -445,6 +450,11 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
+  getCrop(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/crops/${id}`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
   deleteCrop(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/crops/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
@@ -463,6 +473,11 @@ export class ApiService {
 
   updateJob(id: string, payload: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/jobs/${id}`, payload, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  getJob(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/jobs/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 

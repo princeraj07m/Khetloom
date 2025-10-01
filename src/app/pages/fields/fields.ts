@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { ToastService } from '../../services/toast.service';
 declare var bootstrap: any;
@@ -26,7 +27,7 @@ export class Fields implements OnInit {
 
   modal: any; // Bootstrap modal instance
 
-  constructor(private api: ApiService, private toast: ToastService) {}
+  constructor(private api: ApiService, private toast: ToastService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadFields();
@@ -108,5 +109,12 @@ export class Fields implements OnInit {
     this.isEditing = false;
     this.currentId = null;
     this.form = { name: '', crop: '', location: '', area: null, notes: '' };
+  }
+
+  viewFieldDetail(field: any): void {
+    const fieldId = field._id || field.id;
+    if (fieldId) {
+      this.router.navigate(['/field-detail', fieldId]);
+    }
   }
 }

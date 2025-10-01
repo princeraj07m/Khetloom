@@ -28,6 +28,9 @@ import { HealthReports } from './health-reports/health-reports';
 import { Activities } from './activities/activities';
 import { WeatherCache } from './weather-cache/weather-cache';
 import { DiseaseDetectionComponent } from './disease-detection/disease-detection';
+import { CropDetail } from './crop-detail/crop-detail';
+import { FieldDetail } from './field-detail/field-detail';
+import { JobDetail } from './job-detail/job-detail';
 const routes: Routes = [
   {
     path: '',
@@ -163,6 +166,21 @@ const routes: Routes = [
   {
     path: 'disease-detection',
     component: DiseaseDetectionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'crop-detail/:id',
+    component: CropDetail,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'field-detail/:id',
+    component: FieldDetail,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'job-detail/:id',
+    component: JobDetail,
     canActivate: [AuthGuard]
   }
 ];
