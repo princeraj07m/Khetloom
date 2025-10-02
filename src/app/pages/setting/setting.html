@@ -18,9 +18,8 @@
 
 <body>
 
-  <!-- PHONE SHELL (centers on desktop so it looks like a mobile app) -->
-  <div class="mobile-shell" id="theme-container">
-    <section class="settings-screen">
+  <div class="mobile-shell py-3" id="theme-container">
+    <div class="settings-screen">
 
       <!-- Header -->
       <div class="settings-header d-flex align-items-center gap-2">
@@ -30,10 +29,10 @@
         <h5 class="mb-0">Settings</h5>
       </div>
 
-      <!-- layout grid: left = main content, right = side panel (farm info) -->
+      <!-- Responsive Grid -->
       <div class="settings-grid">
 
-        <!-- LEFT: Main settings content (keeps original order & bindings) -->
+        <!-- Main Content -->
         <div class="settings-left">
 
           <!-- Farmer Profile -->
@@ -197,27 +196,27 @@
 
       </div> <!-- .settings-grid -->
 
-    </section>
+    </div> <!-- .settings-screen -->
 
     <!-- Bottom Tab Bar -->
     <nav class="bottom-tabs">
-      <a href="#" class="tab" (click)="navigateTo('/dashboard')">
+      <a routerLink="/dashboard" class="tab">
         <i class="bi bi-house"></i>
         <span>Dashboard</span>
       </a>
-      <a href="#" class="tab" (click)="navigateTo('/health')">
+      <a routerLink="/health" class="tab">
         <i class="bi bi-activity"></i>
         <span>Plant Health</span>
       </a>
-      <a href="#" class="tab" (click)="navigateTo('/sprayer')">
+      <a routerLink="/sprayer" class="tab">
         <i class="fa-solid fa-spray-can-sparkles"></i>
         <span>Sprayer</span>
       </a>
-      <a href="#" class="tab" (click)="navigateTo('/analytics')">
+      <a routerLink="/analytics" class="tab">
         <i class="bi bi-bar-chart"></i>
         <span>Analytics</span>
       </a>
-      <a href="#" class="tab active">
+      <a routerLink="/setting" class="tab">
         <i class="bi bi-gear"></i>
         <span>Settings</span>
       </a>
