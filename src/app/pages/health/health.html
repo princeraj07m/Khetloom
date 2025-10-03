@@ -3,7 +3,8 @@
   <div class="container-fluid d-flex justify-content-center align-items-center my-5" style="min-height: 100vh;">
     <div class="plant-screen p-4 container">
       <h5 class="fw-bold mb-4 text-success">← Plant Health</h5>
-      <!-- Plant Cards -->
+
+      <!-- 🌿 Plant Cards -->
       <div class="plant-card d-flex align-items-center">
         <img src="https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/english/wall-2018-whatareplantsmp4.transform/content-tile-large/image.png" class="plant-img">
         <div class="flex-grow-1 ms-3">
@@ -31,7 +32,8 @@
         </div>
         <button class="btn spray-btn">Spray Now</button>
       </div>
-      <!-- Stats -->
+
+      <!-- 📊 Stats -->
       <div class="row text-center mt-5">
         <div class="col-md-4">
           <div class="status-card">
@@ -52,7 +54,8 @@
           </div>
         </div>
       </div>
-      <!-- Alerts -->
+
+      <!-- ⚠ Alerts -->
       <div class="mt-4">
         <div class="alert alert-warning rounded-3 shadow-sm">
           <strong>⚠ Alert:</strong> Plant ID 002 shows medium infection. Recommended spray within 24 hours.
@@ -61,7 +64,8 @@
           <strong>💡 Tip:</strong> Weather forecast indicates rain. Delay spraying for 2 days.
         </div>
       </div>
-      <!-- Spray History -->
+
+      <!-- 🧾 Spray History -->
       <div class="mt-5">
         <h6 class="fw-bold mb-3">🧾 Recent Spray History</h6>
         <table class="table table-bordered table-hover small shadow-sm">
@@ -95,6 +99,38 @@
           </tbody>
         </table>
       </div>
+
+      <!-- 📈 Disease Trends -->
+      <div class="mt-5">
+        <div class="trend-card">
+          <h6 class="fw-bold mb-3">📈 Disease Trends</h6>
+          <p class="text-muted small">Infection rate observed over the past 7 days:</p>
+          <div class="animated-bar success" style="--percent:70%">Healthy <span>70%</span></div>
+          <div class="animated-bar warning" style="--percent:20%">At Risk <span>20%</span></div>
+          <div class="animated-bar danger" style="--percent:10%">Infected <span>10%</span></div>
+        </div>
+      </div>
+
+      <!-- 💧 Spray Effectiveness -->
+      <div class="mt-4">
+        <div class="trend-card">
+          <h6 class="fw-bold mb-3">💧 Spray Effectiveness</h6>
+          <p class="text-muted small">Last spray success rate:</p>
+          <div class="circle-progress" data-value="85">
+            <span class="circle-text">85%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🌦 Weather Forecast -->
+      <div class="mt-4">
+        <div class="weather-card">
+          <h6 class="fw-bold mb-2">🌦 Weather Forecast</h6>
+          <p class="mb-1">Next 3 days: 🌧 Rain expected</p>
+          <p class="small text-muted">Recommendation: Avoid spraying during rainfall</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
