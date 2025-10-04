@@ -1,6 +1,3 @@
-/* field-layout-page.scss
-   Paste into component SCSS (Angular component). Uses SCSS variables & nesting.
-*/
 
 $bg-top: #f6fffa;
 $bg-bottom: #eefaf0;
@@ -32,7 +29,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
     letter-spacing: -0.2px;
   }
 
-  /* ---------------- Map Card Styling ---------------- */
   .map-row {
     .card {
       border-radius: 14px;
@@ -78,14 +74,13 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
 
       .card-body {
         padding: 0;
-        height: 460px; // default height for google map component
+        height: 460px;
         position: relative;
 
         @media (max-width: 768px) {
           height: 320px;
         }
 
-        // Keep user's global/leaflet selectors (they used :global earlier) — helpful for map child elements
         :global(.leaflet-container) {
           width: 100% !important;
           height: 100% !important;
@@ -135,7 +130,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
     }
   }
 
-  /* ---------------- Field Grid ---------------- */
   .field-grid {
     padding: 18px;
     background: linear-gradient(180deg, #ffffff 0%, #f7fff7 100%);
@@ -146,7 +140,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
     position: relative;
     z-index: 2;
 
-    // decorative glow circle
     &::after {
       content: "";
       position: absolute;
@@ -253,7 +246,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
       }
     }
 
-    // Healthy style
     .plant-healthy {
       &::before {
         background: linear-gradient(135deg, $green-600, $green-400 70%);
@@ -265,7 +257,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
       animation: healthyPulse 700ms cubic-bezier(.2,.9,.3,1) both;
     }
 
-    // Defected style
     .plant-defected {
       &::before {
         background: linear-gradient(135deg, $danger-500, #ff7a59 70%);
@@ -278,7 +269,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
       animation: defectWiggle 900ms cubic-bezier(.2,.9,.3,1) both;
     }
 
-    // Empty cell
     .empty-cell {
       border-radius: 10px;
       background: linear-gradient(180deg, #fbfbfb 0%, #f1f1f1 100%);
@@ -308,9 +298,8 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
         box-shadow: 0 10px 26px rgba(14,34,20,0.06);
       }
     }
-  } // .field-grid
+  }
 
-  /* Legend & Quick Actions styling */
   .legend-actions {
     display: flex;
     align-items: center;
@@ -363,7 +352,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
     }
   }
 
-  /* ---------------- Animations ---------------- */
   @keyframes cardIn {
     0% { transform: translateY(8px) scale(0.98); opacity: 0; }
     60% { transform: translateY(-6px) scale(1.02); opacity: 1; }
@@ -383,7 +371,6 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
     100% { transform: translateY(0) rotate(0deg); }
   }
 
-  /* responsive tweaks */
   @media (max-width: 1200px) {
     .field-grid .plant-cell { min-height: 92px; }
     .field-grid .plant-card { min-height: 78px; }
@@ -394,4 +381,4 @@ $shadow-lg: 0 14px 40px rgba(12, 35, 16, 0.08);
     .map-row .card .card-body { height: 300px; }
     .field-grid { padding: 14px; }
   }
-} // .field-layout-page
+}

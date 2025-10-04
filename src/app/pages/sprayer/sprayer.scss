@@ -360,7 +360,6 @@
   }
 }
 
-/* Animations */
 @keyframes chargeMove { from { background-position:0 0; } to { background-position:30px 0; } }
 @keyframes glowGreen { 0%,100%{box-shadow:0 0 6px rgba(67,160,71,0.6);}50%{box-shadow:0 0 16px rgba(67,160,71,1);} }
 @keyframes glowYellow { 0%,100%{box-shadow:0 0 6px rgba(251,192,45,0.6);}50%{box-shadow:0 0 16px rgba(251,192,45,1);} }
