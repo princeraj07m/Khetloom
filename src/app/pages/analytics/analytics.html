@@ -90,66 +90,7 @@
       </div>
     </div>
 
-    <!-- Jobs by Month (stacked bars) and Crops Donut -->
-    <div class="row mb-4">
-      <div class="col-md-8 mb-3">
-        <div class="card">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Jobs by Month</h5>
-            <small class="text-muted">Last 12 months</small>
-          </div>
-          <div class="card-body">
-            <div class="d-flex align-items-end" style="gap:12px; height:120px;">
-              <ng-container *ngFor="let m of jobsByMonth; let i = index">
-                <div class="d-flex flex-column justify-content-end" style="width:18px;">
-                  <div [style.height.px]="getBarHeights([{completed:m.completed,pending:m.pending}])[0].p" style="background:#ffd166"></div>
-                  <div [style.height.px]="getBarHeights([{completed:m.completed,pending:m.pending}])[0].c" style="background:#06d6a0"></div>
-                  <small class="text-muted text-center" style="font-size:10px;">{{ m.month }}</small>
-                </div>
-              </ng-container>
-            </div>
-            <div class="d-flex gap-3 mt-2">
-              <span class="badge" style="background:#06d6a0;">Completed</span>
-              <span class="badge" style="background:#ffd166;color:#1a1a1a;">Pending</span>
-            </div>
-            <div class="mt-2 text-muted" *ngIf="getSelectedField() as sf">
-              Showing jobs trend for <strong>{{ sf?.name }}</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="mb-0">Crops Mix</h5>
-          </div>
-          <div class="card-body d-flex flex-column align-items-center">
-            <ng-container *ngIf="cropsBreakdown && cropsBreakdown.length">
-              <svg width="140" height="140" viewBox="0 0 140 140">
-                <g transform="translate(70,70)">
-                  <ng-container *ngIf="getDonutMetrics(cropsBreakdown,48) as d">
-                    <ng-container *ngFor="let seg of d.segments; let i = index">
-                      <circle r="48" [attr.stroke-dasharray]="seg.dash + ' ' + (d.circumference - seg.dash)" stroke-width="18" fill="none"
-                        [attr.stroke]="['#1aab55','#06d6a0','#95d5b2'][i % 3]"
-                        [attr.transform]="'rotate(' + (i*120) + ')'"></circle>
-                    </ng-container>
-                  </ng-container>
-                </g>
-              </svg>
-              <div class="mt-2 w-100">
-                <div class="d-flex justify-content-between" *ngFor="let c of cropsBreakdown; let i = index">
-                  <span>
-                    <span class="badge me-2" [style.background]="['#1aab55','#06d6a0','#95d5b2'][i % 3]">&nbsp;</span>
-                    {{ c.label }}
-                  </span>
-                  <strong>{{ c.value }}</strong>
-                </div>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
     <!-- Profile Snapshot -->
     <div class="row mb-4">
