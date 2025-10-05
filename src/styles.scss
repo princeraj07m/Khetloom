@@ -24,3 +24,9 @@ body.dark-theme {
   --green-ink: #45a049;
   --pill-bg: #2e7d32;
 }
+
+/* Scoped dark mode for Financial Overview only */
+body[data-financial-dark="true"] {
+  background-color: #0b0f14;
+  color: #e5e7eb;
+}
