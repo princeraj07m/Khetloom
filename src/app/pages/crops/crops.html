@@ -1,10 +1,19 @@
 <div class="container py-3" style="min-height: 86vh; overflow:hidden;">
-  <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+  <!-- Header + filters -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
     <h4 class="m-0">🌱 Crops</h4>
-    <button class="btn btn-primary mt-2 mt-md-0" (click)="openCreate()">
-      <i class="bi bi-plus-circle me-1"></i> Add Crop
-    </button>
+    <div class="d-flex gap-2 align-items-center flex-wrap">
+      <select class="form-select form-select-sm" [(ngModel)]="selectedFieldId" (ngModelChange)="loadFieldsAndCrops()">
+        <option value="">All Fields</option>
+        <option *ngFor="let f of fields" [value]="f._id">{{ f.name }}</option>
+      </select>
+      <button class="btn btn-outline-secondary btn-sm" (click)="prevPage()" [disabled]="page===1">Prev</button>
+      <span class="small">Page {{ page }}</span>
+      <button class="btn btn-outline-secondary btn-sm" (click)="nextPage()" [disabled]="crops.length < pageSize">Next</button>
+      <button class="btn btn-primary mt-2 mt-md-0" (click)="openCreate()">
+        <i class="bi bi-plus-circle me-1"></i> Add Crop
+      </button>
+    </div>
   </div>
 
   <!-- Loading Spinner -->

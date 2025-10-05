@@ -87,4 +87,18 @@ export class CropDetail implements OnInit {
       }
     });
   }
+
+  updateCropStatus(newStatus: string): void {
+    if (!this.crop?._id) return;
+    const payload = { ...this.crop, status: newStatus };
+    this.api.updateCrop(this.crop._id, payload).subscribe({
+      next: () => {
+        this.crop.status = newStatus;
+        this.toast.show(`Crop status updated to ${newStatus}`, 'success');
+      },
+      error: (err) => {
+        this.toast.show(err.message || 'Failed to update crop status', 'error');
+      }
+    });
+  }
 }

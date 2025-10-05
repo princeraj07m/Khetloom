@@ -48,7 +48,7 @@
 }
 
 .analytics-graph {
-  height: 150px; /* ⬆️ Taller graph */
+  height: 80px; /* compact sparkline container */
   background: linear-gradient(
     180deg,
     rgba(51, 214, 132, 0.2) 0%,
@@ -81,3 +81,76 @@
     flex: 1;
   }
 }
+
+/* Playful table styles and subtle animations */
+.table-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.fancy-table thead th {
+  background: #f3fbf7;
+  color: #0f5132;
+  font-weight: 600;
+  border-bottom: 1px solid #d9f4e6;
+}
+
+.fancy-table tbody tr {
+  transition: background 0.2s ease, transform 0.12s ease;
+}
+
+.fancy-table tbody tr:hover {
+  background: #f8fffb;
+  transform: scale(1.002);
+}
+
+.appear {
+  animation: rowIn 360ms ease both;
+}
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero band */
+.hero-band {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.hero-bg {
+  height: 120px;
+  background: linear-gradient(135deg, #e8f9ef 0%, #ffffff 60%);
+}
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+}
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #d6f5e5;
+}
+.hello { font-weight: 700; font-size: 18px; }
+.hello-sub { color: #5f6b66; }
+
+/* Glass cards + gradient KPIs */
+.glass {
+  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(26,171,85,0.08);
+}
+.kpi-title { font-size: 14px; color: #2f6b49; }
+.kpi-value { font-size: 22px; font-weight: 700; color: #0f5132; }
+.kpi-icon { font-size: 28px; color: #1aab55; opacity: 0.9; }
+
+.gradient-green { background: linear-gradient(135deg, #e8f9ef, #ffffff); }
+.gradient-blue { background: linear-gradient(135deg, #e6f1ff, #ffffff); }
+.gradient-purple { background: linear-gradient(135deg, #f1e6ff, #ffffff); }

@@ -24,3 +24,8 @@ body.dark-theme {
   --green-ink: #45a049;
   --pill-bg: #2e7d32;
 }
+
+/* 🌿 Global background style for entire project */
+html, body, app-root, .body, .dashboard-container {
+  background: linear-gradient(180deg, #EEFCEE 0%, #E8F8E8 100%) !important;
+}
