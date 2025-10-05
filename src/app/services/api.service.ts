@@ -388,8 +388,8 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  getDevices(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/devices`, { headers: this.getHeaders() })
+  getDevices(params?: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/devices`, { headers: this.getHeaders(), params })
       .pipe(catchError(this.handleError));
   }
 
@@ -397,6 +397,8 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/devices/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
+  // Alias for consistency with the rest of code
+  getDevice(id: string): Observable<any> { return this.getDeviceByIdApi(id); }
 
   updateDevice(id: string, payload: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/devices/${id}`, payload, { headers: this.getHeaders() })
@@ -414,8 +416,8 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  getFields(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/fields`, { headers: this.getHeaders() })
+  getFields(params?: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/fields`, { headers: this.getHeaders(), params })
       .pipe(catchError(this.handleError));
   }
 
@@ -426,6 +428,15 @@ export class ApiService {
 
   getField(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/fields/${id}`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+  // Field-scoped fetchers
+  getJobsByField(fieldId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/jobs`, { headers: this.getHeaders(), params: { fieldId } })
+      .pipe(catchError(this.handleError));
+  }
+  getCropsByField(fieldId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/crops`, { headers: this.getHeaders(), params: { fieldId } })
       .pipe(catchError(this.handleError));
   }
 
@@ -440,8 +451,8 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  getCrops(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/crops`, { headers: this.getHeaders() })
+  getCrops(params?: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/crops`, { headers: this.getHeaders(), params })
       .pipe(catchError(this.handleError));
   }
 
@@ -466,8 +477,8 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  getJobs(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/jobs`, { headers: this.getHeaders() })
+  getJobs(params?: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/jobs`, { headers: this.getHeaders(), params })
       .pipe(catchError(this.handleError));
   }
 
@@ -508,8 +519,18 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  getHealthReports(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/health-reports`, { headers: this.getHeaders() })
+  getHealthReports(params?: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/health-reports`, { headers: this.getHeaders(), params })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Job status update
+  updateJobStatus(id: string, status: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/jobs/${id}/status`, { status }, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+  getHealthReport(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/health-reports/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 

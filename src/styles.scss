@@ -25,8 +25,7 @@ body.dark-theme {
   --pill-bg: #2e7d32;
 }
 
-/* Scoped dark mode for Financial Overview only */
-body[data-financial-dark="true"] {
-  background-color: #0b0f14;
-  color: #e5e7eb;
+/* 🌿 Global background style for entire project */
+html, body, app-root, .body, .dashboard-container {
+  background: linear-gradient(180deg, #EEFCEE 0%, #E8F8E8 100%) !important;
 }

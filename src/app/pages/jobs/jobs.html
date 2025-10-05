@@ -1,10 +1,25 @@
 <div class="container py-3" style="min-height: 86vh; overflow:hidden;">
-  <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+  <!-- Header + filters -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
     <h4 class="m-0">📝 Jobs</h4>
-    <button class="btn btn-primary mt-2 mt-md-0" (click)="openCreateJob()">
-      <i class="bi bi-plus-circle me-1"></i> Add Job
-    </button>
+    <div class="d-flex gap-2 align-items-center flex-wrap">
+      <select class="form-select form-select-sm" [(ngModel)]="selectedFieldId" (ngModelChange)="loadJobs()">
+        <option value="">All Fields</option>
+        <option *ngFor="let f of fields" [value]="f._id">{{ f.name }}</option>
+      </select>
+      <select class="form-select form-select-sm" [(ngModel)]="selectedStatus" (ngModelChange)="loadJobs()">
+        <option value="">All Status</option>
+        <option value="scheduled">Scheduled</option>
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+      <button class="btn btn-outline-secondary btn-sm" (click)="page = Math.max(1, page-1); loadJobs()" [disabled]="page===1">Prev</button>
+      <span class="small">Page {{ page }}</span>
+      <button class="btn btn-outline-secondary btn-sm" (click)="page = page+1; loadJobs()" [disabled]="jobs.length < pageSize">Next</button>
+      <button class="btn btn-primary mt-2 mt-md-0" (click)="openCreateJob()">
+        <i class="bi bi-plus-circle me-1"></i> Add Job
+      </button>
+    </div>
   </div>
 
   <!-- Loading Spinner -->
@@ -72,6 +87,16 @@
                 </path>
               </svg>
             </button>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" (click)="$event.stopPropagation()">
+                Status
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="setStatus(j, 'scheduled'); $event.stopPropagation()">Scheduled</a></li>
+                <li><a class="dropdown-item" (click)="setStatus(j, 'in_progress'); $event.stopPropagation()">In Progress</a></li>
+                <li><a class="dropdown-item" (click)="setStatus(j, 'completed'); $event.stopPropagation()">Completed</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

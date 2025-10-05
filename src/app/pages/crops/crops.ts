@@ -16,6 +16,12 @@ export class Crops implements OnInit {
   isLoading = false;
   errorMessage = '';
 
+  // pagination and filters
+  page = 1;
+  pageSize = 20;
+  total = 0;
+  selectedFieldId = '';
+
   form: any = {
     name: '',
     season: '',
@@ -38,7 +44,7 @@ export class Crops implements OnInit {
     if (modalEl) this.modal = new bootstrap.Modal(modalEl);
   }
 
-  // Load fields first, then crops with field names mapped
+  // Load fields first, then crops with filters/pagination
   loadFieldsAndCrops(): void {
     this.isLoading = true;
     this.errorMessage = '';
@@ -48,12 +54,15 @@ export class Crops implements OnInit {
         this.fields = res.fields || [];
 
         // Now load crops
-        this.api.getCrops().subscribe({
+        const params: any = { page: String(this.page), pageSize: String(this.pageSize) };
+        if (this.selectedFieldId) params.fieldId = this.selectedFieldId;
+        this.api.getCrops(params).subscribe({
           next: (res: any) => {
             this.crops = (res.crops || []).map((crop: any) => {
               const field = this.fields.find(f => f._id === crop.fieldId);
               return { ...crop, fieldName: field ? field.name : 'Select field' };
             });
+            this.total = res.total || this.crops.length;
             this.isLoading = false;
           },
           error: (err) => {
@@ -67,6 +76,18 @@ export class Crops implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page -= 1;
+      this.loadFieldsAndCrops();
+    }
+  }
+
+  nextPage(): void {
+    this.page += 1;
+    this.loadFieldsAndCrops();
   }
 
   openCreate(): void {

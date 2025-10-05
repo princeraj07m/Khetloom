@@ -15,6 +15,14 @@ export class Jobs implements OnInit {
   fields: any[] = []; // for dropdown
   isLoading = false;
   errorMessage = '';
+  Math = Math;
+
+  // pagination and filters
+  page = 1;
+  pageSize = 20;
+  total = 0;
+  selectedFieldId = '';
+  selectedStatus = '';
 
   form: any = {
     type: '',
@@ -44,13 +52,18 @@ loadJobs(): void {
   this.isLoading = true;
   this.errorMessage = '';
 
-  this.api.getJobs().subscribe({
+  const params: any = { page: String(this.page), pageSize: String(this.pageSize) };
+  if (this.selectedFieldId) params.fieldId = this.selectedFieldId;
+  if (this.selectedStatus) params.status = this.selectedStatus;
+
+  this.api.getJobs(params).subscribe({
     next: (res: any) => {
       // Map jobs to include fieldName from fields array
       this.jobs = (res.jobs || []).map((job: any) => {
         const field = this.fields.find(f => f._id === job.fieldId);
         return { ...job, fieldName: field ? field.name : 'Select field' };
       });
+      this.total = res.total || this.jobs.length;
       this.isLoading = false;
     },
     error: (err) => {
@@ -128,5 +141,14 @@ loadJobs(): void {
     if (jobId) {
       this.router.navigate(['/job-detail', jobId]);
     }
+  }
+
+  // Quick status update from list
+  setStatus(item: any, status: string) {
+    if (!item?._id) return;
+    this.api.updateJobStatus(item._id, status).subscribe({
+      next: () => { item.status = status; this.toast.show('Status updated', 'success'); },
+      error: (err) => this.toast.show(err.message || 'Failed to update status', 'error')
+    });
   }
 }

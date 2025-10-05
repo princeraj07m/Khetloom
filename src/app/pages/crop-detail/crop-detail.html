@@ -63,6 +63,32 @@
           </div>
         </div>
       </div>
+
+      <!-- Status Update Actions -->
+      <div class="card themed-card mb-4">
+        <div class="card-header">
+          <h6 class="mb-0">
+            <i class="bi bi-gear me-2"></i>
+            Update Status
+          </h6>
+        </div>
+        <div class="card-body">
+          <div class="d-flex gap-2 flex-wrap">
+            <button 
+              class="btn btn-outline-success" 
+              (click)="updateCropStatus('completed')"
+              [disabled]="crop?.status === 'completed'">
+              <i class="bi bi-check-circle me-1"></i> Mark Complete
+            </button>
+            <button 
+              class="btn btn-outline-warning" 
+              (click)="updateCropStatus('in_progress')"
+              [disabled]="crop?.status === 'in_progress' || crop?.status === 'in-progress'">
+              <i class="bi bi-play-circle me-1"></i> In Progress
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Field Information -->

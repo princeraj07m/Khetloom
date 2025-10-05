@@ -81,3 +81,18 @@
     transform: scale(0.6) translateX(-5px); /* 0.5 * 1.2 = 0.6 */
   }
 }
+
+
+
+/* Optional: remove white from nested cards/sections */
+// .card,
+// .section,
+// .metric-card,
+// .equipment-card,
+// .weather-section,
+// .field-status-card,
+// .alert-card {
+//   background: transparent !important;
+//   box-shadow: none !important;
+//   border: none !important;
+// }
