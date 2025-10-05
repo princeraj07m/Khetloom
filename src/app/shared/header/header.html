@@ -83,6 +83,11 @@
         </li>
 
 
+        <li class="nav-item px-2 me-2">
+          <button class="btn btn-outline-secondary px-3 rounded-pill shadow-sm" (click)="toggleGlobalDark()" title="Toggle Dark Mode">
+            <i class="fa-solid" [ngClass]="isDark ? 'fa-moon' : 'fa-sun'"></i>
+          </button>
+        </li>
         <li class="nav-item px-2">
           <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/user-profile">
             <i class="fa-slab fa-regular fa-circle-user" style="color: #1d7258;"></i>

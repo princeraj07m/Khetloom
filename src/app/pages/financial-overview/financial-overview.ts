@@ -292,8 +292,10 @@ export class FinancialOverviewComponent implements OnInit, OnDestroy, AfterViewI
     // Add or remove a scoped data attribute on body that CSS can target when this page is active
     if (this.darkMode) {
       document.body.setAttribute('data-financial-dark', 'true');
+      document.body.classList.add('financial-dark');
     } else {
       document.body.removeAttribute('data-financial-dark');
+      document.body.classList.remove('financial-dark');
     }
   }
 
