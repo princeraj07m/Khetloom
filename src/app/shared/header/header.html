@@ -59,7 +59,6 @@
             <li><a class="dropdown-item" routerLink="/weather"><i class="fa-solid fa-cloud-sun me-2 text-success"></i> Weather</a></li>
             <li><a class="dropdown-item" routerLink="/fields"><i class="fa-solid fa-layer-group me-2 text-success"></i> Fields</a></li>
             <li><a class="dropdown-item" routerLink="/crops"><i class="fa-solid fa-seedling me-2 text-success"></i> Crops</a></li>
-            <li><a class="dropdown-item" routerLink="/fieldlayout"><i class="fa-solid fa-map me-2 text-success"></i> Field Map</a></li>
             <li><a class="dropdown-item" routerLink="/health"><i class="fa-solid fa-heart-pulse me-2 text-success"></i> Health</a></li>
             <li><a class="dropdown-item" routerLink="/sprayer"><i class="fa-solid fa-truck-field me-2 text-success"></i> Sprayer</a></li>
             <li><a class="dropdown-item" routerLink="/health-reports"><i class="fa-solid fa-file-medical me-2 text-success"></i> Health Reports</a></li>
@@ -84,6 +83,11 @@
         </li>
 
 
+        <li class="nav-item px-2 me-2">
+          <button class="btn btn-outline-secondary px-3 rounded-pill shadow-sm" (click)="toggleGlobalDark()" title="Toggle Dark Mode">
+            <i class="fa-solid" [ngClass]="isDark ? 'fa-moon' : 'fa-sun'"></i>
+          </button>
+        </li>
         <li class="nav-item px-2">
           <button class="btn btn-outline-success px-3 ms-2 rounded-pill shadow-sm" routerLink="/user-profile">
             <i class="fa-slab fa-regular fa-circle-user" style="color: #1d7258;"></i>
@@ -205,10 +209,6 @@
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
         routerLink="/jobs">
         <i class="fa-solid fa-briefcase me-2 text-success"></i> Jobs
-      </a>
-      <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
-        routerLink="/fieldlayout">
-        <i class="fa-solid fa-map me-2 text-success"></i> Field Map
       </a>
       <a class="nav-link text-dark fw-semibold px-3 py-2 rounded hover-bg" data-bs-dismiss="offcanvas"
         routerLink="/health">

@@ -84,17 +84,19 @@ export class FinancialService {
   }
 
   private generateFinancialDataByPeriod(period: string): FinancialData {
-    const baseData = this.generateFinancialData();
-    const multiplier = this.getPeriodMultiplier(period);
-    
+    const trendData = this.generateTrendDataForPeriod(period);
+    const totalRevenue = trendData.reduce((sum, d) => sum + d.revenue, 0);
+    const totalExpenses = trendData.reduce((sum, d) => sum + d.expenses, 0);
+    const netProfit = totalRevenue - totalExpenses;
+
     return {
       metrics: {
-        totalRevenue: Math.round(baseData.metrics.totalRevenue * multiplier),
-        totalExpenses: Math.round(baseData.metrics.totalExpenses * multiplier),
-        netProfit: Math.round(baseData.metrics.netProfit * multiplier),
+        totalRevenue: Math.round(totalRevenue),
+        totalExpenses: Math.round(totalExpenses),
+        netProfit: Math.round(netProfit),
         period: period
       },
-      trendData: this.generateTrendDataForPeriod(period),
+      trendData,
       expenseBreakdown: this.generateExpenseBreakdownForPeriod(period),
       cropProfitability: this.generateCropProfitabilityForPeriod(period)
     };

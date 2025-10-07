@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +12,15 @@ import { AuthService } from '../../services/auth.service';
 export class Header implements OnInit {
   isMenuOpen = false;
   isLoggedIn: boolean = false;
+  isDark = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private theme: ThemeService) {}
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe(user => {
       this.isLoggedIn = !!user;
     });
+    this.theme.dark$.subscribe(v => this.isDark = v);
   }
 
   navigateToProfile(): void {
@@ -32,5 +35,9 @@ export class Header implements OnInit {
 
   demoLogin(): void {
     this.authService.demoLogin();
+  }
+
+  toggleGlobalDark(): void {
+    this.theme.toggle();
   }
 }
